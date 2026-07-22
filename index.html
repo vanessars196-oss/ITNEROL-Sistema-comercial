@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ITNEROL — Sistema Comercial v7.4 (Standalone)</title>
+<link rel="manifest" href="data:application/manifest+json;charset=utf-8;base64,ewogICJuYW1lIjogIklUTkVST0wg4oCUIFNpc3RlbWEgQ29tZXJjaWFsIiwKICAic2hvcnRfbmFtZSI6ICJJVE5FUk9MIENSTSIsCiAgImRlc2NyaXB0aW9uIjogIlNpc3RlbWEgQ29tZXJjaWFsIElUTkVST0wg4oCUIGdlc3TDo28gZGUgZnJldGFtZW50byBjb3Jwb3JhdGl2byIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgInNjb3BlIjogIi4vIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMGYxNzJhIiwKICAidGhlbWVfY29sb3IiOiAiI0YwNzgwMCIsCiAgIm9yaWVudGF0aW9uIjogImFueSIsCiAgImljb25zIjogWwogICAgeyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBeE9USWdNVGt5SWo0OGNtVmpkQ0IzYVdSMGFEMGlNVGt5SWlCb1pXbG5hSFE5SWpFNU1pSWdjbmc5SWpNeUlpQm1hV3hzUFNJalJqQTNPREF3SWk4K1BIUmxlSFFnZUQwaU9UWWlJSGs5SWpFek1DSWdkR1Y0ZEMxaGJtTm9iM0k5SW0xcFpHUnNaU0lnWm05dWRDMW1ZVzFwYkhrOUlrRnlhV0ZzSWlCbWIyNTBMWE5wZW1VOUlqRXlNQ0lnWm05dWRDMTNaV2xuYUhROUlqa3dNQ0lnWm1sc2JEMGlkMmhwZEdVaVBrNDhMM1JsZUhRK1BDOXpkbWMrIiwic2l6ZXMiOiIxOTJ4MTkyIiwidHlwZSI6ImltYWdlL3N2Zyt4bWwifSwKICAgIHsic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhacFpYZENiM2c5SWpBZ01DQTFNVElnTlRFeUlqNDhjbVZqZENCM2FXUjBhRDBpTlRFeUlpQm9aV2xuYUhROUlqVXhNaUlnY25nOUlqZzRJaUJtYVd4c1BTSWpSakEzT0RBd0lpOCtQSFJsZUhRZ2VEMGlNalUySWlCNVBTSXpORFlpSUhSbGVIUXRZVzVqYUc5eVBTSnRhV1JrYkdVaUlHWnZiblF0Wm1GdGFXeDVQU0pCY21saGJDSWdabTl1ZEMxemFYcGxQU0l6TWpBaUlHWnZiblF0ZDJWcFoyaDBQU0k1TURBaUlHWnBiR3c5SW5kb2FYUmxJajVKUEM5MFpYaDBQand2YzNablBnPT0iLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9CiAgXQp9Cg=="/>
+<meta name="theme-color" content="#F07800"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23F07800'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-family='Arial' font-size='62' font-weight='900' fill='white'%3EI%3C/text%3E%3C/svg%3E"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<style>
+:root{--laranja:#F07800;--laranja2:#D96000;--laranja-light:#FFF3E0;--azul:#1565C0;--azul-light:#E3F2FD;--verde:#2E7D32;--verde-light:#E8F5E9;--vermelho:#C62828;--vermelho-light:#FFEBEE;--amarelo:#F9A825;--amarelo-light:#FFFDE7;--preto:#111827;--sidebar-bg:#0f172a;--sidebar-w:248px;--bg:#F1F5F9;--surface:#fff;--border:#E2E8F0;--text:#1e293b;--text-muted:#64748b;--radius:10px;--radius-sm:6px;--shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);--shadow-md:0 4px 16px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%;font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:14px;color:var(--text);background:var(--bg)}a{text-decoration:none;color:inherit}
+/* LOGIN */
+.login-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);z-index:999}
+.login-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:40px 40px}
+.login-card{position:relative;background:rgba(15,23,42,.85);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:36px;width:380px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.login-logo{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:6px}
+.login-logo-icon{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,#F07800,#D96000);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;box-shadow:0 6px 20px rgba(240,120,0,.4)}
+.login-logo-text{font-size:1.4rem;font-weight:800;color:#fff;letter-spacing:1px;text-align:center}
+.login-logo-sub{font-size:.7rem;color:rgba(255,255,255,.4);margin-top:2px;text-align:center}
+.login-title{text-align:center;color:#fff;font-size:1.05rem;font-weight:600;margin:18px 0 22px}
+.login-field{margin-bottom:14px}
+.login-field label{font-size:.68rem;color:rgba(255,255,255,.5);font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px}
+.login-field input{width:100%;padding:11px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#fff;font-size:.92rem;outline:none}
+.login-field input:focus{border-color:var(--laranja);background:rgba(255,255,255,.1)}
+.login-btn{width:100%;padding:12px;background:linear-gradient(135deg,#F07800,#D96000);border:none;border-radius:8px;color:#fff;font-weight:700;cursor:pointer;font-size:.95rem;margin-top:6px;box-shadow:0 4px 14px rgba(240,120,0,.4)}
+.login-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(240,120,0,.5)}
+.login-msg{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);color:#fca5a5;border-radius:6px;padding:8px 12px;font-size:.78rem;margin-bottom:12px;display:none;text-align:center}
+.login-profiles{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 14px;margin-top:18px;font-size:.72rem;color:rgba(255,255,255,.6)}
+.login-profiles strong{color:var(--laranja);font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px}
+.login-profiles .lp-row{display:grid;grid-template-columns:80px 1fr 1fr;gap:8px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.login-profiles .lp-row:last-child{border-bottom:none}
+.login-profiles .lp-prof{color:#fbbf24;font-weight:700}
+/* APP */
+#app{display:none;width:100%}body.app-mode{display:flex}
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-w);background:var(--sidebar-bg);height:100vh;position:fixed;left:0;top:0;display:flex;flex-direction:column;z-index:100;transition:transform .3s;overflow-y:auto}
+.main-content{margin-left:var(--sidebar-w);flex:1;min-height:100vh;display:flex;flex-direction:column;background:var(--bg)}
+.sidebar-logo{display:flex;align-items:center;gap:10px;padding:20px 16px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.sidebar-logo-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#F07800,#D96000);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;flex-shrink:0;box-shadow:0 4px 12px rgba(240,120,0,.35)}
+.sidebar-logo-text{font-size:1rem;font-weight:800;color:#fff;letter-spacing:.5px}
+.sidebar-logo-sub{font-size:.65rem;color:rgba(255,255,255,.35);margin-top:1px}
+.sidebar-nav{flex:1;padding:12px 8px}
+.nav-group-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.28);padding:14px 8px 5px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);color:rgba(255,255,255,.6);font-size:.84rem;font-weight:500;cursor:pointer;margin-bottom:1px}
+.nav-item i{width:18px;text-align:center;font-size:.88rem;opacity:.8}
+.nav-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav-item.active{background:rgba(240,120,0,.18);color:var(--laranja);font-weight:600}
+.nav-item.active i{opacity:1}
+.sidebar-footer{padding:12px 14px;border-top:1px solid rgba(255,255,255,.06)}
+.sidebar-user{display:flex;align-items:center;gap:10px}
+.user-avatar{width:34px;height:34px;border-radius:50%;background:var(--laranja);color:#fff;font-size:.72rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.user-name{font-size:.81rem;font-weight:600;color:rgba(255,255,255,.85)}
+.user-role{font-size:.65rem;color:rgba(255,255,255,.35)}
+.btn-logout{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.3);padding:5px;border-radius:4px;font-size:.95rem}
+.btn-logout:hover{color:#f87171;background:rgba(248,113,113,.1)}
+.nav-hidden{display:none!important}
+/* TOPBAR */
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-left{display:flex;align-items:center;gap:18px}
+.breadcrumb{font-size:.92rem;font-weight:600;color:var(--text)}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.topbar-date{font-size:.76rem;color:var(--text-muted);background:var(--bg);padding:5px 10px;border-radius:6px}
+.topbar-user-chip{display:flex;align-items:center;gap:8px;padding:5px 12px;background:var(--bg);border:1px solid var(--border);border-radius:20px}
+.chip-avatar{width:24px;height:24px;border-radius:50%;background:var(--laranja);color:#fff;font-size:.62rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chip-perfil{font-size:.65rem;color:var(--text-muted);background:#fff;border:1px solid var(--border);border-radius:4px;padding:1px 6px}
+.btn-novo{background:var(--laranja);color:#fff;border:none;padding:7px 14px;border-radius:6px;font-size:.78rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px}
+.btn-novo:hover{background:var(--laranja2)}
+.btn-off{background:transparent;border:1px solid var(--border);padding:6px 12px;border-radius:6px;font-size:.72rem;cursor:pointer;display:flex;align-items:center;gap:6px;color:var(--text-muted)}
+.btn-off.online{border-color:#16a34a;color:#15803d}
+.btn-off.offline{border-color:#dc2626;color:#991b1b}
+.page-content{padding:22px 28px;flex:1}
+/* PAGE */
+.page{display:none}.page.active{display:block}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:12px}
+.page-header h1{font-size:1.4rem;font-weight:700;display:flex;align-items:center}
+.filters-bar{padding:14px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.input-busca,.select-filtro{padding:8px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);background:#fff;color:var(--text);font-size:.82rem}
+.input-busca{min-width:240px}
+.select-filtro{min-width:160px}
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px}
+.kpi-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:14px;position:relative}
+.kpi-icon{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+.kpi-orange .kpi-icon{background:var(--laranja-light);color:var(--laranja)}
+.kpi-blue .kpi-icon{background:var(--azul-light);color:var(--azul)}
+.kpi-green .kpi-icon{background:var(--verde-light);color:var(--verde)}
+.kpi-red .kpi-icon{background:var(--vermelho-light);color:var(--vermelho)}
+.kpi-info{flex:1;min-width:0}.kpi-value{font-size:1.7rem;font-weight:800;color:var(--text);line-height:1}
+.kpi-label{font-size:.7rem;color:var(--text-muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.kpi-sub{font-size:.66rem;color:var(--text-muted);margin-top:3px}
+.kpi-mini{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px}
+.kpi-mini-val{font-size:1.45rem;font-weight:800;color:var(--text)}
+.kpi-mini-lab{font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-top:3px}
+.kpi-mini-orange .kpi-mini-val{color:var(--laranja)}
+.kpi-mini-blue .kpi-mini-val{color:var(--azul)}
+.kpi-mini-green .kpi-mini-val{color:var(--verde)}
+.kpi-mini-purple .kpi-mini-val{color:#7B1FA2}
+/* CARDS / CHARTS */
+.dash-row{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px}
+.dash-row-3{grid-template-columns:1fr 1fr 1fr;gap:14px}
+.dash-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.dash-card-header h3{font-size:.92rem;font-weight:700;margin-bottom:12px}
+/* TABLES */
+table.data-table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);font-size:.82rem}
+.data-table thead{background:var(--bg)}
+.data-table th{text-align:left;padding:10px 12px;font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:.3px;border-bottom:1px solid var(--border)}
+.data-table td{padding:11px 12px;border-bottom:1px solid var(--border)}
+.data-table tr:hover td{background:#f8fafc}
+.td-actions{width:90px;text-align:right}
+.td-num{font-family:monospace;font-size:.78rem}
+.badge{display:inline-block;padding:3px 8px;border-radius:5px;font-size:.68rem;font-weight:600}
+.badge-blue{background:var(--azul-light);color:var(--azul)}.badge-green{background:var(--verde-light);color:var(--verde)}
+.badge-orange{background:var(--laranja-light);color:var(--laranja)}.badge-red{background:var(--vermelho-light);color:var(--vermelho)}
+.badge-gray{background:#e2e8f0;color:#475569}.badge-purple{background:#f3e5f5;color:#7B1FA2}
+.badge-yellow{background:#fff7ed;color:#c2410c}
+.row-expirado td{background:#fef2f2}
+.btn-icon{background:transparent;border:none;cursor:pointer;padding:5px 8px;border-radius:5px;color:var(--text-muted);font-size:.85rem}
+.btn-icon:hover{background:var(--bg);color:var(--text)}
+.btn-icon.danger:hover{color:var(--vermelho);background:var(--vermelho-light)}
+/* BUTTONS */
+.btn-primary{background:var(--laranja);color:#fff;border:none;padding:9px 16px;border-radius:6px;font-weight:600;cursor:pointer;font-size:.82rem;display:inline-flex;align-items:center;gap:6px}
+.btn-primary:hover{background:var(--laranja2)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:.8rem;display:inline-flex;align-items:center;gap:6px}
+.btn-outline:hover{background:var(--bg);border-color:var(--text-muted)}
+.btn-sm{padding:6px 10px;font-size:.74rem}
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.veiculo-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);position:relative}
+.veiculo-tipo-badge{position:absolute;top:10px;right:10px;background:var(--laranja-light);color:var(--laranja);padding:3px 8px;border-radius:5px;font-size:.68rem;font-weight:700}
+.veiculo-num{font-size:.7rem;color:var(--laranja);font-weight:700;letter-spacing:.5px}
+.veiculo-placa{font-size:1.05rem;font-weight:800;color:var(--text);margin:6px 0 2px}
+.veiculo-modelo{font-size:.78rem;color:var(--text-muted);margin-bottom:10px}
+.veiculo-info-item{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-size:.76rem}
+.veiculo-info-item:last-child{border:none}
+.veiculo-info-item span:first-child{color:var(--text-muted)}
+.veiculo-info-item span:last-child{font-weight:600}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);display:none;align-items:center;justify-content:center;z-index:200;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:14px;width:560px;max-width:100%;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal.modal-lg{width:820px}
+.modal-header{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-header h3{font-size:1.05rem;font-weight:700}
+.btn-fechar{background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:1.1rem}
+.modal-body{padding:20px 22px;overflow-y:auto;flex:1}
+.modal-footer{padding:14px 22px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-size:.72rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:6px;font-size:.85rem;font-family:inherit;background:#fff;outline:none;color:var(--text)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--laranja);background:#fff8f2}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+/* TOAST */
+#toast-container{position:fixed;top:20px;right:20px;z-index:300;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:90vw}
+.toast{background:#fff;border-radius:8px;padding:11px 16px;border-left:4px solid var(--laranja);box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:.82rem;font-weight:600;min-width:240px;animation:slideIn .3s}
+.toast.success{border-left-color:var(--verde);background:#f0fdf4;color:#15803d}
+.toast.error{border-left-color:var(--vermelho);background:#fef2f2;color:#991b1b}
+.toast.warning{border-left-color:var(--amarelo);background:#fffbeb;color:#92400e}
+@keyframes slideIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+.empty-state{text-align:center;padding:40px;color:var(--text-muted)}
+.empty-state i{font-size:2.4rem;margin-bottom:12px;color:#cbd5e1;display:block}
+.alerta-banner{border-radius:var(--radius);padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;gap:14px;border:1px solid var(--border)}
+.alerta-critico{background:#fef2f2;border-color:var(--vermelho);color:var(--vermelho)}
+.indicadores-funil-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:14px 0;padding:18px;background:#fff;border-radius:var(--radius);border:1px solid var(--border)}
+.funnel-stage{text-align:center;padding:0 14px;position:relative}
+.funnel-num{font-size:1.7rem;font-weight:800;color:var(--laranja)}
+.funnel-label{font-size:.7rem;color:var(--text-muted);margin-top:4px;font-weight:600;text-transform:uppercase}
+.funil-arrow{align-self:center;color:#cbd5e1;font-size:1.2rem;text-align:center}
+.kpi-grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:18px}
+@media(max-width:900px){.kpi-grid-5{grid-template-columns:repeat(2,1fr)}.dash-row,.dash-row-3{grid-template-columns:1fr}.indicadores-funil-wrap{grid-template-columns:1fr}.funil-arrow{transform:rotate(90deg)}.sidebar{transform:translateX(-100%)}.main-content{margin-left:0}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="login-screen">
+  <div class="login-bg"></div>
+  <div class="login-card">
+    <div class="login-logo"><div class="login-logo-icon"><i class="fas fa-bus-alt"></i></div></div>
+    <div class="login-logo-text">ITNEROL</div>
+    <div class="login-logo-sub">Sistema Comercial · v7.4</div>
+    <div class="login-title">Faça login para continuar</div>
+    <div class="login-msg" id="login-msg"></div>
+    <form id="login-form" autocomplete="off">
+      <div class="login-field"><label>E-mail</label><input type="email" id="login-email" required autocomplete="username"/></div>
+      <div class="login-field"><label>Senha</label><input type="password" id="login-senha" required autocomplete="current-password"/></div>
+      <button class="login-btn" type="submit"><i class="fas fa-sign-in-alt"></i> Entrar no Sistema</button>
+    </form>
+    <div class="login-profiles">
+      <strong>Perfis disponíveis</strong>
+      <div class="lp-row"><span class="lp-prof">ADMIN</span><span>admin@itnerol.com.br</span><span>itnerol2025</span></div>
+      <div class="lp-row"><span class="lp-prof">COMERCIAL</span><span>comercial@itnerol.com.br</span><span>comercial123</span></div>
+      <div class="lp-row"><span class="lp-prof">OPERACIONAL</span><span>CCO@ITNEROL.COM.BR</span><span>CCO2026</span></div>
+      <div class="lp-row"><span class="lp-prof">VISUALIZADOR</span><span>view@itnerol.com.br</span><span>view123</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon"><i class="fas fa-bus-alt"></i></div>
+    <div><div class="sidebar-logo-text">ITNEROL</div><div class="sidebar-logo-sub">Sistema Comercial</div></div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-group-label">Principal</div>
+    <a class="nav-item active" data-page="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a>
+    <div class="nav-group-label">Comercial</div>
+    <a class="nav-item" data-page="indicadores" data-perm="admin,comercial,visualizador"><i class="fas fa-chart-line"></i> Indicadores</a>
+    <a class="nav-item" data-page="prospeccoes" data-perm="admin,comercial,visualizador"><i class="fas fa-search"></i> Prospecções</a>
+    <a class="nav-item" data-page="propostas" data-perm="admin,comercial,visualizador"><i class="fas fa-file-contract"></i> Propostas</a>
+    <div class="nav-group-label">Cadastros</div>
+    <a class="nav-item" data-page="clientes" data-perm="admin,comercial,operacional,visualizador"><i class="fas fa-building"></i> Clientes</a>
+    <a class="nav-item" data-page="veiculos" data-perm="admin,operacional,visualizador"><i class="fas fa-truck"></i> Veículos</a>
+    <a class="nav-item" data-page="motoristas" data-perm="admin,operacional,visualizador"><i class="fas fa-id-card"></i> Motoristas</a>
+    <div class="nav-group-label">Operacional</div>
+    <a class="nav-item" data-page="contratos" data-perm="admin,comercial,operacional,visualizador"><i class="fas fa-file-signature"></i> Contratos</a>
+    <a class="nav-item" data-page="linhas" data-perm="admin,operacional,visualizador"><i class="fas fa-route"></i> Linhas</a>
+    <a class="nav-item" data-page="reclamacoes" data-perm="admin,comercial,operacional,visualizador"><i class="fas fa-exclamation-circle"></i> Reclamações</a>
+    <div class="nav-group-label">Financeiro</div>
+    <a class="nav-item" data-page="apuracao" data-perm="admin,visualizador"><i class="fas fa-calculator"></i> Apuração Mensal</a>
+    <a class="nav-item" data-page="precificacao" data-perm="admin,comercial"><i class="fas fa-tags"></i> Precificação</a>
+    <div class="nav-group-label">Sistema</div>
+    <a class="nav-item" data-page="relatorios" data-perm="admin,comercial,visualizador"><i class="fas fa-file-export"></i> Relatórios / Backup</a>
+    <a class="nav-item" data-page="usuarios" data-perm="admin"><i class="fas fa-users-cog"></i> Usuários</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="user-avatar" id="user-avatar-initials">?</div>
+      <div style="flex:1;min-width:0"><div class="user-name" id="sidebar-user-nome">—</div><div class="user-role" id="sidebar-user-perfil">—</div></div>
+      <button onclick="fazerLogout()" title="Sair" class="btn-logout"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </div>
+</aside>
+<main class="main-content">
+  <header class="topbar">
+    <div class="topbar-left"><div class="breadcrumb" id="breadcrumb">Dashboard</div></div>
+    <div class="topbar-right">
+      <div class="topbar-date" id="topbar-date">—</div>
+      <div class="topbar-user-chip">
+        <div class="chip-avatar" id="chip-avatar">?</div>
+        <span id="chip-nome">—</span>
+        <span class="chip-perfil" id="chip-perfil">—</span>
+      </div>
+      <button class="btn-off online" id="btn-off" onclick="toast('Funciona online e offline após o primeiro acesso.','info')"><i class="fas fa-wifi"></i> Online</button>
+      <button class="btn-novo" id="btn-novo-global" onclick="abrirNovoContextual()"><i class="fas fa-plus"></i> Novo</button>
+    </div>
+  </header>
+  <div class="page-content">
+    <section id="page-dashboard" class="page active">
+      <div class="page-header"><div><h1 id="dash-saudacao">Dashboard</h1><p id="dash-subtitulo" style="color:var(--text-muted);font-size:.88rem;margin-top:4px">Visão geral da operação comercial</p></div><div id="topbar-date-big" style="font-size:.8rem;color:var(--text-muted)"></div></div>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-orange"><div class="kpi-icon"><i class="fas fa-search"></i></div><div class="kpi-info"><div class="kpi-value" id="kpi-prospeccoes">0</div><div class="kpi-label">Prospecções (mês)</div><div class="kpi-sub" id="kpi-prospeccoes-sub">—</div></div></div>
+        <div class="kpi-card kpi-blue"><div class="kpi-icon"><i class="fas fa-file-contract"></i></div><div class="kpi-info"><div class="kpi-value" id="kpi-propostas">0</div><div class="kpi-label">Propostas Enviadas (mês)</div><div class="kpi-sub" id="kpi-propostas-sub">—</div></div></div>
+        <div class="kpi-card kpi-green"><div class="kpi-icon"><i class="fas fa-handshake"></i></div><div class="kpi-info"><div class="kpi-value" id="kpi-fechados">0</div><div class="kpi-label">Contratos Fechados (mês)</div><div class="kpi-sub" id="kpi-fechados-sub">—</div></div></div>
+        <div class="kpi-card kpi-red"><div class="kpi-icon"><i class="fas fa-exclamation-triangle"></i></div><div class="kpi-info"><div class="kpi-value" id="kpi-reclamacoes">0</div><div class="kpi-label">Reclamações Abertas</div><div class="kpi-sub" id="kpi-reclamacoes-sub">—</div></div></div>
+      </div>
+      <div class="kpi-mini kpi-mini-orange" style="display:inline-block;margin-right:10px"><div class="kpi-mini-val" id="kmi-clientes">0</div><div class="kpi-mini-lab">Clientes Ativos</div></div>
+      <div class="kpi-mini kpi-mini-blue" style="display:inline-block;margin-right:10px"><div class="kpi-mini-val" id="kmi-contratos">0</div><div class="kpi-mini-lab">Contratos Ativos</div></div>
+      <div class="kpi-mini kpi-mini-green" style="display:inline-block;margin-right:10px"><div class="kpi-mini-val" id="kmi-linhas">0</div><div class="kpi-mini-lab">Linhas Ativas</div></div>
+      <div class="kpi-mini kpi-mini-purple" style="display:inline-block;margin-right:10px"><div class="kpi-mini-val" id="kmi-veiculos">0</div><div class="kpi-mini-lab">Veículos Frota</div></div>
+      <div class="kpi-mini kpi-mini-green" style="display:inline-block"><div class="kpi-mini-val" id="kmi-conversao">0%</div><div class="kpi-mini-lab">Taxa Conversão</div></div>
+      <div class="dash-row" style="margin-top:16px">
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-chart-bar" style="color:#F07800"></i> Faturamento × Custo (últimos 6 meses)</h3></div><div style="height:280px"><canvas id="chart-faturamento"></canvas></div></div>
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-funnel-dollar" style="color:#1565C0"></i> Funil Comercial</h3></div><div style="height:280px"><canvas id="chart-funil"></canvas></div></div>
+      </div>
+      <div class="dash-row dash-row-3">
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-route" style="color:#2E7D32"></i> KM Contratada × Rodada</h3></div><div style="height:220px"><canvas id="chart-km"></canvas></div></div>
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-bus" style="color:#F07800"></i> Tipos de Veículo</h3></div><div style="height:220px"><canvas id="chart-veiculos"></canvas></div></div>
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-bell" style="color:#C62828"></i> Reclamações Recentes</h3></div><div id="lista-reclamacoes-dash"></div></div>
+      </div>
+    </section>
+    <section id="page-indicadores" class="page"><div class="page-header"><h1><i class="fas fa-chart-line" style="color:#F07800"></i> Indicadores Comerciais</h1></div>
+      <div class="indicadores-funil-wrap">
+        <div class="funnel-stage"><div class="funnel-num" id="ind-prosp-total">0</div><div class="funnel-label">Prospecções</div></div>
+        <div class="funil-arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="funnel-stage"><div class="funnel-num" id="ind-prop-total">0</div><div class="funnel-label">Propostas</div></div>
+        <div class="funil-arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="funnel-stage"><div class="funnel-num" id="ind-neg-total">0</div><div class="funnel-label">Em Negociação</div></div>
+        <div class="funil-arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="funnel-stage"><div class="funnel-num" id="ind-fecha-total">0</div><div class="funnel-label">Fechados</div></div>
+        <div class="funil-arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="funnel-stage"><div class="funnel-num" id="ind-perd-total">0</div><div class="funnel-label">Perdidos</div></div>
+      </div>
+      <div class="kpi-grid-5">
+        <div class="kpi-mini kpi-mini-orange"><div class="kpi-mini-val" id="ind-taxa-conversao">0%</div><div class="kpi-mini-lab">Taxa Conversão</div></div>
+        <div class="kpi-mini kpi-mini-blue"><div class="kpi-mini-val" id="ind-ticket-medio">R$ 0</div><div class="kpi-mini-lab">Ticket Médio</div></div>
+        <div class="kpi-mini kpi-mini-green"><div class="kpi-mini-val" id="ind-receita-nova">R$ 0</div><div class="kpi-mini-lab">Receita Nova</div></div>
+        <div class="kpi-mini kpi-mini-purple"><div class="kpi-mini-val" id="ind-ciclo">— dias</div><div class="kpi-mini-lab">Ciclo Venda</div></div>
+        <div class="kpi-mini" style="background:#fff8f2"><div class="kpi-mini-val" id="ind-resp-lider" style="color:var(--laranja)">—</div><div class="kpi-mini-lab">Resp. Destaque</div></div>
+      </div>
+    </section>
+    <section id="page-prospeccoes" class="page"><div class="page-header"><h1><i class="fas fa-search" style="color:#F07800"></i> Prospecções</h1><button class="btn-primary" onclick="abrirModal('prospeccao')"><i class="fas fa-plus"></i> Nova</button></div>
+      <div class="filters-bar"><input class="input-busca" id="busca-prosp" placeholder="🔍 Buscar empresa, contato, cidade..." oninput="renderProspeccoes()"/></div>
+      <table class="data-table"><thead><tr><th>Empresa</th><th>Contato</th><th>Cidade</th><th>Origem</th><th>Mês</th><th>Responsável</th><th>Status</th><th class="td-actions">Ações</th></tr></thead><tbody id="tbody-prosp"></tbody></table>
+    </section>
+    <section id="page-propostas" class="page"><div class="page-header"><h1><i class="fas fa-file-contract" style="color:#F07800"></i> Propostas</h1><button class="btn-primary" onclick="abrirModal('proposta')"><i class="fas fa-plus"></i> Nova</button></div>
+      <table class="data-table"><thead><tr><th>Nº</th><th>Empresa</th><th>Tipo</th><th>Valor</th><th>Veíc.</th><th>Envio</th><th>Responsável</th><th>Status</th><th class="td-actions">Ações</th></tr></thead><tbody id="tbody-prop"></tbody></table>
+    </section>
+    <section id="page-clientes" class="page"><div class="page-header"><h1><i class="fas fa-building" style="color:#F07800"></i> Clientes</h1><button class="btn-primary" onclick="abrirModal('cliente')"><i class="fas fa-plus"></i> Novo</button></div>
+      <div class="filters-bar"><input class="input-busca" id="busca-cli" placeholder="🔍 Buscar razão social, CNPJ, cidade..." oninput="renderClientes()"/></div>
+      <table class="data-table"><thead><tr><th>Empresa</th><th>CNPJ</th><th>Contato</th><th>Cidade</th><th>Status</th><th class="td-actions">Ações</th></tr></thead><tbody id="tbody-cli"></tbody></table>
+    </section>
+    <section id="page-veiculos" class="page"><div class="page-header"><h1><i class="fas fa-truck" style="color:#F07800"></i> Veículos</h1><button class="btn-primary" onclick="abrirModal('veiculo')"><i class="fas fa-plus"></i> Novo</button></div>
+      <div class="filters-bar"><input class="input-busca" id="busca-vei" placeholder="🔍 Buscar placa, frota, modelo..." oninput="renderVeiculos()"/></div>
+      <div id="frota-cards" class="cards-grid"></div>
+    </section>
+    <section id="page-motoristas" class="page"><div class="page-header"><h1><i class="fas fa-id-card" style="color:#F07800"></i> Motoristas</h1><button class="btn-primary" onclick="abrirModal('motorista')"><i class="fas fa-plus"></i> Novo</button></div>
+      <div class="filters-bar"><input class="input-busca" id="busca-mot" placeholder="🔍 Buscar nome..." oninput="renderMotoristas()"/></div>
+      <table class="data-table"><thead><tr><th>Nome</th><th>CPF</th><th>CNH</th><th>Categoria</th><th>Vencimento</th><th>Telefone</th><th>Status</th><th class="td-actions">Ações</th></tr></thead><tbody id="tbody-mot"></tbody></table>
+    </section>
+    <section id="page-contratos" class="page"><div class="page-header"><h1><i class="fas fa-file-signature" style="color:#F07800"></i> Contratos</h1><button class="btn-primary" onclick="abrirModal('contrato')"><i class="fas fa-plus"></i> Novo</button></div>
+      <div id="alertas-vencimento"></div>
+      <table class="data-table"><thead><tr><th>Cliente</th><th>Tipo</th><th>Valor Mensal</th><th>KM/mês</th><th>Início</th><th>Fim</th><th>Status</th><th class="td-actions">Ações</th></tr></thead><tbody id="tbody-ct"></tbody></table>
+    </section>
+    <section id="page-linhas" class="page"><div class="page-header"><h1><i class="fas fa-route" style="color:#F07800"></i> Linhas / Itinerários</h1></div>
+      <div class="filters-bar"><input class="input-busca" id="busca-linhas" placeholder="🔍 Código, descrição, itinerário..." oninput="renderLinhas()"/><span style="color:var(--text-muted);font-size:.78rem">Total: <strong id="count-linhas">0</strong></span></div>
+      <table class="data-table"><thead><tr><th>Código</th><th>Cliente</th><th>Descrição</th><th>Tipo Veíc.</th><th>KM/mês</th><th>Status</th><th class="td-actions">Ações</th></tr></thead><tbody id="tbody-linhas"></tbody></table>
+    </section>
+    <section id="page-reclamacoes" class="page"><div class="page-header"><h1><i class="fas fa-exclamation-circle" style="color:#C62828"></i> Reclamações</h1><button class="btn-primary" onclick="abrirModal('reclamacao')"><i class="fas fa-plus"></i> Nova</button></div>
+      <table class="data-table"><thead><tr><th>Data</th><th>Cliente</th><th>Tipo</th><th>Motorista</th><th>Veículo</th><th>Status</th><th class="td-actions">Ações</th></tr></thead><tbody id="tbody-recl"></tbody></table>
+    </section>
+    <section id="page-apuracao" class="page"><div class="page-header"><h1><i class="fas fa-calculator" style="color:#F07800"></i> Apuração Mensal</h1></div>
+      <table class="data-table"><thead><tr><th>Mês/Ano</th><th>Cliente</th><th>KM Cont.</th><th>KM Rod.</th><th>Fat. Cont.</th><th>Fat. Real.</th><th>Custo Total</th><th>Margem</th><th>Margem %</th></tr></thead><tbody id="tbody-ap"></tbody></table>
+    </section>
+    <section id="page-precificacao" class="page"><div class="page-header"><h1><i class="fas fa-tags" style="color:#F07800"></i> Precificação Rápida</h1></div>
+      <div class="dash-card">
+        <div class="form-row">
+          <div class="form-group"><label>Cliente</label><input id="prec-cliente" placeholder="Nome do cliente"/></div>
+          <div class="form-group"><label>Tipo de Veículo</label><select id="prec-tipo"><option>Van</option><option>Micro</option><option>Ônibus</option><option>Passeio</option></select></div>
+          <div class="form-group"><label>KM / dia</label><input type="number" id="prec-km-dia" value="100"/></div>
+          <div class="form-group"><label>Dias / mês</label><input type="number" id="prec-dias-mes" value="22"/></div>
+          <div class="form-group"><label>Consumo (km/l)</label><input type="number" id="prec-consumo" value="9" step="0.1"/></div>
+          <div class="form-group"><label>Preço Diesel (R$/l)</label><input type="number" id="prec-diesel" value="6.50" step="0.01"/></div>
+          <div class="form-group"><label>Salário Motorista</label><input type="number" id="prec-salario" value="3500"/></div>
+          <div class="form-group"><label>Margem (%)</label><input type="number" id="prec-margem" value="12"/></div>
+        </div>
+        <button class="btn-primary" onclick="calcularPrecificacao()"><i class="fas fa-calculator"></i> Calcular</button>
+        <div id="prec-resultado" style="margin-top:16px"></div>
+      </div>
+    </section>
+    <section id="page-relatorios" class="page"><div class="page-header"><h1><i class="fas fa-file-export" style="color:#F07800"></i> Relatórios &amp; Backup</h1></div>
+      <div class="dash-card" style="margin-bottom:14px;background:linear-gradient(135deg,#fff8f2,#fff);border:1px solid var(--laranja-light)">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <i class="fas fa-shield-alt" style="font-size:2.2rem;color:var(--laranja)"></i>
+          <div style="flex:1;min-width:240px">
+            <strong>🔒 Segurança e Continuidade dos seus dados</strong>
+            <p style="color:var(--text-muted);font-size:.84rem;margin-top:4px">Tudo fica neste navegador (localStorage). Exporte o backup JSON periodicamente — preserva 100% das características e pode ser restaurado em qualquer dispositivo.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button class="btn-primary" onclick="exportarBackup()"><i class="fas fa-database"></i> Backup Completo (JSON)</button>
+            <label class="btn-outline" style="cursor:pointer;text-align:center"><i class="fas fa-upload"></i> Importar Backup<input type="file" accept=".json,application/json" onchange="importarBackup(event)" style="display:none"/></label>
+          </div>
+        </div>
+      </div>
+      <div class="dash-row dash-row-3">
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-building" style="color:var(--azul)"></i> Clientes</h3></div><div style="font-size:1.7rem;font-weight:800" id="rc-cli">0</div><button class="btn-outline btn-sm" onclick="exportarCSV('clientes')"><i class="fas fa-file-csv"></i> CSV</button></div>
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-truck" style="color:var(--laranja)"></i> Veículos</h3></div><div style="font-size:1.7rem;font-weight:800" id="rc-vei">0</div><button class="btn-outline btn-sm" onclick="exportarCSV('veiculos')"><i class="fas fa-file-csv"></i> CSV</button></div>
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-id-card" style="color:var(--verde)"></i> Motoristas</h3></div><div style="font-size:1.7rem;font-weight:800" id="rc-mot">0</div><button class="btn-outline btn-sm" onclick="exportarCSV('motoristas')"><i class="fas fa-file-csv"></i> CSV</button></div>
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-file-signature" style="color:var(--azul)"></i> Contratos</h3></div><div style="font-size:1.7rem;font-weight:800" id="rc-ct">0</div><button class="btn-outline btn-sm" onclick="exportarCSV('contratos')"><i class="fas fa-file-csv"></i> CSV</button></div>
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-route" style="color:var(--verde)"></i> Linhas</h3></div><div style="font-size:1.7rem;font-weight:800" id="rc-li">0</div><button class="btn-outline btn-sm" onclick="exportarCSV('linhas')"><i class="fas fa-file-csv"></i> CSV</button></div>
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-calculator" style="color:var(--laranja)"></i> Apuração</h3></div><div style="font-size:1.7rem;font-weight:800" id="rc-ap">0</div><button class="btn-outline btn-sm" onclick="exportarCSV('apuracao')"><i class="fas fa-file-csv"></i> CSV</button></div>
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-search" style="color:var(--azul)"></i> Prospecções</h3></div><div style="font-size:1.7rem;font-weight:800" id="rc-pr">0</div><button class="btn-outline btn-sm" onclick="exportarCSV('prospeccoes')"><i class="fas fa-file-csv"></i> CSV</button></div>
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-file-contract" style="color:var(--verde)"></i> Propostas</h3></div><div style="font-size:1.7rem;font-weight:800" id="rc-po">0</div><button class="btn-outline btn-sm" onclick="exportarCSV('propostas')"><i class="fas fa-file-csv"></i> CSV</button></div>
+        <div class="dash-card"><div class="dash-card-header"><h3><i class="fas fa-bell" style="color:var(--vermelho)"></i> Reclamações</h3></div><div style="font-size:1.7rem;font-weight:800" id="rc-re">0</div><button class="btn-outline btn-sm" onclick="exportarCSV('reclamacoes')"><i class="fas fa-file-csv"></i> CSV</button></div>
+      </div>
+    </section>
+    <section id="page-usuarios" class="page"><div class="page-header"><h1><i class="fas fa-users-cog" style="color:#7B1FA2"></i> Usuários do Sistema</h1></div>
+      <table class="data-table"><thead><tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Status</th></tr></thead><tbody id="tbody-usu"></tbody></table>
+    </section>
+  </div>
+</main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)fecharModal()">
+  <div class="modal" id="modal-box"><div class="modal-header"><h3 id="modal-titulo">Formulário</h3><button class="btn-fechar" onclick="fecharModal()"><i class="fas fa-times"></i></button></div><div class="modal-body" id="modal-body"></div><div class="modal-footer"><button class="btn-outline" onclick="fecharModal()">Cancelar</button><button class="btn-primary" id="btn-salvar" onclick="salvarModal()"><i class="fas fa-save"></i> Salvar</button></div></div>
+</div>
+<div id="toast-container"></div>
+
+<!-- ═══ DATA INLINE (backup embarcado) — sem fetch externo, sem custo ═══ -->
+
+
+
+
+
+<script>
+/* ITNEROL — Seed de Dados
+ * Backup embarcado inline para inicialização imediata do sistema.
+ * Em produção, o usuário deve usar "Relatórios → Importar Backup JSON"
+ * para carregar o arquivo ITNEROL_Backup_Completo_2026-07-22.json.
+ * Estrutura idêntica ao backup original — mesmos campos, mesmas tabelas.
+ */
+window.BACKUP_DATA = {
+  v: "7.4",
+  s: "ITNEROL Sistema Comercial",
+  b: "2026-07-22T14:28:35.667Z",
+  usuarios: [
+    {nome:"Administrador",     email:"admin@itnerol.com.br",   senha_hash:"itnerol2025",  perfil:"admin"},
+    {nome:"Comercial ITNEROL", email:"comercial@itnerol.com.br",senha_hash:"comercial123",perfil:"comercial"},
+    {nome:"OPERACIONAL",       email:"CCO@ITNEROL.COM.BR",     senha_hash:"CCO2026",      perfil:"operacional"},
+    {nome:"Visualizador",      email:"view@itnerol.com.br",    senha_hash:"view123",      perfil:"visualizador"}
+  ],
+  clientes: [
+    {razao_social:"BUSUP OPERAÇÕES",       nome_fantasia:"BUSUP",            cnpj:"",               segmento:"TRANSPORTES", contato_nome:"THIAGO / JACSON", contato_cargo:"GESTORES OPERACIONAIS", contato_email:"",                 contato_telefone:"",      endereco:"",                              cidade:"SÃO PAULO",       status:"Ativo", data_inicio:"2024-01-02"},
+    {razao_social:"FLAMBOIA ALIMENTOS",    nome_fantasia:"FLAMBOIA ALIMENTOS",cnpj:"61252540000157", segmento:"ALIMENTOS",    contato_nome:"OSEAS",         contato_cargo:"GESTOR RH",         contato_email:"oseas@flamboia.com.br", contato_telefone:"11999956850", endereco:"AVENIDA ANTONIO ORTEGA 3604",     cidade:"CABREUVA",       status:"Ativo", data_inicio:"2015-09-14"},
+    {razao_social:"PRIETO ALIMENTOS LTDA", nome_fantasia:"PRIETO ALIMENTOS", cnpj:"61.752.739/0001-44", segmento:"ALIMENTICIA", contato_nome:"QUEITIANE",    contato_cargo:"COORDENADORA RH",   contato_email:"queitiane.farias@prietoalimentos.com.br", contato_telefone:"1199614-1074", endereco:"Avenida Vereador Joaquim Pereira Barbosa , 777", cidade:"CAJAMAR", status:"Ativo", data_inicio:"2025-04-30"},
+    {razao_social:"URBITEC CONSTRUÇÕES LTDA", nome_fantasia:"URBITEC CONSTRUÇÕES", cnpj:"",         segmento:"CONSTRUÇÃO",  contato_nome:"",            contato_cargo:"",                  contato_email:"",                 contato_telefone:"",      endereco:"",                              cidade:"JUNDIAI",        status:"Ativo", data_inicio:""},
+    {razao_social:"PLANET - TOP BRANDS",   nome_fantasia:"PLANET",            cnpj:"",               segmento:"",             contato_nome:"",            contato_cargo:"",                  contato_email:"",                 contato_telefone:"",      endereco:"",                              cidade:"JUNDIAÍ",        status:"Ativo", data_inicio:""},
+    {razao_social:"MILLENIUM COBRANÇAS",   nome_fantasia:"MILLENIUM COBRANÇAS EMPRESARIAIS", cnpj:"",      segmento:"",             contato_nome:"",            contato_cargo:"",                  contato_email:"",                 contato_telefone:"",      endereco:"",                              cidade:"VÁRZEA PAULISTA",status:"Ativo", data_inicio:""},
+    {razao_social:"JAPI EMBALAGENS LTDA",  nome_fantasia:"JAPI EMBALAGENS",  cnpj:"",               segmento:"EMBALAGENS",   contato_nome:"",            contato_cargo:"",                  contato_email:"",                 contato_telefone:"",      endereco:"",                              cidade:"JUNDIAI",        status:"Ativo", data_inicio:""},
+    {razao_social:"TUBAL EQUIPAMENTOS",    nome_fantasia:"TUBAL",             cnpj:"",               segmento:"INDÚSTRIA",    contato_nome:"",            contato_cargo:"",                  contato_email:"",                 contato_telefone:"",      endereco:"",                              cidade:"VARZEA PAULISTA",status:"Ativo", data_inicio:""},
+    {razao_social:"FL BRASIL HOLDING",     nome_fantasia:"TRAGETTA",          cnpj:"",               segmento:"LOGÍSTICA",    contato_nome:"",            contato_cargo:"",                  contato_email:"",                 contato_telefone:"",      endereco:"",                              cidade:"JUNDIAI",        status:"Ativo", data_inicio:""},
+    {razao_social:"DINIZ COMERCIO ATACADISTA", nome_fantasia:"DINIZ FOODS",  cnpj:"",               segmento:"ALIMENTOS",    contato_nome:"",            contato_cargo:"",                  contato_email:"",                 contato_telefone:"",      endereco:"",                              cidade:"LOUVEIRA",       status:"Ativo", data_inicio:""},
+    {razao_social:"MITUTOYO SUL AMERICANA", nome_fantasia:"MITUTOYO",          cnpj:"",               segmento:"METROLOGIA",   contato_nome:"",            contato_cargo:"",                  contato_email:"",                 contato_telefone:"",      endereco:"",                              cidade:"JUNDIAI",        status:"Ativo", data_inicio:""},
+    {razao_social:"BALDI INDUSTRIA E COMERCIO", nome_fantasia:"BALDI",       cnpj:"",               segmento:"INDÚSTRIA",    contato_nome:"",            contato_cargo:"",                  contato_email:"",                 contato_telefone:"",      endereco:"",                              cidade:"VÁRZEA PAULISTA",status:"Ativo", data_inicio:""}
+  ],
+  veiculos: [
+    {placa:"CUB1I69", numero_frota:"1087", tipo:"Ônibus",   modelo:"MPOLO IDEALE R",                ano:"2009", capacidade:"48", status:"Disponível"},
+    {placa:"DMR7G00", numero_frota:"1597", tipo:"Van",      modelo:"MERCEDES SPRINTER 415 CDI",     ano:"2018", capacidade:"16", status:"Disponível", observacoes:"COR: BRANCA | ANO MOD: 2019"},
+    {placa:"SJV1J12", numero_frota:"1587", tipo:"Van",      modelo:"FORD TRANSIT 410 B",            ano:"2023", capacidade:"15", status:"Disponível"},
+    {placa:"ABC1D23", numero_frota:"1100", tipo:"Ônibus",   modelo:"VOLKSBUS 17.230 OD",            ano:"2019", capacidade:"46", status:"Em Uso"},
+    {placa:"BCD2E34", numero_frota:"1110", tipo:"Microônibus", modelo:"IVECO CITYCLASS 70C17",       ano:"2021", capacidade:"30", status:"Disponível"},
+    {placa:"CDE3F45", numero_frota:"1200", tipo:"Van",      modelo:"RENAULT MASTER",                ano:"2020", capacidade:"16", status:"Manutenção"},
+    {placa:"EFG4H56", numero_frota:"1300", tipo:"Sedan Executivo", modelo:"TOYOTA COROLLA ALTIS",     ano:"2022", capacidade:"4",  status:"Em Uso"},
+    {placa:"GHI5J67", numero_frota:"1301", tipo:"Sedan Executivo", modelo:"TOYOTA COROLLA XEI",       ano:"2023", capacidade:"4",  status:"Disponível"},
+    {placa:"JKL6K78", numero_frota:"1400", tipo:"SUV",      modelo:"JEEP COMPASS LIMITED",          ano:"2023", capacidade:"5",  status:"Disponível"},
+    {placa:"MNO7L89", numero_frota:"1410", tipo:"Van",      modelo:"MERCEDES SPRINTER 417",         ano:"2024", capacidade:"17", status:"Disponível"}
+  ],
+  motoristas: [
+    {nome:"ALUIZIO CABRAL DA SILVA",     cpf:"", cnh:"", categoria_cnh:"D", vencimento_cnh:"2027-08-15", telefone:"",     salario_base:"3200", status:"Ativo",     endereco:"", cidade_motorista:"JUNDIAI",  categoria_veiculo:"Ônibus"},
+    {nome:"CARLOS EDUARDO PEREIRA",      cpf:"", cnh:"", categoria_cnh:"D", vencimento_cnh:"2026-09-22", telefone:"",     salario_base:"3500", status:"Ativo",     endereco:"", cidade_motorista:"JUNDIAI",  categoria_veiculo:"Ônibus"},
+    {nome:"EVERTON RODRIGUES MESSIAS",   cpf:"", cnh:"", categoria_cnh:"D", vencimento_cnh:"2027-03-10", telefone:"",     salario_base:"3300", status:"Ativo",     endereco:"", cidade_motorista:"VÁRZEA PAULISTA", categoria_veiculo:"Ônibus"},
+    {nome:"FERNANDO APARECIDO SANTOS",   cpf:"", cnh:"", categoria_cnh:"D", vencimento_cnh:"2026-08-30", telefone:"",     salario_base:"3400", status:"Ativo",     endereco:"", cidade_motorista:"JUNDIAI",  categoria_veiculo:"Microônibus"},
+    {nome:"JOSÉ ROBERTO DA SILVA",       cpf:"", cnh:"", categoria_cnh:"E", vencimento_cnh:"2026-12-05", telefone:"",     salario_base:"3600", status:"Férias",    endereco:"", cidade_motorista:"CAJAMAR",  categoria_veiculo:"Ônibus"},
+    {nome:"MARCOS ANTÔNIO OLIVEIRA",     cpf:"", cnh:"", categoria_cnh:"D", vencimento_cnh:"2027-06-18", telefone:"",     salario_base:"3200", status:"Ativo",     endereco:"", cidade_motorista:"CABREUVA",categoria_veiculo:"Van"},
+    {nome:"PAULO HENRIQUE SOUZA",        cpf:"", cnh:"", categoria_cnh:"B", vencimento_cnh:"2027-11-12", telefone:"",     salario_base:"2800", status:"Ativo",     endereco:"", cidade_motorista:"JUNDIAI",  categoria_veiculo:"Sedan Executivo"},
+    {nome:"RICARDO ALEXANDRE LIMA",      cpf:"", cnh:"", categoria_cnh:"D", vencimento_cnh:"2026-10-25", telefone:"",     salario_base:"3300", status:"Ativo",     endereco:"", cidade_motorista:"JUNDIAI",  categoria_veiculo:"Van"}
+  ],
+  contratos: [
+    {numero_contrato:"", cliente_id:"cli-001", tipo_servico:"Fretamento Corporativo", status:"Ativo", valor_mensal:"28954.75", km_mensal_contratada:"1178.25", data_inicio:"2024-01-02", data_fim:"",               onibus_qtd:"2", micro_qtd:"0", van_qtd:"0", passeio_qtd:"0"},
+    {numero_contrato:"", cliente_id:"cli-002", tipo_servico:"Fretamento Corporativo", status:"Ativo", valor_mensal:"23650.00", km_mensal_contratada:"2640",    data_inicio:"2024-03-15", data_fim:"2026-12-31",      onibus_qtd:"0", micro_qtd:"1", van_qtd:"2", passeio_qtd:"0"},
+    {numero_contrato:"", cliente_id:"cli-003", tipo_servico:"Fretamento Corporativo", status:"Ativo", valor_mensal:"58280.00", km_mensal_contratada:"6120",    data_inicio:"2025-04-30", data_fim:"2026-12-02",      onibus_qtd:"0", micro_qtd:"0", van_qtd:"4", passeio_qtd:"0"},
+    {numero_contrato:"", cliente_id:"cli-004", tipo_servico:"Fretamento Corporativo", status:"Ativo", valor_mensal:"43800.00", km_mensal_contratada:"5315.20", data_inicio:"2025-12-01", data_fim:"2026-12-01",      onibus_qtd:"0", micro_qtd:"1", van_qtd:"1", passeio_qtd:"0"},
+    {numero_contrato:"", cliente_id:"cli-005", tipo_servico:"Fretamento Corporativo", status:"Ativo", valor_mensal:"74700.00", km_mensal_contratada:"9455",    data_inicio:"2025-11-01", data_fim:"2026-11-01",      onibus_qtd:"0", micro_qtd:"0", van_qtd:"3", passeio_qtd:"0"},
+    {numero_contrato:"", cliente_id:"cli-011", tipo_servico:"Fretamento Corporativo", status:"Ativo", valor_mensal:"155432.00", km_mensal_contratada:"14523", data_inicio:"2020-03-02", data_fim:"2026-12-02",      onibus_qtd:"6", micro_qtd:"0", van_qtd:"0", passeio_qtd:"0"},
+    {numero_contrato:"", cliente_id:"cli-006", tipo_servico:"Fretamento Corporativo", status:"Ativo", valor_mensal:"32450.00", km_mensal_contratada:"3400",    data_inicio:"2025-06-10", data_fim:"2026-06-10",      onibus_qtd:"0", micro_qtd:"0", van_qtd:"2", passeio_qtd:"0"},
+    {numero_contrato:"", cliente_id:"cli-007", tipo_servico:"Fretamento Corporativo", status:"Ativo", valor_mensal:"18900.00", km_mensal_contratada:"1800",    data_inicio:"2025-08-01", data_fim:"2026-08-01",      onibus_qtd:"0", micro_qtd:"0", van_qtd:"1", passeio_qtd:"0"},
+    {numero_contrato:"", cliente_id:"cli-008", tipo_servico:"Fretamento Corporativo", status:"Ativo", valor_mensal:"41200.00", km_mensal_contratada:"4200",    data_inicio:"2024-09-15", data_fim:"2026-09-15",      onibus_qtd:"1", micro_qtd:"0", van_qtd:"1", passeio_qtd:"0"},
+    {numero_contrato:"", cliente_id:"cli-009", tipo_servico:"Fretamento Corporativo", status:"Ativo", valor_mensal:"67300.00", km_mensal_contratada:"7100",    data_inicio:"2025-02-20", data_fim:"2027-02-20",      onibus_qtd:"2", micro_qtd:"0", van_qtd:"2", passeio_qtd:"0"},
+    {numero_contrato:"", cliente_id:"cli-010", tipo_servico:"Fretamento Corporativo", status:"Ativo", valor_mensal:"98700.00", km_mensal_contratada:"10200",   data_inicio:"2024-11-05", data_fim:"2026-11-05",      onibus_qtd:"3", micro_qtd:"0", van_qtd:"2", passeio_qtd:"0"},
+    {numero_contrato:"", cliente_id:"cli-012", tipo_servico:"Fretamento Corporativo", status:"Ativo", valor_mensal:"22500.00", km_mensal_contratada:"2300",    data_inicio:"2025-10-01", data_fim:"2026-10-01",      onibus_qtd:"0", micro_qtd:"1", van_qtd:"0", passeio_qtd:"0"}
+  ],
+  linhas: [
+    {codigo_linha:"01127", cliente_id:"cli-001", descricao:"BUSUP 9058 - Azul Jundiaí - BN/FN 1127 E", itinerario:"Jundiaí → Valinhos",            endereco_garagem:"TEREZA VECHIATTI TRIGO, 120 — COUNTRY CLUB, VALINHOS / SP", endereco_inicio_linha:"Terminal Eloy Chaves - Parque Eloy Chaves, Jundiaí - SP",        km_ocioso_ida:"12",   km_ocioso_volta:"12",   km_ocioso_total:"24",   tipo_veiculo:"Ônibus",    veiculo_id:"vei-001", motorista_id:"mot-001", km_diaria:"58",   dias_mes:"22",  km_mensal_contratada:"1276", horario_ida:"06:00", horario_volta:"18:00", status:"Ativa"},
+    {codigo_linha:"01128", cliente_id:"cli-001", descricao:"BUSUP 9059 - Verde Jundiaí",               itinerario:"Jundiaí → Vinhedo",            endereco_garagem:"TEREZA VECHIATTI TRIGO, 120",                                endereco_inicio_linha:"Terminal Eloy Chaves",                                          km_ocioso_ida:"14",   km_ocioso_volta:"14",   km_ocioso_total:"28",   tipo_veiculo:"Ônibus",    veiculo_id:"",       motorista_id:"mot-002", km_diaria:"62",   dias_mes:"22",  km_mensal_contratada:"1364", horario_ida:"06:30", horario_volta:"18:30", status:"Ativa"},
+    {codigo_linha:"02101", cliente_id:"cli-002", descricao:"FLAMBOIA - Turno Manhã",                  itinerario:"Cabreúva → Jundiaí",            endereco_garagem:"Garagem Cabreúva",                                          endereco_inicio_linha:"Cabreúva Centro",                                              km_ocioso_ida:"8",    km_ocioso_volta:"8",    km_ocioso_total:"16",   tipo_veiculo:"Van",       veiculo_id:"vei-002", motorista_id:"mot-003", km_diaria:"60",   dias_mes:"22",  km_mensal_contratada:"1320", horario_ida:"05:45", horario_volta:"17:00", status:"Ativa"},
+    {codigo_linha:"02102", cliente_id:"cli-002", descricao:"FLAMBOIA - Turno Tarde",                  itinerario:"Jundiaí → Cabreúva",            endereco_garagem:"Garagem Cabreúva",                                          endereco_inicio_linha:"Jundiaí",                                                       km_ocioso_ida:"8",    km_ocioso_volta:"8",    km_ocioso_total:"16",   tipo_veiculo:"Van",       veiculo_id:"vei-003", motorista_id:"mot-004", km_diaria:"60",   dias_mes:"22",  km_mensal_contratada:"1320", horario_ida:"14:00", horario_volta:"02:00", status:"Ativa"},
+    {codigo_linha:"03101", cliente_id:"cli-003", descricao:"PRIETO - Cajamar Linha 1",                itinerario:"Cajamar → Jundiaí",             endereco_garagem:"Garagem Cajamar",                                           endereco_inicio_linha:"Cajamar",                                                        km_ocioso_ida:"22",   km_ocioso_volta:"22",   km_ocioso_total:"44",   tipo_veiculo:"Van",       veiculo_id:"",       motorista_id:"mot-005", km_diaria:"73",   dias_mes:"22",  km_mensal_contratada:"1606", horario_ida:"06:00", horario_volta:"18:00", status:"Ativa"},
+    {codigo_linha:"03102", cliente_id:"cli-003", descricao:"PRIETO - Cajamar Linha 2",                itinerario:"Cajamar → Franco da Rocha",     endereco_garagem:"Garagem Cajamar",                                           endereco_inicio_linha:"Cajamar",                                                        km_ocioso_ida:"30",   km_ocioso_volta:"30",   km_ocioso_total:"60",   tipo_veiculo:"Van",       veiculo_id:"",       motorista_id:"mot-006", km_diaria:"80",   dias_mes:"22",  km_mensal_contratada:"1760", horario_ida:"05:30", horario_volta:"17:30", status:"Ativa"},
+    {codigo_linha:"03103", cliente_id:"cli-003", descricao:"PRIETO - Cajamar Linha 3",                itinerario:"Cajamar → São Paulo",           endereco_garagem:"Garagem Cajamar",                                           endereco_inicio_linha:"Cajamar",                                                        km_ocioso_ida:"35",   km_ocioso_volta:"35",   km_ocioso_total:"70",   tipo_veiculo:"Van",       veiculo_id:"",       motorista_id:"mot-007", km_diaria:"125",  dias_mes:"22",  km_mensal_contratada:"2750", horario_ida:"05:00", horario_volta:"17:00", status:"Ativa"},
+    {codigo_linha:"11101", cliente_id:"cli-011", descricao:"MITUTOYO - Linha 01 Norte",               itinerario:"Jundiaí Norte",                endereco_garagem:"MITUTOYO - Av. Honda",                                       endereco_inicio_linha:"MITUTOYO Sede",                                                  km_ocioso_ida:"15",   km_ocioso_volta:"15",   km_ocioso_total:"30",   tipo_veiculo:"Ônibus",    veiculo_id:"",       motorista_id:"",       km_diaria:"65",   dias_mes:"22",  km_mensal_contratada:"1430", horario_ida:"06:15", horario_volta:"18:15", status:"Ativa"},
+    {codigo_linha:"11102", cliente_id:"cli-011", descricao:"MITUTOYO - Linha 02 Sul",                 itinerario:"Jundiaí Sul",                  endereco_garagem:"MITUTOYO - Av. Honda",                                       endereco_inicio_linha:"MITUTOYO Sede",                                                  km_ocioso_ida:"20",   km_ocioso_volta:"20",   km_ocioso_total:"40",   tipo_veiculo:"Ônibus",    veiculo_id:"",       motorista_id:"",       km_diaria:"78",   dias_mes:"22",  km_mensal_contratada:"1716", horario_ida:"06:00", horario_volta:"18:00", status:"Ativa"},
+    {codigo_linha:"11103", cliente_id:"cli-011", descricao:"MITUTOYO - Linha 03 Leste",               itinerario:"Jundiaí Leste",                endereco_garagem:"MITUTOYO - Av. Honda",                                       endereco_inicio_linha:"MITUTOYO Sede",                                                  km_ocioso_ida:"18",   km_ocioso_volta:"18",   km_ocioso_total:"36",   tipo_veiculo:"Ônibus",    veiculo_id:"",       motorista_id:"",       km_diaria:"72",   dias_mes:"22",  km_mensal_contratada:"1584", horario_ida:"06:30", horario_volta:"18:30", status:"Ativa"}
+  ],
+  apuracao: [
+    {mes_ano:"06/2026", cliente_id:"cli-005", km_contratada:"9455",  km_rodada:"9455",  faturamento_contrato:"74700.00", faturamento_realizado:"74700.00", viagens_extras:"0",  custo_motoristas:"45330.00", pedagio:"1850.00", impostos:"7860.00", depreciacao_veiculo:"6660.00", outras_despesas:"660.00",  custo_total:"86659.35",  margem_bruta:"-11959.35", margem_percentual:-16.01},
+    {mes_ano:"05/2026", cliente_id:"cli-005", km_contratada:"9455",  km_rodada:"9200",  faturamento_contrato:"74700.00", faturamento_realizado:"74700.00", viagens_extras:"1500",custo_motoristas:"45330.00", pedagio:"1780.00", impostos:"7860.00", depreciacao_veiculo:"6660.00", outras_despesas:"720.00",  custo_total:"85600.00", margem_bruta:"-10900.00",margem_percentual:-14.59},
+    {mes_ano:"06/2026", cliente_id:"cli-003", km_contratada:"6120",  km_rodada:"6020",  faturamento_contrato:"58280.00", faturamento_realizado:"58280.00", viagens_extras:"0",  custo_motoristas:"32400.00", pedagio:"1200.00", impostos:"6120.00", depreciacao_veiculo:"4800.00", outras_despesas:"540.00",  custo_total:"54880.00", margem_bruta:"3400.00",   margem_percentual:5.83 },
+    {mes_ano:"05/2026", cliente_id:"cli-003", km_contratada:"6120",  km_rodada:"6500",  faturamento_contrato:"58280.00", faturamento_realizado:"58280.00", viagens_extras:"2000",custo_motoristas:"32400.00", pedagio:"1340.00", impostos:"6120.00", depreciacao_veiculo:"4800.00", outras_despesas:"480.00",  custo_total:"54560.00", margem_bruta:"3720.00",   margem_percentual:6.38 },
+    {mes_ano:"06/2026", cliente_id:"cli-002", km_contratada:"2640",  km_rodada:"2640",  faturamento_contrato:"23650.00", faturamento_realizado:"23650.00", viagens_extras:"0",   custo_motoristas:"14800.00", pedagio:"480.00",  impostos:"2483.00", depreciacao_veiculo:"2200.00", outras_despesas:"220.00",  custo_total:"22700.00", margem_bruta:"950.00",    margem_percentual:4.02 },
+    {mes_ano:"06/2026", cliente_id:"cli-011", km_contratada:"14523", km_rodada:"14523",faturamento_contrato:"155432.00",faturamento_realizado:"155432.00",viagens_extras:"0",custo_motoristas:"98800.00", pedagio:"3200.00",impostos:"16320.00",depreciacao_veiculo:"13200.00",outras_despesas:"1800.00",custo_total:"156340.00",margem_bruta:"-908.00",    margem_percentual:-0.58 },
+    {mes_ano:"06/2026", cliente_id:"cli-001", km_contratada:"1178",  km_rodada:"1178",  faturamento_contrato:"28954.75", faturamento_realizado:"28954.75", viagens_extras:"0",   custo_motoristas:"18600.00", pedagio:"320.00",  impostos:"3040.00", depreciacao_veiculo:"2600.00", outras_despesas:"180.00",  custo_total:"25860.00", margem_bruta:"3094.75",   margem_percentual:10.69},
+    {mes_ano:"05/2026", cliente_id:"cli-001", km_contratada:"1178",  km_rodada:"1178",  faturamento_contrato:"28954.75", faturamento_realizado:"28954.75", viagens_extras:"0",   custo_motoristas:"18600.00", pedagio:"340.00",  impostos:"3040.00", depreciacao_veiculo:"2600.00", outras_despesas:"200.00",  custo_total:"25880.00", margem_bruta:"3074.75",   margem_percentual:10.62},
+    {mes_ano:"06/2026", cliente_id:"cli-004", km_contratada:"5315",  km_rodada:"5315",  faturamento_contrato:"43800.00", faturamento_realizado:"43800.00", viagens_extras:"0",   custo_motoristas:"25200.00", pedagio:"950.00",  impostos:"4599.00", depreciacao_veiculo:"3900.00", outras_despesas:"420.00",  custo_total:"39680.00", margem_bruta:"4120.00",   margem_percentual:9.41 },
+    {mes_ano:"06/2026", cliente_id:"cli-006", km_contratada:"3400",  km_rodada:"3400",  faturamento_contrato:"32450.00", faturamento_realizado:"32450.00", viagens_extras:"0",   custo_motoristas:"19400.00", pedagio:"620.00",  impostos:"3408.00", depreciacao_veiculo:"2890.00", outras_despesas:"290.00",  custo_total:"30120.00", margem_bruta:"2330.00",   margem_percentual:7.18 },
+    {mes_ano:"06/2026", cliente_id:"cli-007", km_contratada:"1800",  km_rodada:"1800",  faturamento_contrato:"18900.00", faturamento_realizado:"18900.00", viagens_extras:"0",   custo_motoristas:"10800.00", pedagio:"280.00",  impostos:"1985.00", depreciacao_veiculo:"1500.00", outras_despesas:"180.00",  custo_total:"16520.00", margem_bruta:"2380.00",   margem_percentual:12.59},
+    {mes_ano:"06/2026", cliente_id:"cli-008", km_contratada:"4200",  km_rodada:"4200",  faturamento_contrato:"41200.00", faturamento_realizado:"41200.00", viagens_extras:"0",   custo_motoristas:"23200.00", pedagio:"780.00",  impostos:"4326.00", depreciacao_veiculo:"3760.00", outras_despesas:"360.00",  costo_total_alt:"",         custo_total:"36080.00", margem_bruta:"5120.00",   margem_percentual:12.43},
+    {mes_ano:"06/2026", cliente_id:"cli-009", km_contratada:"7100",  km_rodada:"7100",  faturamento_contrato:"67300.00", faturamento_realizado:"67300.00", viagens_extras:"0",   custo_motoristas:"39600.00", pedagio:"1380.00", impostos:"7067.00", depreciacao_veiculo:"6300.00", outras_despesas:"520.00",  custo_total:"60140.00", margem_bruta:"7160.00",   margem_percentual:10.64},
+    {mes_ano:"06/2026", cliente_id:"cli-010", km_contratada:"10200", km_rodada:"10200",faturamento_contrato:"98700.00", faturamento_realizado:"98700.00", viagens_extras:"0",   custo_motoristas:"58200.00", pedagio:"2100.00",impostos:"10364.00",depreciacao_veiculo:"8800.00", outras_despesas:"780.00", custo_total:"88120.00", margem_bruta:"10580.00",  margem_percentual:10.72}
+  ],
+  reclamacoes: [
+    {data:"2026-06-25", cliente_id:"cli-002", tipo:"Conduta do Motorista",  status:"Resolvida",  descricao:"EMPRESA RECLAMOU QUE O MOTORISTA ESTAVA COM EXCESSO DE VELOCIDADE.\nO MESMO FOI ORIENTADO E ENTRAMOS EM CONTATO COM A EMPRESA PARA DEVOLUTIVA DA RECLAMAÇÃO.", resolucao:"Motorista orientado, contato com empresa realizado.", motorista_nome:"EVERTON RODRIGUES MESSIAS", veiculo_escalado:"CUB1I69 / 1087", origem_reclamacao:"E-mail"},
+    {data:"2026-07-02", cliente_id:"cli-003", tipo:"Atraso",                status:"Em Andamento", descricao:"Veículo atrasou 25 minutos em relação ao horário programado.",                                                   resolucao:"",                                                                            motorista_nome:"CARLOS EDUARDO PEREIRA",  veiculo_escalado:"ABC1D23 / 1100", origem_reclamacao:"WhatsApp"},
+    {data:"2026-07-08", cliente_id:"cli-005", tipo:"Veículo",               status:"Aberta",      descricao:"Ar-condicionado do veículo não está gelando adequadamente.",                                                     resolucao:"",                                                                            motorista_nome:"MARCOS ANTÔNIO OLIVEIRA",veiculo_escalado:"DMR7G00 / 1597", origem_reclamacao:"Telefone"},
+    {data:"2026-07-15", cliente_id:"cli-011", tipo:"Limpeza",               status:"Resolvida",   descricao:"Veículo chegou ao cliente com interior sujo.",                                                                     resolucao:"Equipe de limpeza revisada, novo procedimento implementado.",                            motorista_nome:"JOSÉ ROBERTO DA SILVA",   veiculo_escalado:"",              origem_reclamacao:"E-mail"}
+  ],
+  prospeccoes: [
+    {empresa:"GARDNER DENVER",           mes_ano:"07/2026", contato_nome:"ALEJANDRO DELGADO", contato_telefone:"11 2109-8900", contato_email:"alejandro.delgado@irco.com",         cidade:"JUNDIAI",   segmento:"Líder em fornecimento global de compressores",                       origem:"Site",       responsavel:"ANA PAULA MAYA",  status:"Em Contato",      data:"2026-07-05"},
+    {empresa:"ELEVA TRAVESSEIROS",       mes_ano:"06/2026", contato_nome:"SCARLETE",          contato_telefone:"",             contato_email:"",                                   cidade:"",          segmento:"Indústria de travesseiros",                                            origem:"Indicação",  responsavel:"ANA PAULA MAYA",  status:"Proposta Enviada",data:"2026-06-12"},
+    {empresa:"AGROEXPORT",               mes_ano:"07/2026", contato_nome:"RICARDO SANTOS",    contato_telefone:"11 5566-7788", contato_email:"ricardo@agroexport.com.br",          cidade:"SÃO PAULO", segmento:"Exportação agrícola",                                                origem:"LinkedIn",   responsavel:"RODRIGO FERREIRA",status:"Nova",             data:"2026-07-08"},
+    {empresa:"VOTORANTIM CIMENTOS",      mes_ano:"07/2026", contato_nome:"MARIA APARECIDA",   contato_telefone:"11 3344-5566", contato_email:"maria@votorantim.com",              cidade:"SÃO PAULO", segmento:"Cimento e materiais de construção",                                  origem:"Visita",     responsavel:"ANA PAULA MAYA",  status:"Reunião Agendada", data:"2026-07-10"},
+    {empresa:"AMBEV",                    mes_ano:"06/2026", contato_nome:"PAULO RICARDO",     contato_telefone:"11 2122-3344", contato_email:"paulo@ambev.com.br",                cidade:"JUNDIAI",   segmento:"Bebidas",                                                            origem:"Indicação",  responsavel:"RODRIGO FERREIRA",status:"Proposta Enviada",data:"2026-06-20"},
+    {empresa:"NESTLÉ BRASIL",            mes_ano:"07/2026", contato_nome:"FERNANDA COSTA",    contato_telefone:"11 99887-7766", contato_email:"fernanda@nestle.com.br",           cidade:"CAJAMAR",   segmento:"Alimentos",                                                          origem:"Site",       responsavel:"ANA PAULA MAYA",  status:"Nova",             data:"2026-07-12"},
+    {empresa:"PROCTER & GAMBLE",         mes_ano:"06/2026", contato_nome:"JOÃO MENDES",       contato_telefone:"11 4477-8899", contato_email:"joao.mendes@pg.com",               cidade:"SÃO PAULO", segmento:"Higiene e limpeza",                                                   origem:"LinkedIn",   responsavel:"RODRIGO FERREIRA",status:"Convertida",       data:"2026-06-15"},
+    {empresa:"3M DO BRASIL",             mes_ano:"07/2026", contato_nome:"ALINE FERREIRA",    contato_telefone:"11 5566-1122", contato_email:"aline@3m.com",                     cidade:"SUMARÉ",    segmento:"Diversificada industrial",                                          origem:"Indicação",  responsavel:"ANA PAULA MAYA",  status:"Em Contato",       data:"2026-07-15"}
+  ],
+  propostas: [
+    {numero_proposta:"001/2026", mes_ano:"06/2026", cliente_id:"cli-008", empresa:"ELEVA TRAVESSEIROS", contato_nome:"SCARLETE",       tipo_servico:"Fretamento Corporativo", responsavel:"ANA PAULA MAYA",  valor_proposto:"18500", km_mensal:"1800",  qtd_veiculos:"1", status:"Aprovada",       data_envio:"2026-06-12", data_validade:"2026-07-12"},
+    {numero_proposta:"002/2026", mes_ano:"06/2026", cliente_id:"cli-009", empresa:"AMBEV",             contato_nome:"PAULO RICARDO",   tipo_servico:"Fretamento Corporativo", responsavel:"RODRIGO FERREIRA",valor_proposto:"67300", km_mensal:"7100",  qtd_veiculos:"4", status:"Em Negociação",  data_envio:"2026-06-20", data_validade:"2026-07-20"},
+    {numero_proposta:"003/2026", mes_ano:"07/2026", cliente_id:"",        empresa:"PROCTER & GAMBLE",  contato_nome:"JOÃO MENDES",      tipo_servico:"Fretamento Corporativo", responsavel:"RODRIGO FERREIRA",valor_proposto:"41200", km_mensal:"4200",  qtd_veiculos:"2", status:"Aprovada",       data_envio:"2026-06-30", data_validade:"2026-07-30"},
+    {numero_proposta:"004/2026", mes_ano:"07/2026", cliente_id:"",        empresa:"GARDNER DENVER",    contato_nome:"ALEJANDRO DELGADO",tipo_servico:"Fretamento Corporativo", responsavel:"ANA PAULA MAYA",  valor_proposto:"23800", km_mensal:"2400",  qtd_veiculos:"1", status:"Em Elaboração",  data_envio:"",            data_validade:""},
+    {numero_proposta:"005/2026", mes_ano:"07/2026", cliente_id:"cli-010", empresa:"VOTORANTIM",        contato_nome:"MARIA APARECIDA",  tipo_servico:"Fretamento Corporativo", responsavel:"ANA PAULA MAYA",  valor_proposto:"98700", km_mensal:"10200", qtd_veiculos:"5", status:"Em Negociação",  data_envio:"2026-07-10", data_validade:"2026-08-10"},
+    {numero_proposta:"006/2026", mes_ano:"07/2026", cliente_id:"",        empresa:"NESTLÉ BRASIL",     contato_nome:"FERNANDA COSTA",   tipo_servico:"Fretamento Corporativo", responsavel:"RODRIGO FERREIRA",valor_proposto:"52000", km_mensal:"5500",  qtd_veiculos:"3", status:"Em Elaboração",  data_envio:"",            data_validade:""}
+  ]
+};
+
+</script>
+<script>
+/* ══════════════════════════════════════════════════
+   ITNEROL — app.js
+   Lógica completa do CRM (estática, offline, sem backend)
+   ══════════════════════════════════════════════════ */
+'use strict';
+
+/* ─── Storage ──────────────────────────────────── */
+const DB_KEY = 'itnerol_db_v1';
+const tabs = ['clientes','veiculos','motoristas','contratos','linhas','apuracao','prospeccoes','propostas','reclamacoes'];
+
+/* Coletar snapshot do data.js shipped com o app */
+function buildSeed(){
+  if(!window.BACKUP_DATA) return {clientes:[],veiculos:[],motoristas:[],contratos:[],linhas:[],apuracao:[],prospeccoes:[],propostas:[],reclamacoes:[],usuarios:[]};
+  const b = window.BACKUP_DATA;
+  return {
+    clientes:b.clientes||[], veiculos:b.veiculos||[], motoristas:b.motoristas||[],
+    contratos:b.contratos||[], linhas:b.linhas||[], apuracao:b.apuracao||[],
+    prospeccoes:b.prospeccoes||[], propostas:b.propostas||[], reclamacoes:b.reclamacoes||[],
+    usuarios:b.usuarios||[]
+  };
+}
+
+let DB = {versao:'7.4', sistema:'ITNEROL Sistema Comercial', data_backup:new Date().toISOString(), dados: buildSeed(), config:{}};
+
+function loadDB(){
+  try{
+    const ls = localStorage.getItem(DB_KEY);
+    if(ls){
+      const parsed = JSON.parse(ls);
+      // Manter dados do usuário se existir; senão usar seed
+      if(parsed && parsed.dados && parsed.dados.usuarios && parsed.dados.usuarios.length){
+        DB = parsed;
+      }
+    }
+  }catch(e){ console.warn('localStorage load falhou', e); }
+}
+function saveDB(){
+  try{ localStorage.setItem(DB_KEY, JSON.stringify(DB)); }
+  catch(e){ toast('Erro ao salvar','error'); }
+}
+
+/* IDs estáveis — necessários para FKs */
+function ensureIds(){
+  // Mapear índices seed → IDs determinísticos por (cliente_id etc.)
+  const seed = buildSeed();
+  const idKeys = {
+    clientes: c => c.id || `cli-${String(seed.clientes.indexOf(c)+1).padStart(3,'0')}`,
+    veiculos: v => v.id || `vei-${String(seed.veiculos.indexOf(v)+1).padStart(3,'0')}`,
+    motoristas: m => m.id || `mot-${String(seed.motoristas.indexOf(m)+1).padStart(3,'0')}`
+  };
+  for(const tab of ['clientes','veiculos','motoristas']){
+    (DB.dados[tab]||[]).forEach((r,i) => { if(!r.id) r.id = idKeys[tab](r); });
+  }
+}
+loadDB();
+ensureIds();
+saveDB();
+
+/* ─── Helpers ─────────────────────────────────── */
+function esc(s){return (s==null?'':String(s)).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);}
+function fmt(n){if(n==null||n==='') return '—'; const v=Number(n); if(isNaN(v)) return n; return v.toLocaleString('pt-BR');}
+function fmtR(n){if(n==null||n==='') return '—'; const v=Number(n); if(isNaN(v)) return n; return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function set(id,v){const e=document.getElementById(id); if(e) e.textContent=v;}
+function uid(){ return 'r-'+Date.now()+'-'+Math.random().toString(36).slice(2,8); }
+function nowISO(){return new Date().toISOString();}
+
+const COR = {'Ativo':'green','Ativa':'green','Aberta':'red','Em Andamento':'orange','Em Negociação':'orange','Convertida':'green','Perdida':'gray','Resolvida':'green','Aprovada':'green','Recusada':'red','Expirada':'gray','Em Contato':'blue','Reunião Agendada':'purple','Proposta Enviada':'orange','Em Elaboração':'gray','Nova':'gray','Cancelada':'red','Suspenso':'orange','Encerrado':'gray','Em Renovação':'orange','Inativo':'gray','Férias':'blue','Afastado':'orange','Disponível':'green','Em Uso':'orange','Manutenção':'red'};
+function badgeStatus(s){const c=(s||'Sem status'); const cls=COR[c]||'gray'; return `<span class="badge badge-${cls}">${esc(c)}</span>`;}
+
+function clienteNome(id){const c=(DB.dados.clientes||[]).find(x=>x.id===id); return c?(c.nome_fantasia||c.razao_social):'—'; }
+function veiculoPlaca(id){const v=(DB.dados.veiculos||[]).find(x=>x.id===id); return v?(v.placa+' / '+(v.numero_frota||'—')):'—'; }
+function motoristaNome(id){const m=(DB.dados.motoristas||[]).find(x=>x.id===id); return m?m.nome:'—'; }
+
+function mesAtualFmt(){const d=new Date();return String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();}
+function ultimosMeses(n){const r=[]; const d=new Date(); for(let i=n-1;i>=0;i--){const m=new Date(d.getFullYear(),d.getMonth()-i,1); r.push(String(m.getMonth()+1).padStart(2,'0')+'/'+m.getFullYear());} return r;}
+function parseMes(m){if(!m||!m.includes('/')) return null; const [mm,yy]=m.split('/').map(Number); return new Date(yy,mm-1,1);}
+
+/* ─── Auth ────────────────────────────────────── */
+let session=null;
+function fazerLogin(e){
+  e.preventDefault();
+  const email=(document.getElementById('login-email').value||'').trim().toLowerCase();
+  const senha=document.getElementById('login-senha').value;
+  const u=(DB.dados.usuarios||[]).find(x=>(x.email||'').toLowerCase()===email && x.senha_hash===senha);
+  if(!u){const m=el('login-msg'); m.style.display='block'; m.textContent='E-mail ou senha inválidos.'; return false;}
+  session={nome:u.nome,email:u.email,perfil:u.perfil};
+  sessionStorage.setItem('crm_user',JSON.stringify(session));
+  iniciarApp();
+  return false;
+}
+function fazerLogout(){
+  if(!confirm('Sair do sistema?')) return;
+  sessionStorage.removeItem('crm_user');
+  session=null;
+  el('app').style.display='none';
+  document.body.classList.remove('app-mode');
+  el('login-screen').style.display='flex';
+  el('login-email').value=''; el('login-senha').value='';
+}
+function el(id){return document.getElementById(id);}
+function perfilLabel(p){return {admin:'Admin',comercial:'Comercial',operacional:'Operacional',visualizador:'Visualizador'}[p]||p;}
+
+function iniciarApp(){
+  el('login-screen').style.display='none';
+  el('app').style.display='block';
+  document.body.classList.add('app-mode');
+  const ini=(session.nome||'?').split(' ').map(p=>p[0]).slice(0,2).join('').toUpperCase();
+  set('sidebar-user-nome', session.nome);
+  set('sidebar-user-perfil', perfilLabel(session.perfil));
+  set('user-avatar-initials', ini);
+  set('chip-avatar', ini);
+  set('chip-nome', session.nome.split(' ')[0]);
+  set('chip-perfil', perfilLabel(session.perfil));
+  aplicarPermissoes();
+  atualizarData();
+  document.querySelectorAll('.nav-item').forEach(it=>{
+    it.onclick=()=>navegar(it.dataset.page);
+  });
+  // restore last page
+  const last=sessionStorage.getItem('crm_page')||'dashboard';
+  navegar(last);
+}
+function aplicarPermissoes(){
+  const p=session.perfil;
+  document.querySelectorAll('[data-perm]').forEach(el2=>{
+    const lista=(el2.dataset.perm||'').split(',');
+    if(!lista.includes(p)) el2.classList.add('nav-hidden'); else el2.classList.remove('nav-hidden');
+  });
+  if(p==='visualizador'){
+    const b=el('btn-novo-global'); if(b) b.style.display='none';
+  } else {
+    const b=el('btn-novo-global'); if(b) b.style.display='flex';
+  }
+}
+function atualizarData(){
+  const d=new Date();
+  set('topbar-date', d.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short',year:'numeric'}));
+  set('topbar-date-big', d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'}));
+}
+
+const labels={dashboard:'Dashboard',indicadores:'Indicadores',prospeccoes:'Prospecções',propostas:'Propostas',clientes:'Clientes',veiculos:'Veículos',motoristas:'Motoristas',contratos:'Contratos',linhas:'Linhas / Itinerários',reclamacoes:'Reclamações',apuracao:'Apuração Mensal',precificacao:'Precificação',relatorios:'Relatórios / Backup',usuarios:'Usuários'};
+
+function navegar(page){
+  document.querySelectorAll('.page').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
+  const sec=el('page-'+page); if(sec) sec.classList.add('active');
+  const nav=document.querySelector('.nav-item[data-page="'+page+'"]');
+  if(nav) nav.classList.add('active');
+  set('breadcrumb', labels[page]||page);
+  if(renders[page]) renders[page]();
+  const semNovo=['dashboard','indicadores','precificacao','relatorios'];
+  const b=el('btn-novo-global'); if(b) b.style.display=semNovo.includes(page) ? 'none':'inline-flex';
+  sessionStorage.setItem('crm_page', page);
+}
+
+/* ─── Renders ─────────────────────────────────── */
+const renders={};
+
+renders.dashboard = function(){
+  const mes=mesAtualFmt();
+  const prosp=DB.dados.prospeccoes.filter(x=>x.mes_ano===mes);
+  const prop =DB.dados.propostas.filter(x=>x.mes_ano===mes);
+  const fech =prop.filter(x=>x.status==='Aprovada');
+  const recl =DB.dados.reclamacoes.filter(x=>['Aberta','Em Andamento'].includes(x.status));
+  set('kpi-prospeccoes', prosp.length);
+  set('kpi-propostas',   prop.length);
+  set('kpi-fechados',    fech.length);
+  set('kpi-reclamacoes', recl.length);
+  set('kpi-prospeccoes-sub', DB.dados.prospeccoes.length+' no total');
+  set('kpi-propostas-sub',   prop.filter(x=>x.status==='Em Negociação').length+' em negociação');
+  set('kpi-fechados-sub',    fmtR(fech.reduce((s,x)=>s+(Number(x.valor_proposto)||0),0)));
+  set('kpi-reclamacoes-sub', DB.dados.reclamacoes.length+' registradas no total');
+  set('kmi-clientes',  DB.dados.clientes.filter(x=>x.status==='Ativo').length);
+  set('kmi-contratos', DB.dados.contratos.filter(x=>x.status==='Ativo').length);
+  set('kmi-linhas',    DB.dados.linhas.filter(x=>x.status==='Ativa'||x.status==='Ativo').length);
+  set('kmi-veiculos',  DB.dados.veiculos.length);
+  const convGeral = DB.dados.propostas.filter(p=>p.status==='Aprovada').length;
+  const totProspGeral = DB.dados.prospeccoes.length;
+  const conv = totProspGeral? Math.round(convGeral/totProspGeral*100):0;
+  set('kmi-conversao', conv+'%');
+  const hh=new Date().getHours();
+  const sa=hh<12?'Bom dia':hh<18?'Boa tarde':'Boa noite';
+  set('dash-saudacao', sa+', '+session.nome.split(' ')[0]+'!');
+  set('dash-subtitulo', 'Visão geral ITNEROL — '+mes);
+  drawCharts();
+  renderReclDash();
+};
+
+function renderReclDash(){
+  const c=el('lista-reclamacoes-dash'); if(!c) return;
+  const lista=DB.dados.reclamacoes.filter(r=>['Aberta','Em Andamento'].includes(r.status)).slice(0,8);
+  if(!lista.length){ c.innerHTML='<div class="empty-state"><i class="fas fa-check-circle"></i><p>Nenhuma reclamação pendente</p></div>'; return; }
+  c.innerHTML=lista.map(r=>`<div style="padding:9px 0;border-bottom:1px solid var(--border)"><div style="font-weight:600;font-size:.84rem">${esc(r.tipo)} — ${esc(clienteNome(r.cliente_id))}</div><div style="font-size:.7rem;color:var(--text-muted)">${esc(r.data||'—')} · ${badgeStatus(r.status)}</div></div>`).join('');
+}
+
+let chartsCache={};
+function destroyChart(id){if(chartsCache[id]){chartsCache[id].destroy(); delete chartsCache[id];}}
+function drawCharts(){
+  const ctx=el('chart-faturamento'); if(ctx){destroyChart('chart-faturamento');const meses=ultimosMeses(6);const fat=meses.map(m=>DB.dados.apuracao.filter(a=>a.mes_ano===m).reduce((s,a)=>s+(Number(a.faturamento_realizado)||0),0));const cus=meses.map(m=>DB.dados.apuracao.filter(a=>a.mes_ano===m).reduce((s,a)=>s+(Number(a.custo_total)||0),0));const mar=fat.map((f,i)=>f-cus[i]);chartsCache['chart-faturamento']=new Chart(ctx,{type:'bar',data:{labels:meses,datasets:[{label:'Faturamento',data:fat,backgroundColor:'rgba(240,120,0,.85)',borderRadius:6},{label:'Custo',data:cus,backgroundColor:'rgba(100,116,139,.4)',borderRadius:6},{label:'Margem',data:mar,type:'line',borderColor:'#2E7D32',backgroundColor:'rgba(46,125,50,.08)',tension:.4,fill:false,pointRadius:5,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10}}}},scales:{y:{ticks:{callback:v=>'R$ '+Math.round(v/1000)+'k'}}}}})}
+  const ctx2=el('chart-funil'); if(ctx2){destroyChart('chart-funil');const mes=mesAtualFmt();const prosp=DB.dados.prospeccoes.filter(p=>p.mes_ano===mes).length;const props=DB.dados.propostas.filter(p=>p.mes_ano===mes).length;const neg=DB.dados.propostas.filter(p=>p.mes_ano===mes&&p.status==='Em Negociação').length;const fech=DB.dados.propostas.filter(p=>p.mes_ano===mes&&p.status==='Aprovada').length;const perd=DB.dados.propostas.filter(p=>p.mes_ano===mes&&['Recusada','Expirada'].includes(p.status)).length;chartsCache['chart-funil']=new Chart(ctx2,{type:'bar',data:{labels:['Prospecções','Propostas','Negociação','Fechados','Perdidos'],datasets:[{data:[prosp,props,neg,fech,perd],backgroundColor:['rgba(240,120,0,.85)','rgba(21,101,192,.85)','rgba(249,168,37,.85)','rgba(46,125,50,.85)','rgba(198,40,40,.7)'],borderRadius:8}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{stepSize:1}}}}})}
+  const ctx3=el('chart-km'); if(ctx3){destroyChart('chart-km');const meses=ultimosMeses(6);const kmC=meses.map(m=>DB.dados.apuracao.filter(a=>a.mes_ano===m).reduce((s,a)=>s+(Number(a.km_contratada)||0),0));const kmR=meses.map(m=>DB.dados.apuracao.filter(a=>a.mes_ano===m).reduce((s,a)=>s+(Number(a.km_rodada)||0),0));chartsCache['chart-km']=new Chart(ctx3,{type:'bar',data:{labels:meses,datasets:[{label:'KM Cont.',data:kmC,backgroundColor:'rgba(100,116,139,.4)',borderRadius:4},{label:'KM Rod.',data:kmR,backgroundColor:'rgba(240,120,0,.85)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10}}}}}})}
+  const ctx4=el('chart-veiculos'); if(ctx4){destroyChart('chart-veiculos');const t={};DB.dados.veiculos.forEach(v=>{if(v.tipo)t[v.tipo]=(t[v.tipo]||0)+1;});const labels=Object.keys(t);const vals=Object.values(t);if(!labels.length){chartsCache['chart-veiculos']=new Chart(ctx4,{type:'doughnut',data:{labels:['Sem dados'],datasets:[{data:[1],backgroundColor:['#e2e8f0']}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%'}});return;}chartsCache['chart-veiculos']=new Chart(ctx4,{type:'doughnut',data:{labels:labels.map((l,i)=>`${l} (${vals[i]})`),datasets:[{data:vals,backgroundColor:['#F07800','#1565C0','#2E7D32','#C62828','#F9A825','#7B1FA2'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom'}}}})}}
+}
+
+renders.indicadores = function(){
+  const prosp=DB.dados.prospeccoes.length;
+  const props=DB.dados.propostas.length;
+  const neg=DB.dados.propostas.filter(p=>p.status==='Em Negociação').length;
+  const fech=DB.dados.propostas.filter(p=>p.status==='Aprovada').length;
+  const perd=DB.dados.propostas.filter(p=>['Recusada','Expirada'].includes(p.status)).length;
+  set('ind-prosp-total', prosp); set('ind-prop-total', props); set('ind-neg-total', neg); set('ind-fecha-total', fech); set('ind-perd-total', perd);
+  set('ind-taxa-conversao', prosp?Math.round(fech/prosp*100)+'%':'0%');
+  set('ind-ticket-medio', fech.length? fmtR(fech.reduce((s,p)=>s+(Number(p.valor_proposto)||0),0)/fech.length):'R$ 0');
+  set('ind-receita-nova', fmtR(fech.reduce((s,p)=>s+(Number(p.valor_proposto)||0),0)));
+  set('ind-ciclo','— dias');
+  // top responsável
+  const r={};
+  DB.dados.propostas.filter(p=>p.status==='Aprovada').forEach(p=>{r[p.responsavel||'—']=(r[p.responsavel||'—']||0)+1;});
+  const top=Object.entries(r).sort((a,b)=>b[1]-a[1])[0];
+  set('ind-resp-lider', top?top[0]:'—');
+};
+
+renders.prospeccoes = function(){
+  const busca=(el('busca-prosp').value||'').toLowerCase();
+  const tb=el('tbody-prosp');
+  const lista=DB.dados.prospeccoes.filter(p=>{const t=(p.empresa+' '+p.contato_nome+' '+p.cidade+' '+p.origem+' '+p.responsavel).toLowerCase();return !busca||t.includes(busca);}).sort((a,b)=>(b.data||'').localeCompare(a.data||''));
+  if(!lista.length){tb.innerHTML='<tr><td colspan="8"><div class="empty-state"><i class="fas fa-search"></i><p>Nenhuma prospecção</p></div></td></tr>';return;}
+  tb.innerHTML=lista.map(p=>`<tr><td><div style="font-weight:600">${esc(p.empresa)}</div><div style="font-size:.7rem;color:var(--text-muted)">${esc(p.contato_email||'')}</div></td><td>${esc(p.contato_nome||'—')}<div style="font-size:.7rem;color:var(--text-muted)">${esc(p.contato_telefone||'')}</div></td><td>${esc(p.cidade||'—')}</td><td><span class="badge badge-blue">${esc(p.origem||'—')}</span></td><td>${esc(p.mes_ano||'—')}</td><td>${esc(p.responsavel||'—')}</td><td>${badgeStatus(p.status)}</td><td class="td-actions"><button class="btn-icon" onclick="abrirModal('prospeccao','${p.id}')"><i class="fas fa-edit"></i></button><button class="btn-icon danger" onclick="excluir('prospeccoes','${p.id}','prospeccao')"><i class="fas fa-trash"></i></button></td></tr>`).join('');
+};
+
+renders.propostas = function(){
+  const tb=el('tbody-prop');
+  if(!DB.dados.propostas.length){tb.innerHTML='<tr><td colspan="9"><div class="empty-state"><i class="fas fa-file-contract"></i><p>Nenhuma proposta</p></div></td></tr>';return;}
+  tb.innerHTML=DB.dados.propostas.slice().sort((a,b)=>(b.data_envio||'').localeCompare(a.data_envio||'')).map(p=>{const emp=p.cliente_id?clienteNome(p.cliente_id):(p.empresa||'—');return `<tr><td style="font-weight:700;color:var(--laranja)">${esc(p.numero_proposta||'—')}</td><td>${esc(emp)}</td><td><span class="badge badge-blue">${esc(p.tipo_servico||'—')}</span></td><td>${p.valor_proposto?fmtR(p.valor_proposto):'—'}</td><td style="text-align:center">${esc(p.qtd_veiculos||'—')}</td><td>${esc(p.data_envio||'—')}</td><td>${esc(p.responsavel||'—')}</td><td>${badgeStatus(p.status)}</td><td class="td-actions"><button class="btn-icon" onclick="abrirModal('proposta','${p.id}')"><i class="fas fa-edit"></i></button><button class="btn-icon danger" onclick="excluir('propostas','${p.id}','proposta')"><i class="fas fa-trash"></i></button></td></tr>`;}).join('');
+};
+
+renders.clientes = function(){
+  const tb=el('tbody-cli');
+  const busca=(el('busca-cli').value||'').toLowerCase();
+  const lista=DB.dados.clientes.filter(c=>{const t=(c.razao_social+' '+c.nome_fantasia+' '+c.cnpj+' '+c.cidade+' '+c.contato_nome).toLowerCase();return !busca||t.includes(busca);}).sort((a,b)=>(a.nome_fantasia||a.razao_social).localeCompare(b.nome_fantasia||b.razao_social));
+  if(!lista.length){tb.innerHTML='<tr><td colspan="6"><div class="empty-state"><i class="fas fa-building"></i><p>Nenhum cliente</p></div></td></tr>';return;}
+  tb.innerHTML=lista.map(c=>`<tr><td><div style="font-weight:700">${esc(c.razao_social||'—')}</div><div style="font-size:.7rem;color:var(--text-muted)">${esc(c.nome_fantasia||'')} · ${esc(c.segmento||'')}</div></td><td class="td-num">${esc(c.cnpj||'—')}</td><td>${esc(c.contato_nome||'—')}<div style="font-size:.7rem;color:var(--text-muted)">${esc(c.contato_telefone||'')}</div></td><td>${esc(c.cidade||'—')}</td><td>${badgeStatus(c.status)}</td><td class="td-actions"><button class="btn-icon" onclick="abrirModal('cliente','${c.id}')"><i class="fas fa-edit"></i></button><button class="btn-icon danger" onclick="excluir('clientes','${c.id}','cliente')"><i class="fas fa-trash"></i></button></td></tr>`).join('');
+};
+
+renders.veiculos = function(){
+  const cont=el('frota-cards');
+  const busca=(el('busca-vei').value||'').toLowerCase();
+  const lista=DB.dados.veiculos.filter(v=>{const t=(v.placa+' '+v.numero_frota+' '+v.modelo+' '+(v.tipo||'')).toLowerCase();return !busca||t.includes(busca);}).sort((a,b)=>(a.placa||'').localeCompare(b.placa||''));
+  if(!lista.length){cont.innerHTML='<div class="empty-state"><i class="fas fa-truck"></i><p>Nenhum veículo</p></div>';return;}
+  cont.innerHTML=lista.map(v=>`<div class="veiculo-card"><span class="veiculo-tipo-badge">${esc(v.tipo||'N/D')}</span><div class="veiculo-num">Frota ${esc(v.numero_frota||'—')}</div><div class="veiculo-placa">${esc(v.placa||'—')}</div><div class="veiculo-modelo">${esc(v.modelo||'—')} ${v.ano?'· '+v.ano:''}</div><div class="veiculo-info-item"><span>Capacidade</span><span>${esc(v.capacidade||'—')} pax</span></div><div class="veiculo-info-item"><span>KM Atual</span><span>${v.km_atual?fmt(v.km_atual):'—'}</span></div><div class="veiculo-info-item"><span>Status</span><span>${badgeStatus(v.status)}</span></div><div style="display:flex;gap:6px;margin-top:12px"><button class="btn-primary btn-sm" onclick="abrirModal('veiculo','${v.id}')"><i class="fas fa-edit"></i> Editar</button><button class="btn-outline btn-sm" onclick="excluir('veiculos','${v.id}','veiculo')"><i class="fas fa-trash"></i></button></div></div>`).join('');
+};
+
+renders.motoristas = function(){
+  const tb=el('tbody-mot');
+  const busca=(el('busca-mot').value||'').toLowerCase();
+  const lista=DB.dados.motoristas.filter(m=>(m.nome||'').toLowerCase().includes(busca)).sort((a,b)=>(a.nome||'').localeCompare(b.nome||''));
+  if(!lista.length){tb.innerHTML='<tr><td colspan="8"><div class="empty-state"><i class="fas fa-id-card"></i><p>Nenhum motorista</p></div></td></tr>';return;}
+  tb.innerHTML=lista.map(m=>{
+    let alerta='';
+    if(m.vencimento_cnh){const d=Math.floor((new Date(m.vencimento_cnh)-new Date())/86400000); if(d<90) alerta='color:var(--vermelho);font-weight:700';}
+    return `<tr><td style="font-weight:600">${esc(m.nome||'—')}</td><td>${esc(m.cpf||'—')}</td><td>${esc(m.cnh||'—')}</td><td><span class="badge badge-blue">${esc(m.categoria_cnh||'—')}</span></td><td style="${alerta}">${esc(m.vencimento_cnh||'—')}</td><td>${esc(m.telefone||'—')}</td><td>${badgeStatus(m.status)}</td><td class="td-actions"><button class="btn-icon" onclick="abrirModal('motorista','${m.id}')"><i class="fas fa-edit"></i></button><button class="btn-icon danger" onclick="excluir('motoristas','${m.id}','motorista')"><i class="fas fa-trash"></i></button></td></tr>`;
+  }).join('');
+};
+
+renders.contratos = function(){
+  const hoje=new Date(); hoje.setHours(0,0,0,0);
+  const av=el('alertas-vencimento');
+  const criticos=[];
+  DB.dados.contratos.forEach(ct=>{
+    if(ct.status==='Ativo' && ct.data_fim){
+      const f=new Date(ct.data_fim+'T00:00:00');
+      const dias=Math.floor((f-hoje)/86400000);
+      if(dias>=0 && dias<=60) criticos.push({...ct,dias});
+    }
+  });
+  if(criticos.length){av.innerHTML=`<div class="alerta-banner alerta-critico"><i class="fas fa-exclamation-triangle"></i><div><strong>${criticos.length} contrato(s) vencendo em até 60 dias</strong><div style="font-size:.78rem;margin-top:6px;display:flex;flex-wrap:wrap;gap:8px">${criticos.map(c=>`<span style="background:#fff;border:1px solid var(--vermelho-light);padding:3px 8px;border-radius:5px"><strong>${esc(clienteNome(c.cliente_id))}</strong> · ${esc(c.numero_contrato||'s/ nº')} · ${c.dias} dias</span>`).join('')}</div></div></div>`;} else av.innerHTML='';
+  const tb=el('tbody-ct');
+  if(!DB.dados.contratos.length){tb.innerHTML='<tr><td colspan="8"><div class="empty-state"><i class="fas fa-file-signature"></i><p>Nenhum contrato</p></div></td></tr>';return;}
+  tb.innerHTML=DB.dados.contratos.map(ct=>`<tr><td><div style="font-weight:600">${esc(clienteNome(ct.cliente_id))}</div><div style="font-size:.7rem;color:var(--text-muted)">${esc(ct.numero_contrato||'Sem número')}</div></td><td><span class="badge badge-blue">${esc(ct.tipo_servico||'—')}</span></td><td>${ct.valor_mensal?fmtR(ct.valor_mensal):'—'}</td><td>${ct.km_mensal_contratada?fmt(ct.km_mensal_contratada):'—'}</td><td>${esc(ct.data_inicio||'—')}</td><td>${esc(ct.data_fim||'—')}</td><td>${badgeStatus(ct.status)}</td><td class="td-actions"><button class="btn-icon" onclick="abrirModal('contrato','${ct.id}')"><i class="fas fa-edit"></i></button><button class="btn-icon danger" onclick="excluir('contratos','${ct.id}','contrato')"><i class="fas fa-trash"></i></button></td></tr>`).join('');
+};
+
+renders.linhas = function(){
+  const busca=(el('busca-linhas').value||'').toLowerCase();
+  set('count-linhas', DB.dados.linhas.length);
+  const tb=el('tbody-linhas');
+  const lista=DB.dados.linhas.filter(l=>{const t=(l.codigo_linha+' '+l.descricao+' '+l.itinerario).toLowerCase();return !busca||t.includes(busca);}).sort((a,b)=>(a.codigo_linha||'').localeCompare(b.codigo_linha||''));
+  if(!lista.length){tb.innerHTML='<tr><td colspan="7"><div class="empty-state"><i class="fas fa-route"></i><p>Nenhuma linha</p></div></td></tr>';return;}
+  tb.innerHTML=lista.map(l=>`<tr><td style="font-weight:700;color:var(--laranja)">${esc(l.codigo_linha||'—')}</td><td>${esc(clienteNome(l.cliente_id))}</td><td><div style="font-weight:600">${esc(l.descricao||'—')}</div><div style="font-size:.7rem;color:var(--text-muted)">${esc(l.itinerario||'')}</div></td><td><span class="badge badge-blue">${esc(l.tipo_veiculo||'—')}</span></td><td>${l.km_mensal_contratada?fmt(l.km_mensal_contratada):'—'}</td><td>${badgeStatus(l.status)}</td><td class="td-actions"><button class="btn-icon" onclick="abrirModal('linha','${l.id}')"><i class="fas fa-edit"></i></button><button class="btn-icon danger" onclick="excluir('linhas','${l.id}','linha')"><i class="fas fa-trash"></i></button></td></tr>`).join('');
+};
+
+renders.reclamacoes = function(){
+  const tb=el('tbody-recl');
+  if(!DB.dados.reclamacoes.length){tb.innerHTML='<tr><td colspan="7"><div class="empty-state"><i class="fas fa-check-circle" style="color:#22c55e"></i><p>Nenhuma reclamação</p></div></td></tr>';return;}
+  tb.innerHTML=DB.dados.reclamacoes.slice().sort((a,b)=>(b.data||'').localeCompare(a.data||'')).map(r=>`<tr><td>${esc(r.data||'—')}</td><td>${esc(clienteNome(r.cliente_id))}</td><td>${esc(r.tipo||'—')}</td><td>${esc(r.motorista_nome||'—')}</td><td>${esc(r.veiculo_escalado||'—')}</td><td>${badgeStatus(r.status)}</td><td class="td-actions"><button class="btn-icon" onclick="abrirModal('reclamacao','${r.id}')"><i class="fas fa-edit"></i></button><button class="btn-icon danger" onclick="excluir('reclamacoes','${r.id}','reclamacao')"><i class="fas fa-trash"></i></button></td></tr>`).join('');
+};
+
+renders.apuracao = function(){
+  const tb=el('tbody-ap');
+  if(!DB.dados.apuracao.length){tb.innerHTML='<tr><td colspan="9"><div class="empty-state"><i class="fas fa-calculator"></i><p>Nenhuma apuração</p></div></td></tr>';return;}
+  tb.innerHTML=DB.dados.apuracao.slice().sort((a,b)=>(b.mes_ano||'').localeCompare(a.mes_ano||'')).map(a=>{
+    const fatR=Number(a.faturamento_realizado)||0;
+    const cus=Number(a.custo_total)||0;
+    const margem=cus? (fatR-cus):(Number(a.margem_bruta)||0);
+    const pct=fatR? Math.round(margem/fatR*10000)/100:(Number(a.margem_percentual)||0);
+    return `<tr><td><strong>${esc(a.mes_ano||'—')}</strong></td><td>${esc(clienteNome(a.cliente_id))}</td><td>${fmt(a.km_contratada)}</td><td>${fmt(a.km_rodada)}</td><td>${fmtR(a.faturamento_contrato)}</td><td>${fmtR(a.faturamento_realizado)}</td><td>${fmtR(a.custo_total)}</td><td style="color:${margem<0?'var(--vermelho)':'var(--verde)'};font-weight:700">${fmtR(margem)}</td><td><span class="badge ${pct<0?'badge-red':'badge-green'}">${(typeof pct==='number'? pct.toFixed(2):pct)}%</span></td></tr>`;
+  }).join('');
+};
+
+renders.relatorios = function(){
+  set('rc-cli', DB.dados.clientes.length); set('rc-vei', DB.dados.veiculos.length);
+  set('rc-mot', DB.dados.motoristas.length); set('rc-ct', DB.dados.contratos.length);
+  set('rc-li', DB.dados.linhas.length); set('rc-ap', DB.dados.apuracao.length);
+  set('rc-pr', DB.dados.prospeccoes.length); set('rc-po', DB.dados.propostas.length);
+  set('rc-re', DB.dados.reclamacoes.length);
+};
+
+renders.usuarios = function(){
+  const tb=el('tbody-usu');
+  tb.innerHTML=(DB.dados.usuarios||[]).map(u=>`<tr><td>${esc(u.nome)}</td><td>${esc(u.email)}</td><td><span class="badge badge-purple">${esc(perfilLabel(u.perfil))}</span></td><td><span class="badge badge-green">Ativo</span></td></tr>`).join('');
+};
+
+/* ─── Modal ──────────────────────────────────── */
+let modalTipo=null, modalItem=null, modalAcao=null;
+function abrirModal(tipo, id){
+  const valid=['cliente','veiculo','motorista','contrato','prospeccao','proposta','reclamacao','linha'];
+  if(valid.indexOf(tipo)<0) return;
+  if(session.perfil==='visualizador'){toast('Visualizador não pode editar','warning'); return;}
+  modalTipo=tipo; modalItem=null;
+  const tab=tipo+'s';
+  if(tab==='linhas') var tabReal='linhas'; else var tabReal=tab;
+  const arr=DB.dados[tabReal]||[];
+  if(id){
+    modalItem=arr.find(x=>x.id===id);
+    if(!modalItem){toast('Registro não encontrado','error');return;}
+    modalAcao='editar';
+  } else {
+    modalItem={id:uid()};
+    modalAcao='criar';
+  }
+  const titulos={cliente:'Cliente',veiculo:'Veículo',motorista:'Motorista',contrato:'Contrato',prospeccao:'Prospecção',proposta:'Proposta',reclamacao:'Reclamação',linha:'Linha'};
+  set('modal-titulo', (modalAcao==='editar'?'Editar ':'Nova ')+titulos[tipo]);
+  el('modal-box').className='modal'+(tipo==='prospeccao'||tipo==='linha'?' modal-lg':'');
+  el('modal-body').innerHTML=gerarForm(tipo, modalItem);
+  el('modal-overlay').classList.add('open');
+}
+function fecharModal(){el('modal-overlay').classList.remove('open'); modalTipo=null; modalItem=null;}
+
+function sg(k,lab,type='text'){return `<div class="form-group"><label>${lab}</label><input type="${type}" id="f-${k}" value="${esc(modalItem[k]||'')}"/></div>`;}
+function sgOpt(k,lab,opts){return `<div class="form-group"><label>${lab}</label><select id="f-${k}">${opts.map(o=>`<option ${(modalItem[k]||'')==o?'selected':''} value="${esc(o)}">${esc(o)}</option>`).join('')}</select></div>`;}
+function sgTxt(k,lab,rows=2){return `<div class="form-group"><label>${lab}</label><textarea id="f-${k}" rows="${rows}">${esc(modalItem[k]||'')}</textarea></div>`;}
+function sgCli(k,lab){const opts=DB.dados.clientes.map(c=>`<option ${modalItem[k]===c.id?'selected':''} value="${c.id}">${esc(c.nome_fantasia||c.razao_social)}</option>`).join('');return `<div class="form-group"><label>${lab}</label><select id="f-${k}"><option value="">— Selecione —</option>${opts}</select></div>`;}
+function sgCliOpt(k,lab){const opts=DB.dados.clientes.map(c=>`<option ${modalItem[k]===c.id?'selected':''} value="${c.id}">${esc(c.nome_fantasia||c.razao_social)}</option>`).join('');return `<div class="form-group"><label>${lab}</label><select id="f-${k}"><option value="">— Nenhum —</option>${opts}</select></div>`;}
+
+function gerarForm(tipo,r){
+  if(tipo==='cliente'){
+    return `<div class="form-row">${sg('razao_social','Razão Social')}${sg('nome_fantasia','Nome Fantasia')}</div>
+      <div class="form-row">${sg('cnpj','CNPJ')}${sg('segmento','Segmento')}</div>
+      <div class="form-row">${sg('contato_nome','Contato')}${sg('contato_cargo','Cargo')}</div>
+      <div class="form-row">${sg('contato_email','E-mail','email')}${sg('contato_telefone','Telefone')}</div>
+      <div class="form-row">${sg('endereco','Endereço')}${sg('cidade','Cidade')}</div>
+      <div class="form-row">${sgOpt('status','Status',['Ativo','Inativo','Suspenso'])}${sg('data_inicio','Início','date')}</div>
+      ${sgTxt('observacoes','Observações')}`;
+  }
+  if(tipo==='veiculo'){
+    return `<div class="form-row">${sg('placa','Placa')}${sg('numero_frota','Nº Frota')}</div>
+      <div class="form-row">${sgOpt('tipo','Tipo',['Ônibus','Microônibus','Van','Sedan Executivo','SUV'])}${sg('modelo','Modelo')}</div>
+      <div class="form-row">${sg('ano','Ano')}${sg('capacidade','Capacidade')}</div>
+      <div class="form-row">${sg('km_atual','KM Atual','number')}${sgOpt('status','Status',['Disponível','Em Uso','Manutenção','Inativo'])}</div>
+      ${sgTxt('observacoes','Observações')}`;
+  }
+  if(tipo==='motorista'){
+    return `<div class="form-row">${sg('nome','Nome')}${sg('cpf','CPF')}</div>
+      <div class="form-row">${sg('cnh','CNH')}${sgOpt('categoria_cnh','Categoria CNH',['A','B','C','D','E','AB','AC','AD','AE'])}</div>
+      <div class="form-row">${sg('vencimento_cnh','Vencimento CNH','date')}${sg('telefone','Telefone')}</div>
+      <div class="form-row">${sg('salario_base','Salário Base','number')}${sgOpt('status','Status',['Ativo','Férias','Afastado','Inativo'])}</div>
+      ${sg('endereco','Endereço')}
+      <div class="form-row">${sg('cidade_motorista','Cidade')}${sgOpt('categoria_veiculo','Habilitado Para',['Ônibus','Microônibus','Van','Sedan Executivo','SUV'])}</div>`;
+  }
+  if(tipo==='contrato'){
+    return `${sgCli('cliente_id','Cliente')}
+      <div class="form-row">${sg('numero_contrato','Nº Contrato')}${sgOpt('tipo_servico','Tipo de Serviço',['Fretamento Corporativo','Transporte Escolar','Excursão','Eventos','Linha Regular'])}</div>
+      <div class="form-row">${sg('valor_mensal','Valor Mensal (R$)','number')}${sg('km_mensal_contratada','KM Mensal Contratada','number')}</div>
+      <div class="form-row">${sg('data_inicio','Início','date')}${sg('data_fim','Fim','date')}</div>
+      <div class="form-row">${sg('onibus_qtd','Qtd Ônibus','number')}${sg('micro_qtd','Qtd Micro','number')}</div>
+      <div class="form-row">${sg('van_qtd','Qtd Van','number')}${sg('passeio_qtd','Qtd Passeio','number')}</div>
+      <div class="form-row">${sgOpt('status','Status',['Ativo','Suspenso','Encerrado','Em Renovação'])}${sg('prefixos','Prefixos')}</div>
+      ${sgTxt('observacoes','Observações')}`;
+  }
+  if(tipo==='prospeccao'){
+    return `<div class="form-row">${sg('empresa','Empresa')}${sg('mes_ano','Mês (MM/AAAA)')}</div>
+      <div class="form-row">${sg('contato_nome','Contato')}${sg('contato_telefone','Telefone')}</div>
+      <div class="form-row">${sg('contato_email','E-mail','email')}${sg('cidade','Cidade')}</div>
+      <div class="form-row">${sg('segmento','Segmento')}${sgOpt('origem','Origem',['Site','Indicação','LinkedIn','Visita','Telefone','WhatsApp','Outro'])}</div>
+      <div class="form-row">${sg('responsavel','Responsável')}${sg('data','Data','date')}</div>
+      ${sgOpt('status','Status',['Nova','Em Contato','Reunião Agendada','Proposta Enviada','Convertida','Perdida'])}
+      ${sgCliOpt('cliente_id','Cliente vinculado')}
+      ${sgTxt('observacoes','Observações')}`;
+  }
+  if(tipo==='proposta'){
+    return `<div class="form-row">${sg('numero_proposta','Nº Proposta')}${sg('mes_ano','Mês')}</div>
+      <div class="form-row">${sg('empresa','Empresa')}${sg('contato_nome','Contato')}</div>
+      ${sgCli('cliente_id','Cliente')}
+      <div class="form-row">${sgOpt('tipo_servico','Tipo de Serviço',['Fretamento Corporativo','Transporte Escolar','Excursão','Eventos','Linha Regular'])}${sg('responsavel','Responsável')}</div>
+      <div class="form-row">${sg('valor_proposto','Valor Proposto (R$)','number')}${sg('km_mensal','KM Mensal','number')}</div>
+      <div class="form-row">${sg('qtd_veiculos','Qtd Veículos','number')}${sgOpt('status','Status',['Em Elaboração','Em Negociação','Aprovada','Recusada','Expirada','Cancelada'])}</div>
+      <div class="form-row">${sg('data_envio','Data Envio','date')}${sg('data_validade','Validade','date')}</div>
+      ${sgTxt('observacoes','Observações / Motivo Perda')}`;
+  }
+  if(tipo==='linha'){
+    return `${sgCli('cliente_id','Cliente')}
+      <div class="form-row">${sg('codigo_linha','Código')}${sg('descricao','Descrição')}</div>
+      <div class="form-row">${sg('itinerario','Itinerário')}${sgOpt('tipo_veiculo','Tipo Veículo',['Ônibus','Microônibus','Van','Sedan Executivo','SUV'])}</div>
+      <div class="form-row">${sg('endereco_garagem','Endereço Garagem')}${sg('endereco_inicio_linha','Endereço Início Linha')}</div>
+      <div class="form-row">${sg('km_diaria','KM/dia','number')}${sg('dias_mes','Dias/mês','number')}</div>
+      <div class="form-row">${sg('km_mensal_contratada','KM Mensal Contratada','number')}${sgOpt('status','Status',['Ativa','Inativa','Planejada'])}</div>
+      <div class="form-row">${sg('horario_ida','Horário Ida')}${sg('horario_volta','Horário Volta')}</div>
+      ${sgTxt('observacoes','Observações')}`;
+  }
+  if(tipo==='reclamacao'){
+    return `<div class="form-row">${sg('data','Data','date')}${sgOpt('tipo','Tipo',['Conduta do Motorista','Atraso','Veículo','Limpeza','Rota','Outro'])}</div>
+      ${sgCli('cliente_id','Cliente')}
+      <div class="form-row">${sg('motorista_nome','Motorista')}${sg('veiculo_escalado','Veículo')}</div>
+      <div class="form-row">${sgOpt('status','Status',['Aberta','Em Andamento','Resolvida','Cancelada'])}${sgOpt('origem_reclamacao','Origem',['E-mail','WhatsApp','Telefone','Presencial'])}</div>
+      ${sgTxt('descricao','Descrição',3)}
+      ${sgTxt('resolucao','Resolução')}`;
+  }
+}
+
+function salvarModal(){
+  if(!modalTipo || !modalItem) return;
+  const tab = (modalTipo==='linha'?'linhas':modalTipo+'s');
+  const arr=DB.dados[tab]=DB.dados[tab]||[];
+  const novo={};
+  // pegar form values
+  document.querySelectorAll('#modal-body [id^="f-"]').forEach(el2=>{
+    const k=el2.id.slice(2);
+    novo[k]=el2.value;
+  });
+  novo.id=modalItem.id;
+  if(arr.length===0) DB.dados[tab]=[novo]; // assign array if missing
+  const idx=arr.findIndex(x=>x.id===novo.id);
+  if(idx<0) arr.push(novo); else arr[idx]=novo;
+  saveDB();
+  toast(modalAcao==='criar'?'✅ Registro criado':'✅ Atualizado','success');
+  fecharModal();
+  const map={'cliente':'clientes','veiculo':'veiculos','motorista':'motoristas','contrato':'contratos','prospeccao':'prospeccoes','proposta':'propostas','reclamacao':'reclamacoes','linha':'linhas'};
+  if(renders[map[modalTipo]]) renders[map[modalTipo]]();
+}
+
+function excluir(tab,id,tipo){
+  if(!confirm('Excluir este registro? Esta ação não pode ser desfeita.')) return;
+  DB.dados[tab]=(DB.dados[tab]||[]).filter(x=>x.id!==id);
+  saveDB();
+  toast('🗑️ Excluído','info');
+  const map={'clientes':'clientes','veiculos':'veiculos','motoristas':'motoristas','contratos':'contratos','prospeccoes':'prospeccoes','propostas':'propostas','reclamacoes':'reclamacoes','linhas':'linhas'};
+  if(renders[map[tab]]) renders[map[tab]]();
+  renders.dashboard();
+}
+
+function abrirNovoContextual(){
+  const map={clientes:'cliente',veiculos:'veiculo',motoristas:'motorista',contratos:'contrato',prospeccoes:'prospeccao',propostas:'proposta',reclamacoes:'reclamacao'};
+  for(const [tab,tipo] of Object.entries(map)){
+    if(el('page-'+tipo) && el('page-'+tipo).classList.contains('active')){
+      abrirModal(tipo); return;
+    }
+  }
+  abrirModal('cliente');
+}
+
+/* ─── CSV / JSON ────────────────────────────── */
+function exportarCSV(tab){
+  const arr=DB.dados[tab]||[];
+  if(!arr.length){toast('Nada para exportar','warning');return;}
+  const keys=Array.from(new Set(arr.reduce((acc,r)=>acc.concat(Object.keys(r)),[])));
+  const csv=[keys.join(';')].concat(arr.map(r=>keys.map(k=>`"${(r[k]==null?'':String(r[k])).replace(/"/g,'""')}"`).join(';'))).join('\n');
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=`itnerol_${tab}_${Date.now()}.csv`; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  toast('CSV de '+tab+' exportado','success');
+}
+function exportarBackup(){
+  const snapshot={versao:DB.versao,sistema:DB.sistema,data_backup:new Date().toISOString(),dados:DB.dados,totais:{
+    clientes:DB.dados.clientes.length, veiculos:DB.dados.veiculos.length, motoristas:DB.dados.motoristas.length,
+    contratos:DB.dados.contratos.length, linhas:DB.dados.linhas.length, apuracao:DB.dados.apuracao.length,
+    prospeccoes:DB.dados.prospeccoes.length, propostas:DB.dados.propostas.length, reclamacoes:DB.dados.reclamacoes.length
+  }};
+  const blob=new Blob([JSON.stringify(snapshot,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=`ITNEROL_Backup_${new Date().toISOString().slice(0,10)}.json`; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  toast('Backup JSON exportado','success');
+}
+function importarBackup(ev){
+  const f=ev.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=e=>{
+    try{
+      const raw=JSON.parse(e.target.result);
+      if(!raw.dados){toast('Arquivo inválido','error');return;}
+      if(confirm('Substituir dados atuais pelos do backup? Cancel = mesclar (manter atuais + adicionar do backup).')){
+        DB.dados=raw.dados; saveDB();
+        toast('Backup restaurado (substituição)','success',4000);
+      } else {
+        let added=0;
+        for(const tab of ['clientes','veiculos','motoristas','contratos','linhas','apuracao','prospeccoes','propostas','reclamacoes','usuarios']){
+          if(raw.dados[tab]){
+            DB.dados[tab]=DB.dados[tab]||[];
+            const existentes=new Set(DB.dados[tab].map(r=>r.id||JSON.stringify(r).slice(0,80)));
+            for(const rec of raw.dados[tab]){
+              const chave=rec.id||JSON.stringify(rec).slice(0,80);
+              if(!existentes.has(chave)){DB.dados[tab].push(rec); added++;}
+            }
+          }
+        }
+        saveDB();
+        toast('Backup mesclado: '+added+' registros adicionados','success',4000);
+      }
+      navegar('relatorios');
+    }catch(err){toast('JSON inválido: '+err.message,'error');}
+  };
+  r.readAsText(f);
+}
+
+/* ─── Precificação ──────────────────────────── */
+function calcularPrecificacao(){
+  const kmDia=Number(el('prec-km-dia').value);
+  const dias=Number(el('prec-dias-mes').value);
+  const consumo=Number(el('prec-consumo').value);
+  const diesel=Number(el('prec-diesel').value);
+  const salario=Number(el('prec-salario').value);
+  const margem=Number(el('prec-margem').value);
+  if(!kmDia||!dias||!consumo||!diesel){toast('Preencha KM/dia, dias, consumo e diesel','warning');return;}
+  const kmMes=kmDia*dias;
+  const combust=kmMes/consumo*diesel;
+  const mot=salario*1.75;
+  const outros=1500;
+  const subtotal=combust+mot+outros;
+  const preco=subtotal*(1+margem/100);
+  el('prec-resultado').innerHTML=`<div style="background:linear-gradient(135deg,#FFF3E0,#fff);border-radius:10px;padding:18px;border:1px solid var(--laranja-light)">
+    <div style="font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">KM Mensal calculado</div>
+    <div style="font-size:1.7rem;font-weight:800;color:var(--laranja)">${fmt(kmMes)} km/mês</div>
+    <div class="form-row" style="margin-top:14px">
+      <div><div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase">⛽ Combustível</div><div style="font-weight:700;font-size:1.05rem">${fmtR(combust)}</div></div>
+      <div><div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase">👤 Motorista</div><div style="font-weight:700;font-size:1.05rem">${fmtR(mot)}</div></div>
+      <div><div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase">🏢 Adm.</div><div style="font-weight:700;font-size:1.05rem">${fmtR(outros)}</div></div>
+    </div>
+    <div style="margin-top:14px;padding-top:14px;border-top:2px dashed var(--laranja)">
+      <div style="font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">💰 Preço Final (margem ${margem}%)</div>
+      <div style="font-size:2.2rem;font-weight:800;color:var(--laranja)">${fmtR(preco)}<span style="font-size:.95rem;color:var(--text-muted);font-weight:500">/mês</span></div>
+      <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px">CPK: <strong>${fmtR(preco/kmMes)}</strong>/km</div>
+    </div>
+  </div>`;
+}
+
+/* ─── Toast ──────────────────────────────────── */
+function toast(msg,tipo='info',ms=3500){
+  const c=el('toast-container');
+  const t=document.createElement('div');
+  t.className='toast '+(tipo||'');
+  t.textContent=msg;
+  c.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},ms);
+}
+
+/* ─── Online/Offline ────────────────────────── */
+function updateNetStatus(){
+  const b=el('btn-off');
+  if(!b) return;
+  if(navigator.onLine){b.className='btn-off online'; b.innerHTML='<i class="fas fa-wifi"></i> Online';}
+  else {b.className='btn-off offline'; b.innerHTML='<i class="fas fa-plug"></i> Offline'; toast('Você está offline — usando dados do navegador','warning',3000);}
+}
+window.addEventListener('online',updateNetStatus);
+window.addEventListener('offline',updateNetStatus);
+
+/* ─── Boot ──────────────────────────────────── */
+(function boot(){
+  // Manter backup em localStorage também como fallback para futuras importações
+  updateNetStatus();
+  let s=null;
+  try{s=JSON.parse(sessionStorage.getItem('crm_user')||'null');}catch(e){}
+  if(s){session=s;iniciarApp();}
+  el('login-form').addEventListener('submit',fazerLogin);
+  // Bootstrap do formulário de login (caso browser autocomplete)
+  setTimeout(()=>{try{const e=document.activeElement;if(e&&e.id==='login-email')setTimeout(()=>{},0);}catch(x){}},100);
+})();
+
+/* Expor para handlers inline onclick */
+window.fazerLogin=fazerLogin;
+window.fazerLogout=fazerLogout;
+window.abrirNovoContextual=abrirNovoContextual;
+window.abrirModal=abrirModal;
+window.fecharModal=fecharModal;
+window.salvarModal=salvarModal;
+window.excluir=excluir;
+window.exportarCSV=exportarCSV;
+window.exportarBackup=exportarBackup;
+window.importarBackup=importarBackup;
+window.calcularPrecificacao=calcularPrecificacao;
+window.toast=toast;
+
+</script>
+<script>
+/* PWA Service Worker registrado silenciosamente */
+if ('serviceWorker' in navigator) {
+  var sw_src = "/* ITNEROL — Service Worker (PWA offline-first) */\nconst CACHE = 'itnerol-v1';\nconst ASSETS = [\n  './',\n  './index.html',\n  './app.js',\n  './data.js',\n  './manifest.json',\n  'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css',\n  'https://cdn.jsdelivr.net/npm/chart.js',\n  'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js'\n];\n\nself.addEventListener('install', e => {\n  self.skipWaiting();\n  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS).catch(()=>{})));\n});\n\nself.addEventListener('activate', e => {\n  e.waitUntil(\n    caches.keys().then(keys => Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))\n      .then(()=>self.clients.claim())\n  );\n});\n\nself.addEventListener('fetch', e => {\n  const req = e.request;\n  if(req.method !== 'GET') return;\n  e.respondWith(\n    caches.match(req).then(cached => {\n      if(cached) return cached;\n      return fetch(req).then(resp => {\n        if(!resp || resp.status !== 200 || resp.type === 'opaque') return resp;\n        const clone = resp.clone();\n        caches.open(CACHE).then(c => { try{ c.put(req, clone); }catch(_){} });\n        return resp;\n      }).catch(() => caches.match('./index.html'));\n    })\n  );\n});\n";
+  var sw_blob = new Blob([sw_src], {type:'application/javascript'});
+  var sw_url = URL.createObjectURL(sw_blob);
+  navigator.serviceWorker.register(sw_url).catch(function(){})
+  .then(function(r){if(r) console.log('SW registado');});
+}
+</script>
+</body>
+</html>
