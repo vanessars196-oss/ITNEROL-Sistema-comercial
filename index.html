@@ -194,15 +194,21 @@ table.data-table{width:100%;border-collapse:collapse;background:#fff;border-radi
       <div class="lp-row"><span class="lp-prof">ADMIN</span><span>admin@itnerol.com.br</span><span>itnerol2025</span></div>
       <div class="lp-row"><span class="lp-prof">COMERCIAL</span><span>comercial@itnerol.com.br</span><span>comercial123</span></div>
       <div class="lp-row"><span class="lp-prof">OPERACIONAL</span><span>CCO@ITNEROL.COM.BR</span><span>CCO2026</span></div>
-      <div class="lp-row"><span class="lp-prof">VISUALIZADOR</span><span>view@itnerol.com.br</span><span>view123</span></div>
-    </div>
-  </div>
-</div>
-
-<!-- APP -->
-<div id="app">
-<aside class="sidebar">
-  <div class="sidebar-logo">
+      let chartsCache={};
+function destroyChart(id){if(chartsCache[id]){chartsCache[id].destroy(); delete chartsCache[id];}}
+function drawCharts(){
+  var ctx=el('chart-faturamento');
+  if(ctx && window.Chart){
+    destroyChart('chart-faturamento');
+    try{var meses=ultimosMeses(6);var ap=DB.dados.apuracao||[];var fat=meses.map(function(m){return ap.filter(function(a){return a.mes_ano===m;}).reduce(function(s,a){return s+(Number(a.faturamento_realizado)||0);},0);});var cus=meses.map(function(m){return ap.filter(function(a){return a.mes_ano===m;}).reduce(function(s,a){return s+(Number(a.custo_total)||0);},0);});chartsCache['chart-faturamento']=new Chart(ctx,{type:'bar',data:{labels:meses,datasets:[{label:'Faturamento',data:fat,backgroundColor:'rgba(240,120,0,.85)',borderRadius:6},{label:'Custo',data:cus,backgroundColor:'rgba(100,116,139,.4)',borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10}}}}}});}catch(e){}
+  }
+  var ctx2=el('chart-funil');
+  if(ctx2 && window.Chart){
+    try{var mes=mesAtualFmt();var props_arr=DB.dados.propostas||[];var prosp=(DB.dados.prospeccoes||[]).filter(function(p){return p.mes_ano===mes;}).length;var props_v=props_arr.filter(function(p){return p.mes_ano===mes;}).length;var neg=props_arr.filter(function(p){return p.mes_ano===mes&&p.status==='Em Negociação';}).length;var fech=props_arr.filter(function(p){return p.mes_ano===mes&&p.status==='Aprovada';}).length;var perd=props_arr.filter(function(p){return p.mes_ano===mes&&['Recusada','Expirada'].indexOf(p.status)>=0;}).length;destroyChart('chart-funil');chartsCache['chart-funil']=new Chart(ctx2,{type:'bar',data:{labels:['Prospecções','Propostas','Negociação','Fechados','Perdidos'],datasets:[{data:[prosp,props_v,neg,fech,perd],backgroundColor:['rgba(240,120,0,.85)','rgba(21,101,192,.85)','rgba(249,168,37,.85)','rgba(46,125,50,.85)','rgba(198,40,40,.7)'],borderRadius:8}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{stepSize:1}}}}}});}catch(e){}
+  }  var ctx3=el('chart-km');
+  if(ctx3 && window.Chart){
+    try{var meses3=ultimosMeses(6);var ap3=DB.dados.apuracao||[];var kmC=meses3.map(function(m){return ap3.filter(function(a){return a.mes_ano===m;}).reduce(function(s,a){return s+(Number(a.km_contratada)||0);},0);});var kmR=meses3.map(function(m){return ap3.filter(function(a){return a.mes_ano===m;}).reduce(function(s,a){return s+(Number(a.km_rodada)||0);},0);});destroyChart('chart-km');chartsCache['chart-km']=new Chart(ctx3,{type:'bar',data:{labels:meses3,datasets:[{label:'KM Cont.',data:kmC,backgroundColor:'rgba(100,116,139,.4)',borderRadius:4},{label:'KM Rod.',data:kmR,backgroundColor:'rgba(240,120,0,.85)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10}}}}}});}catch(e){}
+    <div class="sidebar-logo">
     <div class="sidebar-logo-icon"><i class="fas fa-bus-alt"></i></div>
     <div><div class="sidebar-logo-text">ITNEROL</div><div class="sidebar-logo-sub">Sistema Comercial</div></div>
   </div>
