@@ -1,694 +1,1409 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Itnerol Transportes | Qualidade e Segurança — Transportamos Vidas</title>
-  <meta name="description" content="Fundada em 1994, a Itnerol é sinônimo de compromisso, qualidade e responsabilidade no transporte de passageiros. Fretamento corporativo e transporte executivo." />
-  <meta name="keywords" content="fretamento, transporte executivo, transporte corporativo, Várzea Paulista, Itnerol" />
-  <link rel="stylesheet" href="css/fontawesome.min.css" />
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ITNEROL — Sistema Comercial v7.4</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <link rel="stylesheet" href="css/crm.css?v=7.1"/>
 </head>
 <body>
 
-  <!-- ===== HEADER / NAV ===== -->
-  <header id="site-header" class="site-header">
-    <nav class="nav-container" aria-label="Navegação principal">
-      <a href="#hero" class="nav-logo" aria-label="Itnerol Transporte — Página Inicial">
-        <span class="nav-logo-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ícone ônibus">
-            <!-- Corpo do ônibus -->
-            <rect x="4" y="10" width="40" height="26" rx="4"/>
-            <!-- Parabrisa -->
-            <rect x="7" y="13" width="34" height="11" rx="2" fill="rgba(0,0,0,0.25)"/>
-            <!-- Linha separadora parabrisa -->
-            <rect x="23.5" y="13" width="1.5" height="11" fill="rgba(0,0,0,0.2)"/>
-            <!-- Parte inferior / saia -->
-            <rect x="4" y="33" width="40" height="5" rx="2"/>
-            <!-- Roda esquerda -->
-            <circle cx="13" cy="39" r="4.5" fill="#1A1A1A"/>
-            <circle cx="13" cy="39" r="2" fill="#555"/>
-            <!-- Roda direita -->
-            <circle cx="35" cy="39" r="4.5" fill="#1A1A1A"/>
-            <circle cx="35" cy="39" r="2" fill="#555"/>
-            <!-- Porta -->
-            <rect x="29" y="20" width="11" height="13" rx="1" fill="rgba(0,0,0,0.2)"/>
-            <!-- Farol esquerdo -->
-            <rect x="6" y="14" width="5" height="3" rx="1" fill="rgba(255,255,255,0.6)"/>
-            <!-- Farol direito -->
-            <rect x="37" y="14" width="5" height="3" rx="1" fill="rgba(255,255,255,0.6)"/>
-          </svg>
-        </span>
-        <span class="nav-logo-text-wrap">
-          <span class="logo-text">ITNEROL</span>
-          <span class="logo-sub">TRANSPORTES</span>
-        </span>
-      </a>
-      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menu">
-        <span></span><span></span><span></span>
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon">
+      <i class="fas fa-bus-alt"></i>
+    </div>
+    <div>
+      <div class="sidebar-logo-text">ITNEROL</div>
+      <div class="sidebar-logo-sub">Sistema Comercial</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-group-label">Principal</div>
+    <a href="#" class="nav-item active" data-page="dashboard">
+      <i class="fas fa-chart-pie"></i> Dashboard
+    </a>
+
+    <div class="nav-group-label">Comercial</div>
+    <a href="#" class="nav-item" data-page="indicadores">
+      <i class="fas fa-chart-line"></i> Indicadores
+    </a>
+    <a href="#" class="nav-item" data-page="prospeccoes">
+      <i class="fas fa-search"></i> Prospecções
+    </a>
+    <a href="#" class="nav-item" data-page="propostas">
+      <i class="fas fa-file-contract"></i> Propostas
+    </a>
+
+    <div class="nav-group-label">Cadastros</div>
+    <a href="#" class="nav-item" data-page="clientes">
+      <i class="fas fa-building"></i> Clientes
+    </a>
+    <a href="#" class="nav-item" data-page="veiculos">
+      <i class="fas fa-truck"></i> Veículos
+    </a>
+    <a href="#" class="nav-item" data-page="motoristas">
+      <i class="fas fa-id-card"></i> Motoristas
+    </a>
+
+    <div class="nav-group-label">Operacional</div>
+    <a href="#" class="nav-item" data-page="tapete">
+      <i class="fas fa-table"></i> Tapete Operacional
+    </a>
+    <a href="#" class="nav-item" data-page="contratos">
+      <i class="fas fa-file-signature"></i> Contratos
+    </a>
+    <a href="#" class="nav-item" data-page="precificacao">
+      <i class="fas fa-tags"></i> Precificação
+    </a>
+    <a href="#" class="nav-item" data-page="linhas">
+      <i class="fas fa-route"></i> Linhas / Itinerários
+    </a>
+    <a href="#" class="nav-item" data-page="reclamacoes">
+      <i class="fas fa-exclamation-circle"></i> Reclamações
+    </a>
+
+    <div class="nav-group-label">Financeiro</div>
+    <a href="#" class="nav-item" data-page="apuracao">
+      <i class="fas fa-calculator"></i> Apuração Mensal
+    </a>
+    <a href="#" class="nav-item" data-page="ind-apuracao">
+      <i class="fas fa-chart-bar"></i> Indicadores Apuração
+    </a>
+    <a href="#" class="nav-item" data-page="ticketlog">
+      <i class="fas fa-toll"></i> TicketLog / Pedágio
+    </a>
+    <a href="#" class="nav-item" data-page="relatorios">
+      <i class="fas fa-file-export"></i> Relatórios / Backup
+    </a>
+
+    <div class="nav-group-label" id="nav-admin-label" style="display:none">Administração</div>
+    <a href="#" class="nav-item" data-page="usuarios" id="nav-usuarios" style="display:none">
+      <i class="fas fa-users-cog"></i> Usuários
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="user-avatar" id="user-avatar-initials">?</div>
+      <div style="flex:1;min-width:0">
+        <div class="user-name" id="sidebar-user-nome">Carregando...</div>
+        <div class="user-role" id="sidebar-user-perfil">—</div>
+      </div>
+      <button onclick="fazerLogout()" title="Sair do sistema" class="btn-logout">
+        <i class="fas fa-sign-out-alt"></i>
       </button>
-      <ul class="nav-menu" id="nav-menu" role="menubar">
-        <li role="none"><a href="#sobre" class="nav-link" role="menuitem">Sobre</a></li>
-        <li role="none"><a href="#servicos" class="nav-link" role="menuitem">Serviços</a></li>
-        <li role="none"><a href="#frota" class="nav-link" role="menuitem">Nossa Frota</a></li>
-        <li role="none"><a href="#higienizacao" class="nav-link" role="menuitem">Higienização</a></li>
-        <li role="none"><a href="#video" class="nav-link" role="menuitem">Vídeo</a></li>
-        <li role="none"><a href="#unidades" class="nav-link" role="menuitem">Unidades</a></li>
-        <li role="none">
-          <a href="#contato" class="nav-link nav-cta" role="menuitem">Orçamento</a>
-        </li>
-      </ul>
-    </nav>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main-content" id="main-content">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="sidebar-toggle" id="sidebar-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="breadcrumb" id="breadcrumb">Dashboard</div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-date" id="topbar-date"></div>
+      <div class="topbar-user-chip">
+        <div class="chip-avatar" id="chip-avatar">?</div>
+        <span id="chip-nome">—</span>
+        <span class="chip-perfil" id="chip-perfil">—</span>
+      </div>
+      <button id="btn-sync-offline" onclick="_abrirPainelOffline()" title="Status de Conexão"
+        style="background:none;border:1px solid #1e293b;border-radius:20px;padding:5px 12px;
+        color:#94a3b8;font-size:.74rem;cursor:pointer;display:flex;align-items:center;gap:6px;
+        transition:all .2s;display:none">
+        <span id="topbar-dot" style="width:7px;height:7px;border-radius:50%;background:#94a3b8;display:inline-block"></span>
+        <span id="topbar-conn-txt">Online</span>
+      </button>
+      <button id="btn-forcar-atualizacao" onclick="forcarAtualizacao()" title="Recarregar dados do banco compartilhado"
+        style="background:none;border:1px solid #334155;border-radius:20px;padding:5px 12px;
+        color:#94a3b8;font-size:.74rem;cursor:pointer;display:flex;align-items:center;gap:6px;
+        transition:all .2s" onmouseover="this.style.borderColor='#F07800';this.style.color='#F07800'" onmouseout="this.style.borderColor='#334155';this.style.color='#94a3b8'">
+        <i class="fas fa-sync-alt"></i> Atualizar
+      </button>
+      <button class="btn-novo" id="btn-novo-global" onclick="abrirModalContextual()">
+        <i class="fas fa-plus"></i> Novo
+      </button>
+    </div>
   </header>
 
-  <!-- ===== HERO SLIDER ===== -->
-  <section id="hero" class="hero-section" aria-label="Destaques Itnerol">
-    <div class="hero-slider" id="hero-slider">
+  <div class="page-content">
 
-      <article class="hero-slide active" aria-hidden="false">
-        <div class="hero-bg" style="background-image:url('https://lh3.googleusercontent.com/d/1f6U6JQmvs6_YxvaNAz1PQ57WBoaQK5Gi=w1200-h800')"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="hero-eyebrow">Mais de 30 anos transportando com segurança</p>
-          <h1 class="hero-title">Qualidade e Segurança —<br>Porque Aqui,<br><em>Transportamos Vidas.</em></h1>
-          <p class="hero-subtitle">Fretamento corporativo e transporte executivo.<br>Torre de controle 24h • App do passageiro em tempo real.</p>
-          <div class="hero-actions">
-            <a href="#contato" class="btn btn-primary">Solicitar Orçamento</a>
-            <a href="https://wa.me/5511998024526?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20da%20Itnerol%20Transportes." class="btn btn-whatsapp" target="_blank" rel="noopener">
-              <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
-            </a>
-          </div>
+    <!-- ══ DASHBOARD ══ -->
+    <section id="page-dashboard" class="page active">
+      <div class="page-header">
+        <div>
+          <h1 id="dash-saudacao">Dashboard</h1>
+          <p id="dash-subtitulo">Visão geral da operação comercial</p>
         </div>
-      </article>
+        <div class="topbar-date-big" id="topbar-date-big"></div>
+      </div>
 
-      <article class="hero-slide" aria-hidden="true">
-        <div class="hero-bg" style="background-image:url('https://lh3.googleusercontent.com/d/1Nb97VN3wqseqBuRe1eY5Vnt4FVj60192=w1200-h800')"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="hero-eyebrow">Frota moderna e inspecionada</p>
-          <h2 class="hero-title">Fretamento<br>para Empresas.</h2>
-          <p class="hero-subtitle">Rotas personalizadas com monitoramento GPS e torre de controle 24h.</p>
-          <div class="hero-actions">
-            <a href="#servicos" class="btn btn-primary">Ver Serviços</a>
-            <a href="https://wa.me/5511998024526?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20de%20fretamento." class="btn btn-whatsapp" target="_blank" rel="noopener">
-              <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
-            </a>
-          </div>
+      <!-- Barra de filtros do dashboard -->
+      <div class="dash-filters-bar">
+        <div class="dash-filter-group">
+          <label><i class="fas fa-calendar-alt"></i> Mês de referência</label>
+          <select id="dash-filtro-mes" class="select-filtro" onchange="renderDashboard()">
+            <option value="">Mês atual</option>
+          </select>
         </div>
-      </article>
-
-      <article class="hero-slide" aria-hidden="true">
-        <div class="hero-bg" style="background-image:url('https://lh3.googleusercontent.com/d/1VYfJ0nl70mIAOT6uhLqPiJwJMruvrac0=w1200-h800')"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-placa-blur" aria-hidden="true"></div>
-        <div class="hero-content">
-          <p class="hero-eyebrow">Conforto e sofisticação</p>
-          <h2 class="hero-title">Transporte<br>Executivo.</h2>
-          <p class="hero-subtitle">Toyota Corolla 2025 e van executiva climatizada para executivos e equipes corporativas.</p>
-          <div class="hero-actions">
-            <a href="#servicos" class="btn btn-primary">Saiba Mais</a>
-            <a href="https://wa.me/5511998024526?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20de%20transporte%20executivo." class="btn btn-whatsapp" target="_blank" rel="noopener">
-              <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
-            </a>
-          </div>
-        </div>
-      </article>
-
-    </div><!-- /.hero-slider -->
-
-    <nav class="slider-dots" aria-label="Slides do hero">
-      <button class="dot active" data-index="0" aria-label="Slide 1" aria-current="true"></button>
-      <button class="dot" data-index="1" aria-label="Slide 2"></button>
-      <button class="dot" data-index="2" aria-label="Slide 3"></button>
-    </nav>
-
-    <button class="slider-arrow slider-prev" id="slider-prev" aria-label="Slide anterior"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
-    <button class="slider-arrow slider-next" id="slider-next" aria-label="Próximo slide"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
-
-    <a href="#sobre" class="hero-scroll-hint" aria-label="Rolar para baixo">
-      <i class="fas fa-chevron-down" aria-hidden="true"></i>
-    </a>
-  </section>
-
-  <!-- ===== FEATURES BAR ===== -->
-  <div class="features-bar" aria-label="Diferenciais Itnerol">
-    <div class="features-bar-inner">
-      <div class="feature-item">
-        <i class="fas fa-shield-alt" aria-hidden="true"></i>
-        <span>Segurança Total</span>
-      </div>
-      <div class="feature-item">
-        <i class="fas fa-clock" aria-hidden="true"></i>
-        <span>Pontualidade</span>
-      </div>
-      <div class="feature-item">
-        <i class="fas fa-star" aria-hidden="true"></i>
-        <span>Excelência</span>
-      </div>
-      <div class="feature-item">
-        <i class="fas fa-tower-broadcast" aria-hidden="true"></i>
-        <span>Torre 24h</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== SOBRE ===== -->
-  <section id="sobre" class="section-sobre">
-    <div class="container">
-      <div class="sobre-grid">
-
-        <div class="sobre-images placa-blur">
-          <img src="https://lh3.googleusercontent.com/d/1f6U6JQmvs6_YxvaNAz1PQ57WBoaQK5Gi=w800-h600"
-               alt="Frota Itnerol Transportes"
-               class="sobre-img-main"
-               loading="lazy" />
-          <img src="https://lh3.googleusercontent.com/d/1Nb97VN3wqseqBuRe1eY5Vnt4FVj60192=w400-h300"
-               alt="Veículo Itnerol"
-               class="sobre-img-secondary"
-               loading="lazy" />
-          <div class="sobre-badge">
-            <span class="badge-number">30+</span>
-            <span class="badge-label">Anos de<br>Experiência</span>
-          </div>
-        </div>
-
-        <div class="sobre-content">
-          <p class="section-eyebrow">Quem Somos</p>
-          <h2 class="section-title">30+ Anos de<br>Experiência</h2>
-          <p class="sobre-text">Contamos com a determinação, dedicação e comprometimento de uma equipe que busca atender as necessidades de seus clientes. A empresa é marcada por uma administração com visão moderna e participativa, que tem proporcionado um crescimento sólido.</p>
-          <p class="sobre-text">Fundada em 1994, a ITNEROL Transporte cuida dos detalhes que fazem toda a diferença, ganhando a credibilidade e a fidelização de nossos clientes ao longo de três décadas.</p>
-
-          <div class="sobre-cards">
-            <div class="sobre-card">
-              <i class="fas fa-bullseye" aria-hidden="true"></i>
-              <div>
-                <h3>Missão</h3>
-                <p>"Oferecer transporte seguro, pontual e produtivo, promovendo o respeito e o cuidado com os valores humanos, impulsionando o crescimento sustentável, atendendo aos requisitos legais do setor e às necessidades das partes interessadas."</p>
-              </div>
-            </div>
-            <div class="sobre-card">
-              <i class="fas fa-eye" aria-hidden="true"></i>
-              <div>
-                <h3>Visão</h3>
-                <p>"Ser referência em transporte de passageiros por fretamento, promovendo o crescimento da organização com profissionalismo e melhoria contínua da qualidade, aumento da produtividade e equilíbrio econômico e financeiro."</p>
-              </div>
-            </div>
-            <div class="sobre-card">
-              <i class="fas fa-heart" aria-hidden="true"></i>
-              <div>
-                <h3>Valores</h3>
-                <p>Comprometimento • Responsabilidade • Honestidade • Criatividade • Humildade • Unidade • Foco</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== MÉTRICAS ===== -->
-  <section class="section-metricas" aria-label="Números da Itnerol">
-    <div class="metricas-overlay"></div>
-    <div class="container">
-      <div class="metricas-grid">
-        <div class="metrica-item">
-          <span class="metrica-num" data-target="30" data-suffix="+">30+</span>
-          <span class="metrica-label">Anos de Experiência</span>
-        </div>
-        <div class="metrica-item">
-          <span class="metrica-num" data-target="20" data-suffix="M+">20M+</span>
-          <span class="metrica-label">Passageiros Transportados</span>
-        </div>
-        <div class="metrica-item">
-          <span class="metrica-num" data-target="2" data-suffix="">2</span>
-          <span class="metrica-label">Unidades</span>
-        </div>
-        <div class="metrica-item">
-          <span class="metrica-num metrica-fixed">24h</span>
-          <span class="metrica-label">Torre de Controle</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SERVIÇOS ===== -->
-  <section id="servicos" class="section-servicos">
-    <div class="container">
-      <header class="section-header">
-        <p class="section-eyebrow">O Que Fazemos</p>
-        <h2 class="section-title">Nossos Serviços</h2>
-      </header>
-
-      <div class="servicos-grid">
-
-        <!-- Fretamento para Empresas -->
-        <article class="servico-card">
-          <div class="servico-img-wrap placa-blur">
-            <img src="https://lh3.googleusercontent.com/d/1jmAlkz7RTEnyyBpjJUhQook2mFdN4eab=w800-h600"
-                 alt="Fretamento para Empresas Itnerol"
-                 loading="lazy" />
-          </div>
-          <div class="servico-body">
-            <h3>Fretamento para Empresas</h3>
-            <p>Transporte corporativo com pontualidade, segurança e conforto para equipes de todos os tamanhos. Frota inspecionada diariamente.</p>
-            <ul class="servico-features">
-              <li><i class="fas fa-check-circle" aria-hidden="true"></i> Rotas personalizadas</li>
-              <li><i class="fas fa-check-circle" aria-hidden="true"></i> Frota variada com monitoramento GPS</li>
-              <li><i class="fas fa-check-circle" aria-hidden="true"></i> Torre de controle 24h</li>
-              <li><i class="fas fa-check-circle" aria-hidden="true"></i> App do passageiro em tempo real</li>
-              <li><i class="fas fa-check-circle" aria-hidden="true"></i> Rastreamento GPS • Notificações de embarque</li>
-              <li><i class="fas fa-check-circle" aria-hidden="true"></i> Monitoramento de toda a frota 24h/7 dias</li>
-            </ul>
-            <div class="servico-actions">
-              <a href="https://wa.me/5511998024526?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20de%20fretamento." class="btn btn-whatsapp" target="_blank" rel="noopener">
-                <i class="fab fa-whatsapp" aria-hidden="true"></i> Falar no WhatsApp
-              </a>
-              <a href="#contato" class="btn btn-outline">Solicitar Orçamento</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Transporte Executivo -->
-        <article class="servico-card servico-destaque">
-          <span class="servico-badge-destaque">Destaque</span>
-          <div class="servico-exec-imgs">
-            <div class="exec-img-item">
-              <img src="images/corolla-preto2.jpg"
-                   alt="Toyota Corolla Preto Sedan Executivo — Itnerol"
-                   loading="lazy" />
-              <span class="exec-img-label">Toyota Corolla Preto</span>
-            </div>
-            <div class="exec-img-item">
-              <img src="images/van-executiva.jpg"
-                   alt="Van Executiva Ford Transit — Itnerol"
-                   loading="lazy" />
-              <span class="exec-img-label">Van Executiva</span>
-            </div>
-          </div>
-          <div class="servico-body">
-            <h3>Transporte Executivo</h3>
-            <p>Conforto e sofisticação para executivos e equipes corporativas. Sedan ou van executiva — você escolhe o veículo ideal para cada ocasião.</p>
-            <ul class="servico-features">
-              <li><i class="fas fa-check-circle" aria-hidden="true"></i> Toyota Corolla 2025 preto</li>
-              <li><i class="fas fa-check-circle" aria-hidden="true"></i> Van executiva climatizada</li>
-              <li><i class="fas fa-check-circle" aria-hidden="true"></i> Motoristas uniformizados</li>
-              <li><i class="fas fa-check-circle" aria-hidden="true"></i> Pontualidade garantida</li>
-            </ul>
-            <div class="servico-actions">
-              <a href="https://wa.me/5511998024526?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20de%20transporte%20executivo." class="btn btn-whatsapp" target="_blank" rel="noopener">
-                <i class="fab fa-whatsapp" aria-hidden="true"></i> Falar no WhatsApp
-              </a>
-              <a href="#contato" class="btn btn-outline">Solicitar Orçamento</a>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FROTA / GALERIA ===== -->
-  <section id="frota" class="section-frota">
-    <div class="container">
-      <header class="section-header">
-        <p class="section-eyebrow">Veja Nossa</p>
-        <h2 class="section-title">Nossa Frota</h2>
-      </header>
-
-      <div class="frota-grid" id="frota-grid">
-        <button class="frota-item frota-item-destaque placa-blur" data-src="images/frota-completa.jpg" aria-label="Frota completa Itnerol Transportes">
-          <img src="images/frota-completa.jpg" alt="Frota completa Itnerol Transportes — ônibus e vans" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="images/van-executiva.jpg" aria-label="Van Ford Transit Itnerol">
-          <img src="images/van-executiva.jpg" alt="Van Ford Transit Itnerol 1407" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="images/sprinter-branca.jpg" aria-label="Mercedes Sprinter Itnerol">
-          <img src="images/sprinter-branca.jpg" alt="Mercedes Sprinter Branca Itnerol 1397" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/1jmAlkz7RTEnyyBpjJUhQook2mFdN4eab=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/1jmAlkz7RTEnyyBpjJUhQook2mFdN4eab=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/1MijEkBt0umdDMM-r-7kQGrR2Af62vO0l=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/1MijEkBt0umdDMM-r-7kQGrR2Af62vO0l=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/1Nb97VN3wqseqBuRe1eY5Vnt4FVj60192=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/1Nb97VN3wqseqBuRe1eY5Vnt4FVj60192=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/1VYfJ0nl70mIAOT6uhLqPiJwJMruvrac0=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/1VYfJ0nl70mIAOT6uhLqPiJwJMruvrac0=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/1f6U6JQmvs6_YxvaNAz1PQ57WBoaQK5Gi=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/1f6U6JQmvs6_YxvaNAz1PQ57WBoaQK5Gi=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/10X54LszS1MRfmF90wn9oVZF9e9h2yjJW=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/10X54LszS1MRfmF90wn9oVZF9e9h2yjJW=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/1bydhltakusrREr5biTBx8HI6kVLbtRwL=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/1bydhltakusrREr5biTBx8HI6kVLbtRwL=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/1N_pOWyQGTnT1-hqUnVfo7UdcsZkOUCYm=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/1N_pOWyQGTnT1-hqUnVfo7UdcsZkOUCYm=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/1XglgfhyeSX-gyQ1lFjHU0yqwjcUOptOe=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/1XglgfhyeSX-gyQ1lFjHU0yqwjcUOptOe=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/1elwKDHNKkww89psoUEsV40Ruy4KFKtF2=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/1elwKDHNKkww89psoUEsV40Ruy4KFKtF2=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/1BrzHqjyOuNWul3zItgcrqyo1Ou3VCamo=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/1BrzHqjyOuNWul3zItgcrqyo1Ou3VCamo=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/10acSMb4noaVu0pAUtcTZZyUVGeuS0743=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/10acSMb4noaVu0pAUtcTZZyUVGeuS0743=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-        <button class="frota-item placa-blur" data-src="https://lh3.googleusercontent.com/d/1JkX8tghZum5MyoeXbnQHKq7XSQEFuYXM=w1200-h900" aria-label="Abrir imagem da frota Itnerol">
-          <img src="https://lh3.googleusercontent.com/d/1JkX8tghZum5MyoeXbnQHKq7XSQEFuYXM=w400-h300" alt="Frota Itnerol" loading="lazy" />
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizar imagem" hidden>
-    <button class="lightbox-close" id="lightbox-close" aria-label="Fechar"><i class="fas fa-times" aria-hidden="true"></i></button>
-    <button class="lightbox-arrow lightbox-prev" id="lightbox-prev" aria-label="Imagem anterior"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
-    <img src="" alt="Imagem da frota Itnerol" id="lightbox-img" />
-    <button class="lightbox-arrow lightbox-next" id="lightbox-next" aria-label="Próxima imagem"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
-  </div>
-
-  <!-- ===== HIGIENIZAÇÃO ===== -->
-  <section id="higienizacao" class="section-higienizacao">
-    <div class="container">
-      <div class="higienizacao-grid">
-
-        <div class="higienizacao-visual">
-          <div class="higienizacao-video-wrap">
-            <video
-              controls
-              playsinline
-              webkit-playsinline
-              muted
-              poster="https://lh3.googleusercontent.com/d/1elwKDHNKkww89psoUEsV40Ruy4KFKtF2=w800-h600"
-              aria-label="Vídeo de lavagem e higienização da frota Itnerol">
-              <source src="videos/higienizacao-frota.mov" type="video/quicktime" />
-              <source src="videos/higienizacao-frota.mov" type="video/mp4" />
-              <p>Seu navegador não suporta reprodução de vídeo.</p>
-            </video>
-            <div class="higienizacao-badge">
-              <i class="fas fa-check-double" aria-hidden="true"></i>
-              <span>Frota 100% Higienizada</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="higienizacao-content">
-          <p class="section-eyebrow">Cuidado com Você</p>
-          <h2 class="section-title">Higienização<br>Diária</h2>
-          <p>Na Itnerol, a <strong>saúde dos nossos passageiros é prioridade absoluta</strong>. Cada veículo passa por rigoroso protocolo de limpeza e higienização antes e após cada viagem, garantindo um ambiente seguro, fresco e livre de contaminantes.</p>
-
-          <div class="higienizacao-cards">
-            <div class="hig-card">
-              <i class="fas fa-soap" aria-hidden="true"></i>
-              <div>
-                <h4>Limpeza Profunda</h4>
-                <p>Higienização completa de bancos, pisos, corrimãos e superfícies internas com produtos certificados.</p>
-              </div>
-            </div>
-            <div class="hig-card">
-              <i class="fas fa-spray-can" aria-hidden="true"></i>
-              <div>
-                <h4>Desinfecção Total</h4>
-                <p>Aplicação de desinfetantes de alto grau em todos os pontos de contato: maçanetas, janelas e apoios.</p>
-              </div>
-            </div>
-            <div class="hig-card">
-              <i class="fas fa-wind" aria-hidden="true"></i>
-              <div>
-                <h4>Ar-Condicionado Limpo</h4>
-                <p>Manutenção e limpeza periódica dos sistemas de climatização para garantir ar puro e renovado.</p>
-              </div>
-            </div>
-            <div class="hig-card">
-              <i class="fas fa-virus-slash" aria-hidden="true"></i>
-              <div>
-                <h4>Sanitização Profunda</h4>
-                <p>Tratamento especializado elimina vírus, bactérias e fungos, proporcionando ambiente 100% seguro.</p>
-              </div>
-            </div>
-            <div class="hig-card">
-              <i class="fas fa-pump-soap" aria-hidden="true"></i>
-              <div>
-                <h4>Álcool e Higienizantes</h4>
-                <p>Dispensers de álcool gel disponíveis para passageiros e motoristas em todos os veículos.</p>
-              </div>
-            </div>
-            <div class="hig-card">
-              <i class="fas fa-clipboard-check" aria-hidden="true"></i>
-              <div>
-                <h4>Protocolo Diário</h4>
-                <p>Checklist de higienização registrado e auditado diariamente pela nossa equipe de qualidade.</p>
-              </div>
-            </div>
-          </div>
-
-          <a href="https://wa.me/5511998024526?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20as%20medidas%20de%20higieniza%C3%A7%C3%A3o%20da%20Itnerol." class="btn btn-primary" target="_blank" rel="noopener">Saiba Mais</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== VÍDEO INSTITUCIONAL ===== -->
-  <section id="video" class="section-video">
-    <div class="container">
-      <header class="section-header section-header-light">
-        <p class="section-eyebrow">Institucional</p>
-        <h2 class="section-title">Assista ao nosso vídeo institucional</h2>
-      </header>
-      <div class="video-wrapper">
-        <video
-          controls
-          playsinline
-          webkit-playsinline
-          poster="https://lh3.googleusercontent.com/d/1f6U6JQmvs6_YxvaNAz1PQ57WBoaQK5Gi=w1200-h800"
-          aria-label="Vídeo institucional Itnerol Transporte">
-          <source src="videos/video-institucional.mp4" type="video/mp4" />
-          <p>Seu navegador não suporta reprodução de vídeo. <a href="https://wa.me/5511998024526" target="_blank" rel="noopener">Entre em contato pelo WhatsApp</a>.</p>
-        </video>
-      </div>
-      <div class="video-cta">
-        <a href="https://wa.me/5511998024526?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20da%20Itnerol%20Transportes." class="btn btn-whatsapp" target="_blank" rel="noopener">
-          <i class="fab fa-whatsapp" aria-hidden="true"></i> Falar no WhatsApp
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== UNIDADES ===== -->
-  <section id="unidades" class="section-unidades">
-    <div class="container">
-      <header class="section-header">
-        <p class="section-eyebrow">Onde Estamos</p>
-        <h2 class="section-title">Nossas Unidades</h2>
-      </header>
-      <div class="unidades-grid">
-
-        <!-- Unidade 1 — Várzea Paulista -->
-        <article class="unidade-card">
-          <div class="unidade-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>
-          <h3>Unidade 1 — Várzea Paulista</h3>
-          <address>
-            <p><i class="fas fa-road" aria-hidden="true"></i> Av. Brasil, 472B — Vila Santa Terezinha</p>
-            <p><i class="fas fa-city" aria-hidden="true"></i> Várzea Paulista — SP, CEP: 13220-200</p>
-            <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+551145955073">(11) 4595-5073</a></p>
-            <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:itnerol@itnerol.com.br">itnerol@itnerol.com.br</a></p>
-            <p><i class="fab fa-whatsapp" aria-hidden="true"></i> <a href="https://wa.me/5511998024526" target="_blank" rel="noopener">(11) 99802-4526</a></p>
-          </address>
-          <div class="unidade-horario" style="margin-top:16px">
-            <p><strong>Segunda a Sexta:</strong> 08h às 18h</p>
-            <p><strong>Sábado:</strong> 08h às 12h</p>
-            <p class="horario-destaque"><i class="fas fa-tower-broadcast" aria-hidden="true"></i> <strong>Torre de Controle:</strong> 24h / 7 dias</p>
-          </div>
-        </article>
-
-        <!-- Unidade 2 — Cabreúva -->
-        <article class="unidade-card">
-          <div class="unidade-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>
-          <h3>Unidade 2 — Cabreúva</h3>
-          <address>
-            <p><i class="fas fa-road" aria-hidden="true"></i> Rua Roque Mesquita Camargo, 104</p>
-            <p><i class="fas fa-city" aria-hidden="true"></i> Jardim Ipê — Cabreúva — SP</p>
-            <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+551145955073">(11) 4595-5073</a></p>
-            <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:itnerol@itnerol.com.br">itnerol@itnerol.com.br</a></p>
-            <p><i class="fab fa-whatsapp" aria-hidden="true"></i> <a href="https://wa.me/5511998024526" target="_blank" rel="noopener">(11) 99802-4526</a></p>
-          </address>
-          <div class="unidade-horario" style="margin-top:16px">
-            <p><strong>Segunda a Sexta:</strong> 08h às 18h</p>
-            <p><strong>Sábado:</strong> 08h às 12h</p>
-            <p class="horario-destaque"><i class="fas fa-tower-broadcast" aria-hidden="true"></i> <strong>Torre de Controle:</strong> 24h / 7 dias</p>
-          </div>
-        </article>
-
-        <!-- Redes Sociais -->
-        <article class="unidade-card">
-          <div class="unidade-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/></svg>
-          </div>
-          <h3>Redes Sociais</h3>
-          <div class="unidade-redes">
-            <a href="https://www.instagram.com/itnerolturismo/" target="_blank" rel="noopener" class="rede-link rede-instagram">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-              Instagram — @itnerolturismo
-            </a>
-            <a href="https://www.facebook.com/itnerolturismo/" target="_blank" rel="noopener" class="rede-link rede-facebook">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              Facebook — itnerolturismo
-            </a>
-            <a href="https://www.linkedin.com/in/itnerol-54689a269" target="_blank" rel="noopener" class="rede-link rede-linkedin">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              LinkedIn — Itnerol Transportes
-            </a>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CONTATO ===== -->
-  <section id="contato" class="section-contato">
-    <div class="container">
-      <div class="contato-grid">
-
-        <div class="contato-info">
-          <p class="section-eyebrow">Fale Conosco</p>
-          <h2 class="section-title">Solicite seu<br>Orçamento</h2>
-          <p>Entre em contato conosco para solicitar um orçamento personalizado para sua empresa. Nossa equipe está pronta para atender você.</p>
-          <ul class="contato-lista">
-            <li><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+551145955073">(11) 4595-5073</a></li>
-            <li><i class="fab fa-whatsapp" aria-hidden="true"></i> <a href="https://wa.me/5511998024526" target="_blank" rel="noopener">(11) 99802-4526</a></li>
-            <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:itnerol@itnerol.com.br">itnerol@itnerol.com.br</a></li>
-            <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Av. Brasil, 472B — Várzea Paulista/SP</li>
-          </ul>
-        </div>
-
-        <form class="contato-form" id="contato-form" novalidate aria-label="Formulário de contato">
-          <div class="form-group">
-            <label for="nome">Nome completo <span aria-hidden="true">*</span></label>
-            <input type="text" id="nome" name="nome" placeholder="Seu nome" required autocomplete="name" />
-          </div>
-          <div class="form-group">
-            <label for="empresa">Empresa</label>
-            <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa" autocomplete="organization" />
-          </div>
-          <div class="form-group">
-            <label for="telefone">Telefone / WhatsApp <span aria-hidden="true">*</span></label>
-            <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required autocomplete="tel" />
-          </div>
-          <div class="form-group">
-            <label for="servico">Tipo de Serviço</label>
-            <select id="servico" name="servico">
-              <option value="">Selecione...</option>
-              <option value="fretamento">Fretamento para Empresas</option>
-              <option value="executivo">Transporte Executivo</option>
-              <option value="turismo">Fretamento para Turismo</option>
-              <option value="outro">Outro</option>
+        <div class="dash-filter-group dash-filter-group-cliente">
+          <label><i class="fas fa-building" style="color:#F07800"></i> <strong style="color:#F07800">Filtrar por Cliente</strong> <span class="dash-filter-cliente-hint">— visão financeira individual</span></label>
+          <div style="display:flex;gap:6px;align-items:center">
+            <select id="dash-filtro-cliente" class="select-filtro select-filtro-cliente" onchange="renderDashboard()" style="min-width:220px">
+              <option value="">👥 Todos os clientes</option>
             </select>
+            <button class="btn-outline btn-sm" onclick="limparFiltroCliente()" id="btn-limpar-cliente" style="display:none" title="Limpar filtro de cliente"><i class="fas fa-times"></i></button>
           </div>
-          <div class="form-group">
-            <label for="mensagem">Mensagem</label>
-            <textarea id="mensagem" name="mensagem" rows="4" placeholder="Descreva sua necessidade de transporte..."></textarea>
+        </div>
+        <div class="dash-filtro-cliente-info" id="dash-filtro-cliente-info" style="display:none">
+          <i class="fas fa-info-circle" style="color:#F07800"></i>
+          <span id="dash-filtro-cliente-info-txt">Exibindo dados financeiros do cliente selecionado</span>
+        </div>
+        <div class="dash-filter-badge" id="dash-filtro-badge" style="display:none">
+          <span id="dash-filtro-badge-txt"></span>
+          <button onclick="limparFiltrosDash()" title="Limpar filtros"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+
+      <!-- KPIs principais -->
+      <div class="kpi-grid" id="kpi-grid">
+        <div class="kpi-card kpi-orange">
+          <div class="kpi-icon"><i class="fas fa-search"></i></div>
+          <div class="kpi-info">
+            <div class="kpi-value" id="kpi-prospeccoes">0</div>
+            <div class="kpi-label">Prospecções (mês)</div>
+            <div class="kpi-sub" id="kpi-prospeccoes-sub">—</div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block">
-            <i class="fab fa-whatsapp" aria-hidden="true"></i> Enviar via WhatsApp
+          <div class="kpi-pct-wrap"><span class="kpi-pct" id="kpi-pct-prosp"></span></div>
+        </div>
+        <div class="kpi-card kpi-blue">
+          <div class="kpi-icon"><i class="fas fa-file-contract"></i></div>
+          <div class="kpi-info">
+            <div class="kpi-value" id="kpi-propostas">0</div>
+            <div class="kpi-label">Propostas Enviadas (mês)</div>
+            <div class="kpi-sub" id="kpi-propostas-sub">—</div>
+          </div>
+          <div class="kpi-pct-wrap"><span class="kpi-pct" id="kpi-pct-prop"></span></div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-icon"><i class="fas fa-handshake"></i></div>
+          <div class="kpi-info">
+            <div class="kpi-value" id="kpi-fechados">0</div>
+            <div class="kpi-label">Contratos Fechados (mês)</div>
+            <div class="kpi-sub" id="kpi-fechados-sub">—</div>
+          </div>
+          <div class="kpi-pct-wrap"><span class="kpi-pct" id="kpi-pct-fech"></span></div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-icon"><i class="fas fa-exclamation-triangle"></i></div>
+          <div class="kpi-info">
+            <div class="kpi-value" id="kpi-reclamacoes">0</div>
+            <div class="kpi-label">Reclamações Abertas</div>
+            <div class="kpi-sub" id="kpi-reclamacoes-sub">—</div>
+          </div>
+          <div class="kpi-pct-wrap"><span class="kpi-pct" id="kpi-pct-recl"></span></div>
+        </div>
+      </div>
+
+      <!-- KPIs financeiros do cliente (visível apenas com cliente selecionado) -->
+      <div id="dash-cliente-kpis" style="display:none;margin-bottom:18px"></div>
+
+      <!-- KPIs secundários -->
+      <div class="kpi-grid kpi-grid-5" style="margin-bottom:24px" id="dash-kpis-mini">
+        <div class="kpi-mini kpi-mini-blue">
+          <div class="kpi-mini-val" id="kmi-clientes">0</div>
+          <div class="kpi-mini-lab">Clientes Ativos</div>
+          <div class="kmi-pct" id="kmi-pct-clientes"></div>
+        </div>
+        <div class="kpi-mini kpi-mini-green">
+          <div class="kpi-mini-val" id="kmi-contratos">0</div>
+          <div class="kpi-mini-lab">Contratos Ativos</div>
+          <div class="kmi-pct" id="kmi-pct-contratos"></div>
+        </div>
+        <div class="kpi-mini kpi-mini-orange">
+          <div class="kpi-mini-val" id="kmi-linhas">0</div>
+          <div class="kpi-mini-lab">Linhas Ativas</div>
+          <div class="kmi-pct" id="kmi-pct-linhas"></div>
+        </div>
+        <div class="kpi-mini kpi-mini-gray">
+          <div class="kpi-mini-val" id="kmi-veiculos">0</div>
+          <div class="kpi-mini-lab">Veículos na Frota</div>
+          <div class="kmi-pct" id="kmi-pct-veiculos"></div>
+        </div>
+        <div class="kpi-mini kpi-mini-purple">
+          <div class="kpi-mini-val" id="kmi-conversao">0%</div>
+          <div class="kpi-mini-lab">Taxa de Conversão</div>
+          <div class="kmi-pct" id="kmi-pct-conversao"></div>
+        </div>
+      </div>
+
+      <!-- Gráficos -->
+      <div class="dash-row">
+        <div class="dash-card dash-chart-big">
+          <div class="dash-card-header">
+            <h3><i class="fas fa-chart-bar" style="color:#F07800;margin-right:6px"></i>Faturamento × Custo (últimos 6 meses)</h3>
+          </div>
+          <div style="height:280px"><canvas id="chart-faturamento"></canvas></div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3><i class="fas fa-funnel-dollar" style="color:#1565C0;margin-right:6px"></i>Funil Comercial (mês)</h3></div>
+          <div style="height:280px"><canvas id="chart-funil"></canvas></div>
+        </div>
+      </div>
+
+      <div class="dash-row dash-row-3">
+        <div class="dash-card">
+          <div class="dash-card-header"><h3><i class="fas fa-route" style="color:#2E7D32;margin-right:6px"></i>KM Contratada × Rodada</h3></div>
+          <div style="height:200px"><canvas id="chart-km"></canvas></div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3><i class="fas fa-bus" style="color:#F07800;margin-right:6px"></i>Tipos de Veículo</h3></div>
+          <div style="height:200px"><canvas id="chart-veiculos"></canvas></div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3><i class="fas fa-bell" style="color:#C62828;margin-right:6px"></i>Reclamações Recentes</h3></div>
+          <div id="lista-reclamacoes-dash" class="lista-dash"></div>
+        </div>
+      </div>
+
+      <!-- KPIs por tipo de veículo (mês / cliente) -->
+      <div id="dash-veic-tipo" style="margin-bottom:16px"></div>
+
+      <!-- Painel por cliente (visível quando cliente selecionado) -->
+      <div id="dash-painel-cliente" style="display:none;margin-top:16px"></div>
+
+    </section>
+
+    <!-- ══ INDICADORES ══ -->
+    <section id="page-indicadores" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-chart-line" style="color:#F07800;margin-right:8px"></i>Indicadores Comerciais</h1>
+        <div class="filters-bar" style="margin:0">
+          <select id="filtro-mes-indicadores" onchange="renderIndicadores()" class="select-filtro">
+            <option value="">Todos os meses</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Funil de vendas -->
+      <div class="indicadores-funil-wrap">
+        <div class="funil-stage funil-prospeccao">
+          <div class="funil-num" id="ind-prosp-total">0</div>
+          <div class="funil-label">Prospecções</div>
+        </div>
+        <div class="funil-arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="funil-stage funil-proposta">
+          <div class="funil-num" id="ind-prop-total">0</div>
+          <div class="funil-label">Propostas</div>
+        </div>
+        <div class="funil-arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="funil-stage funil-negociacao">
+          <div class="funil-num" id="ind-neg-total">0</div>
+          <div class="funil-label">Em Negociação</div>
+        </div>
+        <div class="funil-arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="funil-stage funil-fechado">
+          <div class="funil-num" id="ind-fecha-total">0</div>
+          <div class="funil-label">Fechados</div>
+        </div>
+        <div class="funil-arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="funil-stage funil-perdido">
+          <div class="funil-num" id="ind-perd-total">0</div>
+          <div class="funil-label">Perdidos</div>
+        </div>
+      </div>
+
+      <!-- Cards de métricas -->
+      <div class="kpi-grid kpi-grid-4" style="margin-top:24px">
+        <div class="ind-card">
+          <div class="ind-card-icon" style="background:#FFF3E0;color:#F07800"><i class="fas fa-percentage"></i></div>
+          <div class="ind-card-info">
+            <div class="ind-card-val" id="ind-taxa-conversao">0%</div>
+            <div class="ind-card-lab">Taxa de Conversão</div>
+            <div class="ind-card-sub">Prosp → Contrato</div>
+          </div>
+        </div>
+        <div class="ind-card">
+          <div class="ind-card-icon" style="background:#E3F2FD;color:#1565C0"><i class="fas fa-file-invoice-dollar"></i></div>
+          <div class="ind-card-info">
+            <div class="ind-card-val" id="ind-ticket-medio">R$ 0</div>
+            <div class="ind-card-lab">Ticket Médio</div>
+            <div class="ind-card-sub">Por proposta aprovada</div>
+          </div>
+        </div>
+        <div class="ind-card">
+          <div class="ind-card-icon" style="background:#E8F5E9;color:#2E7D32"><i class="fas fa-handshake"></i></div>
+          <div class="ind-card-info">
+            <div class="ind-card-val" id="ind-receita-nova">R$ 0</div>
+            <div class="ind-card-lab">Receita Nova (mês)</div>
+            <div class="ind-card-sub">Contratos fechados</div>
+          </div>
+        </div>
+        <div class="ind-card">
+          <div class="ind-card-icon" style="background:#F3E5F5;color:#7B1FA2"><i class="fas fa-clock"></i></div>
+          <div class="ind-card-info">
+            <div class="ind-card-val" id="ind-ciclo">0 dias</div>
+            <div class="ind-card-lab">Ciclo Médio de Venda</div>
+            <div class="ind-card-sub">Prosp → Fechamento</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráficos indicadores -->
+      <div class="dash-row" style="margin-top:24px">
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Prospecções × Propostas × Fechamentos por Mês</h3></div>
+          <div style="height:260px"><canvas id="chart-pipeline-mensal"></canvas></div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Origem dos Leads</h3></div>
+          <div style="height:260px"><canvas id="chart-origem-leads"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Ranking motivação -->
+      <div class="dash-card" style="margin-top:16px">
+        <div class="dash-card-header">
+          <h3><i class="fas fa-trophy" style="color:#F9A825;margin-right:6px"></i>Ranking de Responsáveis (mês atual)</h3>
+        </div>
+        <div id="ranking-responsaveis"></div>
+      </div>
+    </section>
+
+    <!-- ══ PROSPECÇÕES ══ -->
+    <section id="page-prospeccoes" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-search" style="color:#F07800;margin-right:8px"></i>Prospecções</h1>
+        <button class="btn-primary" onclick="abrirModal('prospeccao')"><i class="fas fa-plus"></i> Nova Prospecção</button>
+      </div>
+      <div class="filters-bar">
+        <input type="text" id="busca-prospeccoes" placeholder="Buscar empresa, contato, cidade..." class="input-busca" oninput="renderProspeccoes()"/>
+        <select id="filtro-mes-prosp" onchange="renderProspeccoes()" class="select-filtro">
+          <option value="">Todos os meses</option>
+        </select>
+        <select id="filtro-status-prosp" onchange="renderProspeccoes()" class="select-filtro">
+          <option value="">Todos os status</option>
+          <option>Nova</option><option>Em Contato</option><option>Reunião Agendada</option>
+          <option>Proposta Enviada</option><option>Convertida</option><option>Perdida</option><option>Dormindo</option>
+        </select>
+      </div>
+      <!-- Kanban -->
+      <div class="kanban-board" id="kanban-prospeccoes"></div>
+      <!-- Tabela alternativa -->
+      <div class="table-wrap" style="margin-top:16px">
+        <table class="data-table">
+          <thead>
+            <tr><th>Empresa</th><th>Contato</th><th>Cidade</th><th>Origem</th><th>Mês</th><th>Responsável</th><th>Status</th><th>Ações</th></tr>
+          </thead>
+          <tbody id="tbody-prospeccoes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ PROPOSTAS ══ -->
+    <section id="page-propostas" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-file-contract" style="color:#F07800;margin-right:8px"></i>Propostas</h1>
+        <button class="btn-primary" onclick="abrirModal('proposta')"><i class="fas fa-plus"></i> Nova Proposta</button>
+      </div>
+      <div class="filters-bar">
+        <select id="filtro-mes-prop" onchange="renderPropostas()" class="select-filtro">
+          <option value="">Todos os meses</option>
+        </select>
+        <select id="filtro-status-prop" onchange="renderPropostas()" class="select-filtro">
+          <option value="">Todos os status</option>
+          <option>Enviada</option><option>Em Negociação</option><option>Aprovada</option>
+          <option>Recusada</option><option>Expirada</option><option>Cancelada</option>
+        </select>
+      </div>
+      <!-- Resumo rápido -->
+      <div class="kpi-grid kpi-grid-4" id="kpi-propostas-resumo" style="margin-bottom:16px"></div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Nº</th><th>Empresa</th><th>Tipo</th><th>Valor Proposto</th><th>Veículos</th><th>Data Envio</th><th>Validade</th><th>Responsável</th><th>Status</th><th>Ações</th></tr>
+          </thead>
+          <tbody id="tbody-propostas"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ CLIENTES ══ -->
+    <section id="page-clientes" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-building" style="color:#F07800;margin-right:8px"></i>Clientes</h1>
+        <button class="btn-primary" onclick="abrirModal('cliente')"><i class="fas fa-plus"></i> Novo Cliente</button>
+      </div>
+      <div class="filters-bar">
+        <input type="text" id="busca-clientes" placeholder="Buscar por nome, CNPJ, cidade..." class="input-busca" oninput="renderClientes()"/>
+        <select id="filtro-status-cliente" onchange="renderClientes()" class="select-filtro">
+          <option value="">Todos os status</option>
+          <option>Ativo</option><option>Inativo</option><option>Prospecto</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Empresa</th><th>CNPJ</th><th>Contato</th><th>Cidade</th><th>Status</th><th>Desde</th><th>Ações</th></tr>
+          </thead>
+          <tbody id="tbody-clientes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ VEÍCULOS ══ -->
+    <section id="page-veiculos" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-truck" style="color:#F07800;margin-right:8px"></i>Veículos da Frota</h1>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <button class="btn-outline btn-sm" onclick="document.getElementById('input-importar-csv-veic').click()" title="Importar planilha CSV/Excel de veículos">
+            <i class="fas fa-file-upload"></i> Importar Planilha
           </button>
-        </form>
-
+          <input type="file" id="input-importar-csv-veic" accept=".csv,.txt" style="display:none" onchange="importarCSVVeiculos(event)"/>
+          <button class="btn-primary" onclick="abrirModal('veiculo')"><i class="fas fa-plus"></i> Novo Veículo</button>
+        </div>
       </div>
-    </div>
-  </section>
+      <div class="import-csv-hint" id="import-csv-hint" style="display:none">
+        <i class="fas fa-info-circle"></i>
+        <div>
+          <strong>Como importar:</strong> Exporte sua planilha como CSV (separador <strong>ponto-e-vírgula</strong> ou <strong>vírgula</strong>).
+          Colunas reconhecidas: <code>PREFIXO</code>, <code>PLACA</code>, <code>LUGARES</code>, <code>MARCA</code>, <code>MODELO</code>, <code>COR</code>, <code>ANO_FAB</code>, <code>ANO_MOD</code>.
+          <a href="#" onclick="baixarModeloCSV();return false">📥 Baixar modelo CSV</a>
+        </div>
+        <button onclick="document.getElementById('import-csv-hint').style.display='none'" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:1rem">✕</button>
+      </div>
+      <div class="filters-bar">
+        <input type="text" id="busca-veiculos" placeholder="Buscar placa, frota, modelo..." class="input-busca" oninput="renderVeiculos()"/>
+        <select id="filtro-tipo-veiculo" onchange="renderVeiculos()" class="select-filtro">
+          <option value="">Todos os tipos</option>
+          <option>Ônibus</option><option>Microônibus</option><option>Van</option><option>Sedan Executivo</option><option>SUV</option>
+        </select>
+        <select id="filtro-status-veiculo" onchange="renderVeiculos()" class="select-filtro">
+          <option value="">Todos os status</option>
+          <option>Disponível</option><option>Em Rota</option><option>Manutenção</option><option>Inativo</option>
+        </select>
+      </div>
+      <div id="import-progress" style="display:none;padding:10px 16px;background:#1e293b;border-radius:8px;margin-bottom:12px;font-size:.84rem;color:#94a3b8"></div>
+      <div class="frota-cards" id="frota-cards"></div>
+    </section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="site-footer-bottom">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="footer-logo-wrap">
-            <span class="footer-logo-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <rect x="4" y="10" width="40" height="26" rx="4"/>
-                <rect x="7" y="13" width="34" height="11" rx="2" fill="rgba(0,0,0,0.25)"/>
-                <rect x="23.5" y="13" width="1.5" height="11" fill="rgba(0,0,0,0.2)"/>
-                <rect x="4" y="33" width="40" height="5" rx="2"/>
-                <circle cx="13" cy="39" r="4.5" fill="#1A1A1A"/>
-                <circle cx="13" cy="39" r="2" fill="#666"/>
-                <circle cx="35" cy="39" r="4.5" fill="#1A1A1A"/>
-                <circle cx="35" cy="39" r="2" fill="#666"/>
-                <rect x="29" y="20" width="11" height="13" rx="1" fill="rgba(0,0,0,0.2)"/>
-                <rect x="6" y="14" width="5" height="3" rx="1" fill="rgba(255,255,255,0.5)"/>
-                <rect x="37" y="14" width="5" height="3" rx="1" fill="rgba(255,255,255,0.5)"/>
-              </svg>
-            </span>
-            <span class="logo-text">ITNEROL</span>
+    <!-- ══ MOTORISTAS ══ -->
+    <section id="page-motoristas" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-id-card" style="color:#F07800;margin-right:8px"></i>Motoristas</h1>
+        <div style="display:flex;gap:8px;align-items:center">
+          <label class="btn-outline" style="cursor:pointer;display:flex;align-items:center;gap:6px;font-size:.82rem;padding:7px 14px" title="Importar lista de motoristas por planilha CSV ou Excel exportado como CSV">
+            <i class="fas fa-file-import"></i> Importar CSV
+            <input type="file" accept=".csv,.txt" style="display:none" onchange="importarCSVMotoristas(event)"/>
+          </label>
+          <button class="btn-primary" onclick="abrirModal('motorista')"><i class="fas fa-plus"></i> Novo Motorista</button>
+        </div>
+      </div>
+
+      <!-- Dica de importação -->
+      <div class="import-csv-hint" id="mot-import-hint">
+        <i class="fas fa-info-circle"></i>
+        <div>
+          <strong>Importação por planilha CSV:</strong> Aceita dois formatos automaticamente:<br>
+          <span style="color:#7dd3fc">▸ Sistema RH (VBP0213):</span> <code>EMP;N.REG;C.CUSTO;<strong>NOME DO FUNCIONARIO</strong>;ENDERECO;BAIRRO;CEP;<strong>MUNICIPIO;ES;TELEFONE</strong></code><br>
+          <span style="color:#7dd3fc">▸ Formato livre:</span> colunas <code>Nome</code> <code>CPF</code> <code>CNH</code> <code>Categoria</code> <code>Telefone</code> <code>Salario</code> <code>Status</code> <code>Endereco</code> <code>Cidade</code><br>
+          Campos não encontrados ficam em branco. Motoristas com mesmo CPF ou nome são <strong>atualizados</strong>.
+        </div>
+      </div>
+      <div id="mot-import-progress" style="display:none;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 16px;font-size:.84rem;color:#94a3b8;margin-bottom:12px"></div>
+
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px">
+        <div style="position:relative;flex:1;max-width:380px">
+          <i class="fas fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#64748b;font-size:.85rem"></i>
+          <input id="busca-motoristas" type="text" placeholder="Pesquisar motorista por nome..." oninput="filtrarMotoristas(this.value)"
+            style="width:100%;padding:8px 10px 8px 32px;background:#1e293b;border:1px solid #334155;border-radius:8px;color:#e2e8f0;font-size:.85rem"/>
+        </div>
+        <span id="contador-motoristas" style="font-size:.78rem;color:#64748b"></span>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Nome</th><th>CPF</th><th>CNH</th><th>Cat. CNH</th><th>Habilitado para</th><th>Vencimento CNH</th><th>Telefone</th><th>Status</th><th>Ações</th></tr></thead>
+          <tbody id="tbody-motoristas"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ CONTRATOS ══ -->
+    <section id="page-contratos" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-file-signature" style="color:#F07800;margin-right:8px"></i>Contratos</h1>
+        <button class="btn-primary" onclick="abrirModal('contrato')"><i class="fas fa-plus"></i> Novo Contrato</button>
+      </div>
+
+      <!-- Alertas de vencimento -->
+      <div id="alertas-vencimento"></div>
+
+      <div class="filters-bar">
+        <input type="text" id="busca-contratos" placeholder="Buscar contrato, cliente..." class="input-busca" oninput="renderContratos()"/>
+        <select id="filtro-status-contrato" onchange="renderContratos()" class="select-filtro">
+          <option value="">Todos os status</option>
+          <option>Ativo</option><option>Encerrado</option><option>Suspenso</option><option>Em Renovação</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Nº Contrato</th><th>Cliente</th><th>Tipo</th><th>Valor Mensal</th><th>KM/Mês</th><th>Veículos Alocados</th><th>Vigência</th><th>Linhas</th><th>Status</th><th>Ações</th></tr></thead>
+          <tbody id="tbody-contratos"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ LINHAS ══ -->
+    <section id="page-linhas" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-route" style="color:#F07800;margin-right:8px"></i>Linhas / Itinerários</h1>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <!-- Input oculto para seleção do arquivo Excel -->
+          <input type="file" id="input-importar-xlsx" accept=".xlsx,.xls" style="display:none" onchange="importarLinhasExcel(this)"/>
+          <button class="btn-outline btn-sm" onclick="el('input-importar-xlsx').click()" title="Importar linhas da planilha do sistema externo">
+            <i class="fas fa-file-excel" style="color:#2E7D32"></i> Importar Excel
+          </button>
+          <button class="btn-primary" onclick="abrirModal('linha')"><i class="fas fa-plus"></i> Nova Linha</button>
+        </div>
+      </div>
+      <div class="filters-bar">
+        <input type="text" id="busca-linhas" placeholder="Buscar linha ou itinerário..." class="input-busca" oninput="renderLinhas()"/>
+        <select id="filtro-cliente-linha" onchange="renderLinhas()" class="select-filtro">
+          <option value="">🏢 Todos os clientes</option>
+        </select>
+        <select id="filtro-tipo-linha" onchange="renderLinhas()" class="select-filtro">
+          <option value="">Todos os tipos</option>
+          <option>Ônibus</option><option>Microônibus</option><option>Van</option><option>Sedan Executivo</option><option>SUV</option>
+        </select>
+        <select id="filtro-status-linha" onchange="renderLinhas()" class="select-filtro">
+          <option value="">Todos os status</option>
+          <option>Ativa</option><option>Inativa</option><option>Suspensa</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Código</th><th>Cliente</th><th>Itinerário</th><th>Veículo</th><th>Motorista</th><th>KM/Mês</th><th>Horários</th><th>Status</th><th>Ações</th></tr></thead>
+          <tbody id="tbody-linhas"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ APURAÇÃO MENSAL ══ -->
+    <section id="page-apuracao" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-calculator" style="color:#F07800;margin-right:8px"></i>Apuração Mensal</h1>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn-outline btn-sm" onclick="navegarPara('ticketlog')" title="Importar pedágio do TicketLog"><i class="fas fa-toll"></i> TicketLog</button>
+          <button class="btn-primary" onclick="abrirModal('apuracao')"><i class="fas fa-plus"></i> Nova Apuração</button>
+        </div>
+      </div>
+      <div class="filters-bar">
+        <select id="filtro-mes-apuracao" onchange="renderApuracao()" class="select-filtro"><option value="">Todos os meses</option></select>
+        <select id="filtro-cliente-apuracao" onchange="renderApuracao()" class="select-filtro"><option value="">Todos os clientes</option></select>
+      </div>
+      <div class="kpi-grid" id="kpi-apuracao" style="margin-bottom:16px"></div>
+      <div id="receita-por-veiculo" style="margin-bottom:16px"></div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Mês/Ano</th><th>Cliente</th><th>Frota do Mês</th><th>KM Cont.</th><th>KM Rod.</th><th>Δ KM</th><th>Fat. Cont.</th><th>Fat. Real.</th><th>V. Extras</th><th>Δ Fat.</th><th>Pedágio</th><th>Impostos</th><th>Deprec.</th><th>Outras Desp.</th><th>Custo Total</th><th>Margem</th><th>Recl.</th><th>Status</th><th>Ações</th></tr>
+          </thead>
+          <tbody id="tbody-apuracao"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ INDICADORES APURAÇÃO ══ -->
+    <section id="page-ind-apuracao" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-chart-bar" style="color:#F07800;margin-right:8px"></i>Indicadores de Apuração</h1>
+        <div style="display:flex;gap:8px">
+          <button class="btn-outline btn-sm" onclick="renderIndApuracao()"><i class="fas fa-sync"></i> Atualizar</button>
+          <button class="btn-outline btn-sm" onclick="navegarPara('ticketlog')"><i class="fas fa-toll"></i> Ver TicketLog</button>
+        </div>
+      </div>
+      <div class="filters-bar">
+        <select id="ind-filtro-mes" onchange="renderIndApuracao()" class="select-filtro"><option value="">Todos os meses</option></select>
+        <select id="ind-filtro-cliente" onchange="renderIndApuracao()" class="select-filtro"><option value="">Todos os clientes</option></select>
+        <select id="ind-filtro-visao" onchange="renderIndApuracao()" class="select-filtro">
+          <option value="cliente">🏢 Por Cliente</option>
+          <option value="veiculo">🚚 Por Veículo / Prefixo</option>
+          <option value="negativos">📉 Resultados Negativos</option>
+          <option value="ajustes">↔️ Ajustes &amp; Variações</option>
+          <option value="historico">📅 Histórico / Tendência Mês a Mês</option>
+        </select>
+      </div>
+      <div class="kpi-grid" id="kpi-ind-apuracao" style="margin-bottom:16px"></div>
+      <div id="kpi-ind-composicao"></div>
+      <div id="ind-apuracao-grafico" style="margin-bottom:20px"></div>
+      <div id="ind-apuracao-tabela"></div>
+      <div style="margin-top:12px;font-size:.75rem;color:#64748b">
+        <i class="fas fa-info-circle"></i>
+        <strong>Histórico / Tendência:</strong> compare faturamento, margem e KM mês a mês por cliente.
+        A visão histórica ignora o filtro de mês — use o filtro de cliente para focar em um cliente específico.
+      </div>
+    </section>
+
+    <!-- ══ TAPETE OPERACIONAL ══ -->
+    <section id="page-tapete" class="page">
+      <div class="page-header">
+        <div>
+          <h1><i class="fas fa-table" style="color:#F07800;margin-right:8px"></i>Tapete Operacional</h1>
+          <p id="tapete-subtitulo" style="color:#64748b;font-size:.84rem">Visão em tempo real da frota e escalas</p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <select id="tapete-filtro-cliente" onchange="renderTapete()" class="select-filtro" style="min-width:180px">
+            <option value="">Todos os clientes</option>
+          </select>
+          <select id="tapete-filtro-tipo" onchange="renderTapete()" class="select-filtro">
+            <option value="">Todos os tipos</option>
+            <option value="Ônibus">Ônibus</option>
+            <option value="Microônibus">Microônibus</option>
+            <option value="Van">Van</option>
+            <option value="Sedan Executivo">Sedan Executivo</option>
+            <option value="SUV">SUV</option>
+          </select>
+          <button class="btn-outline btn-sm" onclick="renderTapete()"><i class="fas fa-sync-alt"></i> Atualizar</button>
+          <button class="btn-outline btn-sm" onclick="exportarTapeteCSV()"><i class="fas fa-download"></i> Exportar</button>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-grid" id="kpi-tapete" style="margin-bottom:20px"></div>
+
+      <!-- Linha do tempo / escala -->
+      <div id="tapete-timeline" style="margin-bottom:20px"></div>
+
+      <!-- Grid frota -->
+      <div id="tapete-grid-frota" style="margin-bottom:20px"></div>
+
+      <!-- Motoristas escalados -->
+      <div id="tapete-motoristas" style="margin-bottom:20px"></div>
+
+      <!-- Veículos ociosos / disponíveis -->
+      <div id="tapete-ociosos"></div>
+    </section>
+
+    <!-- ══ TICKETLOG / PEDÁGIO ══ -->
+    <section id="page-ticketlog" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-toll" style="color:#F07800;margin-right:8px"></i>TicketLog — Pedágio Mensal</h1>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <span id="tl-contador-registros" style="font-size:.76rem;color:#64748b;background:#1e293b;border:1px solid #334155;border-radius:6px;padding:4px 10px;white-space:nowrap"></span>
+          <button class="btn-outline btn-sm" onclick="_abrirAbaTicketLog()" title="Recarregar dados do servidor"><i class="fas fa-sync-alt"></i> Atualizar</button>
+          <button class="btn-outline btn-sm" onclick="baixarModeloTicketLog()"><i class="fas fa-download"></i> Modelo CSV</button>
+          <button class="btn-outline btn-sm" onclick="exportarTicketLogCSV()" title="Exportar relatório filtrado por veículo/mês"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+          <button class="btn-outline btn-sm" onclick="exportarTicketLogPorContrato()" title="Exportar relatório agrupado por contrato"><i class="fas fa-file-export"></i> Exportar por Contrato</button>
+          <button class="btn-primary btn-sm" onclick="document.getElementById('input-ticketlog-csv').click()"><i class="fas fa-file-upload"></i> Importar CSV</button>
+          <button class="btn-outline btn-sm" onclick="abrirModalVincularTicketLog()"><i class="fas fa-link"></i> Vincular Contratos</button>
+          <input type="file" id="input-ticketlog-csv" accept=".csv,.txt,.xls,.xlsx" style="display:none" onchange="importarTicketLog(event)"/>
+        </div>
+      </div>
+
+      <div class="tl-info-banner">
+        <i class="fas fa-info-circle"></i>
+        <div>
+          <strong>Como usar o TicketLog:</strong>
+          <ol style="margin:6px 0 0 16px;padding:0;font-size:.82rem">
+            <li>Exporte o relatório mensal de pedágio do sistema Ticket Log em CSV (separado por <code>;</code> ou <code>,</code>).</li>
+            <li>Clique em <strong>Importar CSV</strong> — o sistema detecta automático as colunas de placa, prefixo, valor e mês.</li>
+            <li>Registros são agrupados por veículo+mês (soma automática de múltiplas transações).</li>
+            <li>O sistema vincula cada veículo ao contrato pelo prefixo cadastrado. Se não encontrar, clique <strong>Vincular Contratos</strong>.</li>
+            <li>Na <strong>Apuração Mensal</strong>, ao selecionar Contrato + Mês, o pedágio é preenchido automaticamente do TicketLog.</li>
+          </ol>
+          <small style="color:#64748b">Colunas aceitas: <code>PLACA</code>, <code>PREFIXO</code> (ou FROTA/NUM_FROTA), <code>VALOR</code> (ou TOTAL/PEDAGIO), <code>MES_ANO</code> (ou DATA/COMPETENCIA), <code>QTD</code>.</small>
+        </div>
+      </div>
+
+      <div class="filters-bar" style="flex-wrap:wrap;gap:8px;align-items:center">
+        <select id="tl-filtro-mes" onchange="renderTicketLog()" class="select-filtro"><option value="">Todos os meses</option></select>
+        <select id="tl-filtro-contrato" onchange="renderTicketLog()" class="select-filtro"><option value="">Todos os contratos</option></select>
+        <input type="text" id="tl-filtro-placa" placeholder="🔍 Placa..." class="input-busca" oninput="renderTicketLog()" style="max-width:145px"/>
+        <input type="text" id="tl-busca" placeholder="🔍 Prefixo, categoria..." class="input-busca" oninput="renderTicketLog()" style="max-width:200px"/>
+        <select id="tl-visao" onchange="renderTicketLog()" class="select-filtro">
+          <option value="veiculo">🚚 Por Veículo</option>
+          <option value="contrato">📄 Resumo por Contrato/Mês</option>
+        </select>
+        <button onclick="el('tl-filtro-mes').value='';el('tl-filtro-contrato').value='';el('tl-filtro-placa').value='';el('tl-busca').value='';renderTicketLog()" class="btn-outline btn-sm" title="Limpar todos os filtros"><i class="fas fa-times"></i> Limpar filtros</button>
+      </div>
+      <div id="tl-import-progress" style="display:none;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 16px;font-size:.84rem;color:#94a3b8;margin-bottom:12px"></div>
+      <div id="tl-resumo-mes" style="margin-bottom:12px"></div>
+      <div class="kpi-grid" id="kpi-ticketlog" style="margin-bottom:16px"></div>
+      <div class="table-wrap" id="tl-table-wrap">
+        <table class="data-table" id="tl-table">
+          <thead id="tl-thead">
+            <tr><th>Mês/Ano</th><th>Placa</th><th>Prefixo/Frota</th><th>Veículo</th><th>Contrato</th><th>Cliente</th><th>Transações</th><th>Valor Pedágio</th><th>Ações</th></tr>
+          </thead>
+          <tbody id="tbody-ticketlog"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ PRECIFICAÇÃO ══ -->
+    <section id="page-precificacao" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-tags" style="color:#F07800;margin-right:8px"></i>Módulo de Precificação</h1>
+        <div style="display:flex;gap:8px">
+          <button class="btn-outline" onclick="limparPrecificacao()"><i class="fas fa-redo"></i> Limpar</button>
+          <button class="btn-outline" onclick="imprimirPrecificacao()" style="color:#1565C0;border-color:#1565C0" title="Imprimir ou salvar como PDF"><i class="fas fa-print"></i> Imprimir / PDF</button>
+          <button class="btn-outline" onclick="gerarPropostaWord()" style="color:#2E7D32;border-color:#2E7D32" title="Gerar proposta editável no Word (.docx)"><i class="fas fa-file-word"></i> Proposta Word</button>
+          <button class="btn-primary" onclick="salvarPrecificacao()"><i class="fas fa-save"></i> Salvar Cálculo</button>
+        </div>
+      </div>
+
+      <!-- Banner ANP -->
+      <div class="anp-banner" id="anp-banner">
+        <div class="anp-info">
+          <i class="fas fa-gas-pump"></i>
+          <div>
+            <div class="anp-titulo">Preço Diesel ANP (São Paulo) — Média de Revenda</div>
+            <div class="anp-valor" id="anp-valor">Carregando...</div>
           </div>
-          <p class="footer-slogan">O melhor está por vir.</p>
-          <p>Fundada em 1994, a ITNEROL Transporte é sinônimo de compromisso, qualidade e responsabilidade no transporte de passageiros.</p>
         </div>
-        <div class="footer-links">
-          <h4>Navegação</h4>
-          <ul>
-            <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#servicos">Serviços</a></li>
-            <li><a href="#frota">Nossa Frota</a></li>
-            <li><a href="#higienizacao">Higienização</a></li>
-            <li><a href="#unidades">Unidades</a></li>
-            <li><a href="#contato">Contato</a></li>
-          </ul>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="anp-data" id="anp-data"></span>
+          <a href="https://www.gov.br/anp/pt-br/assuntos/precos-e-defesa-da-concorrencia/precos/precos-revenda-e-de-distribuicao-combustiveis/serie-historica-do-levantamento-de-precos" target="_blank" class="btn-outline btn-sm"><i class="fas fa-external-link-alt"></i> ANP</a>
         </div>
-        <div class="footer-contato">
-          <h4>Contato</h4>
-          <address>
-            <p><a href="tel:+551145955073">(11) 4595-5073</a></p>
-            <p><a href="https://wa.me/5511998024526" target="_blank" rel="noopener">(11) 99802-4526</a></p>
-            <p><a href="mailto:itnerol@itnerol.com.br">itnerol@itnerol.com.br</a></p>
-            <p>Av. Brasil, 472B<br>Várzea Paulista — SP</p>
-          </address>
+      </div>
+
+      <div class="prec-layout">
+        <!-- Coluna esquerda: inputs -->
+        <div class="prec-col-inputs">
+
+          <!-- 1. Identificação -->
+          <div class="prec-card">
+            <div class="prec-card-title"><i class="fas fa-info-circle"></i> Identificação</div>
+            <div class="prec-grid2">
+              <div class="prec-field"><label>Cliente / Empresa</label><input id="prec-cliente" placeholder="Nome do cliente"/></div>
+              <div class="prec-field"><label>Tipo de Veículo</label>
+                <select id="prec-tipo-veiculo" onchange="aplicarDefaultsTipo()">
+                  <option value="onibus">Ônibus (44-46 pax)</option>
+                  <option value="micro">Microônibus (28-30 pax)</option>
+                  <option value="van">Van (14-16 pax)</option>
+                  <option value="passeio">Sedan / Passeio (4 pax)</option>
+                </select>
+              </div>
+              <div class="prec-field"><label>KM por Dia</label><input id="prec-km-dia" type="number" value="120" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>Dias por Mês</label><input id="prec-dias-mes" type="number" value="22" oninput="atualizarPrecificacao()"/></div>
+            </div>
+          </div>
+
+          <!-- 2. Combustível -->
+          <div class="prec-card">
+            <div class="prec-card-title"><i class="fas fa-gas-pump"></i> Combustível</div>
+            <div class="form-hint-box" style="margin-bottom:8px"><i class="fas fa-info-circle"></i> <strong>Fórmula:</strong> (KM/mês ÷ Consumo médio do veículo em km/l) × Preço do diesel = Custo combustível/mês. <em>Ex: 2.640 km ÷ 4,5 km/l × R$ 6,50 = R$ 3.813,33/mês</em></div>
+            <div class="prec-grid2">
+              <div class="prec-field">
+                <label>Consumo Médio do Veículo (km/l) <small class="prec-hint">Ex: ônibus=3,8 · van=9,0 · passeio=11,0</small></label>
+                <input id="prec-consumo" type="number" step="0.1" value="4.5" oninput="atualizarPrecificacao()"/>
+              </div>
+              <div class="prec-field">
+                <label>Preço Diesel (R$/l)</label>
+                <div style="display:flex;gap:6px;align-items:center">
+                  <input id="prec-diesel" type="number" step="0.01" value="6.50" oninput="atualizarPrecificacao()" style="flex:1"/>
+                  <button class="btn-outline btn-sm" onclick="usarPrecoANP()" title="Usar preço ANP"><i class="fas fa-sync"></i></button>
+                </div>
+              </div>
+              <div class="prec-field"><label>Arla 32 (R$/l) — opcional (Euro V/VI)</label><input id="prec-arla" type="number" step="0.01" value="0" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label style="color:#F07800;font-weight:600">KM/mês calculado <span style="font-weight:400;color:#64748b">(km/dia × dias)</span></label><input id="prec-km-mes-display" type="text" readonly style="background:#fff3e0;font-weight:700;color:#E65100" placeholder="auto"/></div>
+              <div class="prec-field full">
+                <label style="color:#1565C0;font-weight:600">⛽ Custo Combustível/mês <span style="font-weight:400;color:#64748b;font-size:.78rem">(calculado: KM/mês ÷ consumo × diesel)</span></label>
+                <input id="prec-comb-display" type="text" readonly style="background:#e3f2fd;font-weight:700;color:#1565C0;font-size:.95rem" placeholder="preencha os campos acima"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Motorista -->
+          <div class="prec-card">
+            <div class="prec-card-title"><i class="fas fa-id-card"></i> Custos do Motorista</div>
+            <div class="form-hint-box" style="margin-bottom:8px"><i class="fas fa-info-circle"></i>
+              Defina a <strong>quantidade de motoristas</strong> e os valores por motorista. O custo total é calculado automaticamente (qtd × custo unitário).
+              Refeição = Valor/dia × Dias previstos × Qtd motoristas.
+            </div>
+
+            <!-- Quantidade de motoristas -->
+            <div style="background:#1e293b;border-radius:8px;padding:12px 14px;margin-bottom:12px;border:1px solid #334155">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                <i class="fas fa-users" style="color:#F07800"></i>
+                <span style="font-weight:700;color:#f1f5f9;font-size:.9rem">Quantidade de Motoristas</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <div class="prec-field" style="margin:0;flex:0 0 120px">
+                  <label style="font-size:.75rem">Qtd. Motoristas</label>
+                  <input id="prec-qtd-motoristas" type="number" min="1" step="1" value="1" oninput="atualizarPrecificacao()" style="font-size:1.1rem;font-weight:700;text-align:center"/>
+                </div>
+                <div style="flex:1">
+                  <div id="prec-custo-mot-display" style="background:#0f172a;border-radius:6px;padding:8px 12px;font-size:.82rem;color:#94a3b8;line-height:1.6">
+                    Preencha os campos abaixo para ver o custo total
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prec-grid2">
+              <div class="prec-field"><label>Salário Base por Motorista (R$)</label><input id="prec-salario" type="number" step="0.01" value="3800" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>Encargos Sociais (%)</label><input id="prec-encargos" type="number" step="0.1" value="75" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>Vale Refeição por Motorista (R$/dia)</label><input id="prec-vr" type="number" step="0.01" value="25" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field">
+                <label>Dias com Refeição <small class="prec-hint">(dias previstos de serviço)</small></label>
+                <input id="prec-dias-refeicao" type="number" step="1" value="22" oninput="atualizarPrecificacao()" title="Dias previstos para prestação de serviço no mês"/>
+              </div>
+              <div class="prec-field"><label>Vale Transporte por Motorista (R$/mês)</label><input id="prec-vt" type="number" step="0.01" value="150" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>Cesta Básica por Motorista (R$/mês)</label><input id="prec-cesta" type="number" step="0.01" value="0" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>Convênio Médico por Motorista (R$/mês)</label><input id="prec-convenio" type="number" step="0.01" value="0" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>Premiação / Bônus por Motorista (R$/mês)</label><input id="prec-premiacao" type="number" step="0.01" value="0" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field full"><label>Outras Despesas c/ Motorista (R$/mês/un) <small class="prec-hint">Uniforme, EPI, exames...</small></label><input id="prec-outras-mot" type="number" step="0.01" value="0" oninput="atualizarPrecificacao()"/></div>
+            </div>
+          </div>
+
+          <!-- 4. Veículo -->
+          <div class="prec-card">
+            <div class="prec-card-title"><i class="fas fa-bus"></i> Veículo — Custos Fixos</div>
+            <div class="prec-grid2">
+              <div class="prec-field"><label>Valor do Veículo (R$)</label><input id="prec-valor-veiculo" type="number" step="1000" value="350000" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>Vida Útil (anos)</label><input id="prec-vida-util" type="number" value="8" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>IPVA + Licenciamento (R$/mês)</label><input id="prec-ipva" type="number" step="0.01" value="400" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>Seguro (R$/mês)</label><input id="prec-seguro" type="number" step="0.01" value="800" oninput="atualizarPrecificacao()"/></div>
+            </div>
+          </div>
+
+          <!-- 5. CPK Peças e Lubrificantes -->
+          <div class="prec-card">
+            <div class="prec-card-title"><i class="fas fa-oil-can"></i> CPK Peças e Lubrificantes
+              <button type="button" class="btn-outline btn-sm" onclick="calcularCpkPecasLub(true)" style="float:right;margin-top:-2px" title="Calcular CPK automaticamente a partir dos campos de lançamento"><i class="fas fa-calculator"></i> Calcular CPK</button>
+            </div>
+            <div class="form-hint-box" style="margin-bottom:14px">
+              <i class="fas fa-info-circle"></i>
+              Lance o <strong>custo total mensal de peças e lubrificantes</strong> e o <strong>KM rodado no mês</strong> para que o sistema calcule o CPK automaticamente — ou informe o CPK diretamente.<br>
+              <span style="opacity:.75;font-size:.8rem">Inclui: óleos motor, câmbio, diferencial, fluido de freio, graxas, pneus novos e recapagem.</span>
+            </div>
+
+            <!-- Bloco de lançamento mensal -->
+            <div style="background:#1e293b;border-radius:8px;padding:14px 16px;margin-bottom:14px;border:1px solid #334155">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+                <i class="fas fa-clipboard-list" style="color:#F07800"></i>
+                <span style="font-weight:700;color:#f1f5f9;font-size:.88rem">Lançamento Mensal — Peças &amp; Lubrificantes</span>
+              </div>
+              <div class="prec-grid2">
+                <div class="prec-field">
+                  <label>Total Gasto c/ Peças &amp; Lubrificantes (R$/mês) <small class="prec-hint">soma de todos os itens do mês</small></label>
+                  <input id="prec-pecas-lub-total-mes" type="number" step="0.01" min="0" value="" oninput="calcularCpkPecasLub()" placeholder="Ex: 18307.93"/>
+                </div>
+                <div class="prec-field">
+                  <label>KM Rodado no Mês (deste veículo) <small class="prec-hint">número inteiro sem pontos — ex: 39959</small></label>
+                  <input id="prec-pecas-lub-km-mes" type="number" step="1" min="0" value="" oninput="calcularCpkPecasLub()" placeholder="Ex: 39959"/>
+                </div>
+                <div class="prec-field">
+                  <label style="color:#F07800;font-weight:600">CPK calculado (R$/km)</label>
+                  <input id="prec-cpk-pecas-lub-display" type="text" readonly style="background:#1a1f2e;font-weight:700;color:#F07800;border-color:#F07800" placeholder="Preencha os campos acima →"/>
+                </div>
+              </div>
+            </div>
+
+            <!-- CPK manual (editável / sobrescreve o calculado) -->
+            <div class="prec-grid2">
+              <div class="prec-field">
+                <label style="color:#22c55e;font-weight:700"><i class="fas fa-pen" style="font-size:.75rem"></i> CPK Peças &amp; Lubrificantes (R$/km) <small class="prec-hint">— informe manualmente ou use o botão Calcular CPK</small></label>
+                <input id="prec-cpk-pecas-lub" type="number" step="0.0001" value="0.06" oninput="onCpkPecasLubManual()" style="font-size:1.05rem;font-weight:700;border-color:#22c55e"/>
+              </div>
+              <div class="prec-field">
+                <label style="color:#22c55e;font-weight:600">Custo Total nesta linha (R$/mês) <small class="prec-hint">CPK × KM/mês — calculado</small></label>
+                <input id="prec-custo-pecas-lub-display" type="text" readonly style="background:#1a1f2e;font-weight:700;color:#22c55e;border-color:#22c55e" placeholder="CPK × KM/mês"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Custos Operacionais -->
+          <div class="prec-card">
+            <div class="prec-card-title"><i class="fas fa-road"></i> Custos Operacionais</div>
+            <div class="prec-grid2">
+              <div class="prec-field"><label>Pedágio (R$/mês)</label><input id="prec-pedagio" type="number" step="0.01" value="0" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>Estacionamento/Pátio (R$/mês)</label><input id="prec-estacionamento" type="number" step="0.01" value="0" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>Lavagem (R$/mês)</label><input id="prec-lavagem" type="number" step="0.01" value="200" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>Rastreamento / GPS (R$/mês)</label><input id="prec-rastreamento" type="number" step="0.01" value="80" oninput="atualizarPrecificacao()"/></div>
+            </div>
+          </div>
+
+          <!-- 7. Administrativo -->
+          <div class="prec-card">
+            <div class="prec-card-title"><i class="fas fa-building"></i> Custos Administrativos</div>
+
+            <!-- CPK Folha Geral s/ Motorista -->
+            <div style="background:#1e293b;border-radius:8px;padding:12px 14px;margin-bottom:12px;border:1px solid #334155">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                <i class="fas fa-users-cog" style="color:#1565C0"></i>
+                <span style="font-weight:700;color:#f1f5f9;font-size:.88rem">CPK Folha Geral (sem motoristas)</span>
+                <span style="font-size:.72rem;color:#64748b">— Folha total ÷ KM total da frota</span>
+              </div>
+              <div class="form-hint-box" style="margin-bottom:8px;font-size:.75rem">
+                <i class="fas fa-info-circle"></i> Atualize mensalmente: lance o <strong>total da folha de pagamento sem motoristas</strong> e o <strong>total de KM rodado por toda a frota no mês</strong>. O sistema calcula o CPK automaticamente.
+              </div>
+              <div class="prec-grid2">
+                <div class="prec-field">
+                  <label>Total Folha s/ Motoristas (R$/mês) <small class="prec-hint">cobrador, coordenador, admin...</small></label>
+                  <input id="prec-folha-total-semot" type="number" step="0.01" value="0" oninput="calcularCpkFolha()" placeholder="Ex: 25000"/>
+                </div>
+                <div class="prec-field">
+                  <label>KM Total da Frota no Mês <small class="prec-hint">soma de todos os veículos</small></label>
+                  <input id="prec-km-frota-folha" type="number" step="1" value="0" oninput="calcularCpkFolha()" placeholder="Ex: 45000"/>
+                </div>
+                <div class="prec-field">
+                  <label style="color:#1565C0;font-weight:600">CPK Folha Geral calculado (R$/km)</label>
+                  <input id="prec-cpk-folha-display" type="text" readonly style="background:#e3f2fd;font-weight:700;color:#1565C0" placeholder="calculado automaticamente"/>
+                </div>
+                <div class="prec-field">
+                  <label style="color:#1565C0;font-weight:600">Custo Folha nesta linha (R$/mês)</label>
+                  <input id="prec-custo-folha-linha-display" type="text" readonly style="background:#e3f2fd;font-weight:700;color:#1565C0" placeholder="CPK × KM linha"/>
+                </div>
+              </div>
+              <!-- Campo oculto usado pelo cálculo principal -->
+              <input type="hidden" id="prec-folha-geral" value="0"/>
+            </div>
+
+            <!-- CPK Administrativo -->
+            <div style="background:#1e293b;border-radius:8px;padding:12px 14px;border:1px solid #334155">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                <i class="fas fa-chart-line" style="color:#7B1FA2"></i>
+                <span style="font-weight:700;color:#f1f5f9;font-size:.88rem">CPK Administrativo (Despesas Fixas)</span>
+                <span style="font-size:.72rem;color:#64748b">— Despesas fixas ÷ KM total da frota</span>
+              </div>
+              <div class="form-hint-box" style="margin-bottom:8px;font-size:.75rem">
+                <i class="fas fa-info-circle"></i> Lance as <strong>despesas administrativas fixas do mês</strong> (aluguel, energia, internet, pró-labore, contabilidade etc.) e o <strong>total de KM da frota</strong>. O CPK é calculado automaticamente e entra no custo da precificação.
+              </div>
+              <div class="prec-grid2">
+                <div class="prec-field">
+                  <label>Despesas Fixas Adm. (R$/mês) <small class="prec-hint">aluguel, energia, pró-labore...</small></label>
+                  <input id="prec-despesas-adm" type="number" step="0.01" value="0" oninput="calcularCpkAdm()" placeholder="Ex: 18000"/>
+                </div>
+                <div class="prec-field">
+                  <label>KM Total da Frota no Mês <small class="prec-hint">mesmo valor do campo acima</small></label>
+                  <input id="prec-km-frota-adm" type="number" step="1" value="0" oninput="calcularCpkAdm()" placeholder="Ex: 45000"/>
+                </div>
+                <div class="prec-field">
+                  <label style="color:#7B1FA2;font-weight:600">CPK Adm. calculado (R$/km)</label>
+                  <input id="prec-cpk-adm-display" type="text" readonly style="background:#f3e5f5;font-weight:700;color:#7B1FA2" placeholder="calculado automaticamente"/>
+                </div>
+                <div class="prec-field">
+                  <label style="color:#7B1FA2;font-weight:600">Custo Adm. nesta linha (R$/mês)</label>
+                  <input id="prec-custo-adm-linha-display" type="text" readonly style="background:#f3e5f5;font-weight:700;color:#7B1FA2" placeholder="CPK × KM linha"/>
+                </div>
+              </div>
+              <!-- Campo oculto usado pelo cálculo principal -->
+              <input type="hidden" id="prec-cpk-adm" value="0"/>
+            </div>
+          </div>
+
+          <!-- 7b. Impostos -->
+          <div class="prec-card">
+            <div class="prec-card-title"><i class="fas fa-receipt"></i> Impostos & Tributos</div>
+            <div class="prec-grid2">
+              <div class="prec-field"><label>ISS — Imposto Sobre Serviço (%)</label><input id="prec-iss" type="number" step="0.1" value="5" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field"><label>PIS + COFINS + CSLL (%)</label><input id="prec-pis" type="number" step="0.1" value="3.65" oninput="atualizarPrecificacao()"/></div>
+              <div class="prec-field">
+                <label>ICMS (%) — preencher conforme estado</label>
+                <input id="prec-icms" type="number" step="0.1" value="0" oninput="atualizarPrecificacao()" placeholder="Ex: 12 para SP"/>
+              </div>
+              <div class="prec-field">
+                <label style="color:#C62828;font-weight:600">Total de Impostos sobre o preço</label>
+                <input id="prec-imp-total-display" type="text" readonly style="background:#fef2f2;font-weight:700;color:#C62828" placeholder="calculado automaticamente"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. Margem -->
+          <div class="prec-card prec-card-margem">
+            <div class="prec-card-title"><i class="fas fa-percentage"></i> Margem de Lucro</div>
+            <div class="prec-grid2">
+              <div class="prec-field">
+                <label>Margem Desejada (%)</label>
+                <input id="prec-margem" type="number" step="0.5" value="25" oninput="atualizarPrecificacao()"/>
+              </div>
+              <div class="prec-field">
+                <label>Quantidade de Veículos</label>
+                <input id="prec-qtd-veiculos" type="number" value="1" min="1" oninput="atualizarPrecificacao()"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. Status da Proposta -->
+          <div class="prec-card" style="border:2px solid #e2e8f0">
+            <div class="prec-card-title"><i class="fas fa-clipboard-check"></i> Status da Proposta</div>
+            <div class="prec-grid2">
+              <div class="prec-field">
+                <label>Resultado da proposta</label>
+                <div style="display:flex;gap:10px;margin-top:4px">
+                  <label id="prec-status-label-aprovada" style="display:flex;align-items:center;gap:7px;cursor:pointer;padding:8px 14px;border-radius:8px;border:2px solid #e2e8f0;flex:1;font-size:.82rem;font-weight:600;transition:all .2s" onclick="setPrecStatus('Aprovada')">
+                    <input type="radio" name="prec-status-prop" id="prec-status-aprovada" value="Aprovada" style="accent-color:#16a34a">
+                    <i class="fas fa-check-circle" style="color:#16a34a"></i> Aprovada
+                  </label>
+                  <label id="prec-status-label-recusada" style="display:flex;align-items:center;gap:7px;cursor:pointer;padding:8px 14px;border-radius:8px;border:2px solid #e2e8f0;flex:1;font-size:.82rem;font-weight:600;transition:all .2s" onclick="setPrecStatus('Recusada')">
+                    <input type="radio" name="prec-status-prop" id="prec-status-recusada" value="Recusada" style="accent-color:#dc2626">
+                    <i class="fas fa-times-circle" style="color:#dc2626"></i> Recusada
+                  </label>
+                </div>
+                <small style="color:#94a3b8;font-size:.7rem;margin-top:4px;display:block">Deixe em branco se ainda não houver retorno do cliente</small>
+              </div>
+              <div class="prec-field">
+                <label>Observação sobre o resultado</label>
+                <input id="prec-status-obs" placeholder="Ex: Cliente pediu desconto, aguardando retorno..." style="font-size:.8rem"/>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <div class="footer-social">
-          <h4>Redes Sociais</h4>
-          <div class="social-icons">
-            <a href="https://www.instagram.com/itnerolturismo/" target="_blank" rel="noopener" aria-label="Instagram Itnerol" class="social-btn social-btn-instagram">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-              <span>Instagram</span>
-            </a>
-            <a href="https://www.facebook.com/itnerolturismo/" target="_blank" rel="noopener" aria-label="Facebook Itnerol" class="social-btn social-btn-facebook">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              <span>Facebook</span>
-            </a>
-            <a href="https://www.linkedin.com/in/itnerol-54689a269" target="_blank" rel="noopener" aria-label="LinkedIn Itnerol" class="social-btn social-btn-linkedin">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              <span>LinkedIn</span>
-            </a>
+
+        <!-- Coluna direita: resultado -->
+        <div class="prec-col-resultado">
+          <div class="prec-resultado" id="prec-resultado">
+            <!-- Preenchido pelo JS -->
+          </div>
+          <div class="prec-historico-wrap">
+            <div class="prec-card-title" style="margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+              <span><i class="fas fa-history"></i> Propostas Salvas</span>
+              <button id="btn-migrar-historico" onclick="migrarHistoricoLocal()"
+                style="font-size:.72rem;padding:4px 10px;background:#172554;border:1px solid #1d4ed8;color:#93c5fd;border-radius:6px;cursor:pointer;display:flex;align-items:center;gap:5px"
+                title="Migra histórico salvo neste navegador para o banco compartilhado">
+                <i class="fas fa-upload"></i> Migrar histórico local
+              </button>
+            </div>
+            <!-- Barra de busca das propostas salvas -->
+            <div class="prec-busca-bar">
+              <input type="text" id="prec-busca-input" placeholder="🔍 Cliente, tipo, valor..."
+                style="flex:2" onkeydown="if(event.key==='Enter') filtrarHistoricoPrecificacao()"/>
+              <select id="prec-busca-tipo">
+                <option value="">Todos os tipos</option>
+                <option value="Ônibus">Ônibus</option>
+                <option value="Micro">Micro-ônibus</option>
+                <option value="Van">Van</option>
+                <option value="Passeio">Passeio</option>
+              </select>
+              <select id="prec-busca-status">
+                <option value="">Todos os status</option>
+                <option value="Aprovada">✅ Aprovada</option>
+                <option value="Recusada">❌ Recusada</option>
+                <option value="pendente">⏳ Assin. Pendente</option>
+                <option value="sem">Sem status</option>
+              </select>
+              <button onclick="filtrarHistoricoPrecificacao()"
+                style="padding:7px 16px;background:#F07800;color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;font-size:.82rem;font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:6px">
+                <i class="fas fa-search"></i> Buscar
+              </button>
+            </div>
+            <div id="prec-hist-count" class="prec-hist-count"></div>
+            <div id="prec-historico"></div>
           </div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; <span id="footer-year"></span> ITNEROL — O melhor está por vir. Todos os direitos reservados.</p>
-        <p>Várzea Paulista — SP | <a href="http://itnerol.com.br" target="_blank" rel="noopener">itnerol.com.br</a></p>
+    </section>
+
+    <!-- ══ RELATÓRIOS / BACKUP ══ -->
+    <section id="page-relatorios" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-file-export" style="color:#F07800;margin-right:8px"></i>Relatórios &amp; Backup de Dados</h1>
       </div>
+
+      <!-- Banner segurança -->
+      <div class="rel-seguranca-banner">
+        <div class="rel-seg-icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="rel-seg-texto">
+          <strong>🔒 Segurança e Continuidade dos seus dados</strong>
+          <p>Os dados ficam armazenados na plataforma GenSpark (banco de dados em nuvem). <strong>Para garantir que você nunca perca informações</strong>, exporte regularmente usando os botões abaixo.</p>
+          <div class="rel-seg-items">
+            <div class="rel-seg-item"><i class="fas fa-file-csv"></i> <span><strong>CSV por módulo</strong> — Importável no Excel ou Google Sheets. Cada módulo tem seu botão de exportação.</span></div>
+            <div class="rel-seg-item"><i class="fas fa-database"></i> <span><strong>Backup JSON completo</strong> — Exporta TODOS os dados em um único arquivo. Use para restaurar o sistema se necessário.</span></div>
+            <div class="rel-seg-item"><i class="fas fa-question-circle" style="color:#F9A825"></i> <span><strong>E se eu perder acesso ao GenSpark?</strong> Com o Backup JSON você mantém todos os dados. Um desenvolvedor consegue restaurar o sistema em outra plataforma usando esse arquivo. <u>Recomendado: faça backup mensal.</u></span></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+          <button class="btn-primary" onclick="exportarBackupCompleto()"><i class="fas fa-database"></i> Backup Completo (JSON)</button>
+          <button class="btn-outline" onclick="abrirImportarBackup()" style="font-size:.78rem"><i class="fas fa-upload"></i> Importar Backup JSON</button>
+        </div>
+      </div>
+
+      <!-- Cards por módulo -->
+      <div class="rel-modulos-grid">
+
+        <div class="rel-modulo-card">
+          <div class="rel-mod-header" style="background:#1565C0">
+            <i class="fas fa-building"></i> Clientes
+          </div>
+          <div class="rel-mod-body">
+            <div class="rel-mod-count" id="rel-count-clientes">—</div>
+            <div class="rel-mod-label">registros</div>
+            <div class="rel-mod-campos">Razão Social, Nome Fantasia, CNPJ, Segmento, Contato, Cidade, Status</div>
+          </div>
+          <div class="rel-mod-footer">
+            <button class="btn-outline btn-sm" onclick="exportarCSV('clientes')"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+          </div>
+        </div>
+
+        <div class="rel-modulo-card">
+          <div class="rel-mod-header" style="background:#F07800">
+            <i class="fas fa-truck"></i> Veículos
+          </div>
+          <div class="rel-mod-body">
+            <div class="rel-mod-count" id="rel-count-veiculos">—</div>
+            <div class="rel-mod-label">registros</div>
+            <div class="rel-mod-campos">Placa, Frota, Tipo, Modelo, Ano, Capacidade, KM Atual, Status</div>
+          </div>
+          <div class="rel-mod-footer">
+            <button class="btn-outline btn-sm" onclick="exportarCSV('veiculos')"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+          </div>
+        </div>
+
+        <div class="rel-modulo-card">
+          <div class="rel-mod-header" style="background:#7B1FA2">
+            <i class="fas fa-id-card"></i> Motoristas
+          </div>
+          <div class="rel-mod-body">
+            <div class="rel-mod-count" id="rel-count-motoristas">—</div>
+            <div class="rel-mod-label">registros</div>
+            <div class="rel-mod-campos">Nome, CPF, CNH, Categoria, Vencimento, Telefone, Endereço, Cidade</div>
+          </div>
+          <div class="rel-mod-footer">
+            <button class="btn-outline btn-sm" onclick="exportarCSV('motoristas')"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+          </div>
+        </div>
+
+        <div class="rel-modulo-card">
+          <div class="rel-mod-header" style="background:#2E7D32">
+            <i class="fas fa-file-signature"></i> Contratos
+          </div>
+          <div class="rel-mod-body">
+            <div class="rel-mod-count" id="rel-count-contratos">—</div>
+            <div class="rel-mod-label">registros</div>
+            <div class="rel-mod-campos">Nº Contrato, Cliente, Tipo, Valor Mensal, KM Mensal, Início, Fim, Status</div>
+          </div>
+          <div class="rel-mod-footer">
+            <button class="btn-outline btn-sm" onclick="exportarCSV('contratos')"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+          </div>
+        </div>
+
+        <div class="rel-modulo-card">
+          <div class="rel-mod-header" style="background:#00838F">
+            <i class="fas fa-route"></i> Linhas / Itinerários
+          </div>
+          <div class="rel-mod-body">
+            <div class="rel-mod-count" id="rel-count-linhas">—</div>
+            <div class="rel-mod-label">registros</div>
+            <div class="rel-mod-campos">Código, Cliente, Itinerário, Veículo, Motorista, KM/mês, KM Ocioso, Status</div>
+          </div>
+          <div class="rel-mod-footer">
+            <button class="btn-outline btn-sm" onclick="exportarCSV('linhas')"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+          </div>
+        </div>
+
+        <div class="rel-modulo-card">
+          <div class="rel-mod-header" style="background:#E65100">
+            <i class="fas fa-calculator"></i> Apuração Mensal
+          </div>
+          <div class="rel-mod-body">
+            <div class="rel-mod-count" id="rel-count-apuracao">—</div>
+            <div class="rel-mod-label">registros</div>
+            <div class="rel-mod-campos">Mês, Cliente, KM Contrat., KM Rodada, Faturamento, Custo, Margem, Outras Despesas</div>
+          </div>
+          <div class="rel-mod-footer">
+            <button class="btn-outline btn-sm" onclick="exportarCSV('apuracao')"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+          </div>
+        </div>
+
+        <div class="rel-modulo-card">
+          <div class="rel-mod-header" style="background:#C62828">
+            <i class="fas fa-exclamation-circle"></i> Reclamações
+          </div>
+          <div class="rel-mod-body">
+            <div class="rel-mod-count" id="rel-count-reclamacoes">—</div>
+            <div class="rel-mod-label">registros</div>
+            <div class="rel-mod-campos">Data, Cliente, Tipo, Descrição, Status, Resolução</div>
+          </div>
+          <div class="rel-mod-footer">
+            <button class="btn-outline btn-sm" onclick="exportarCSV('reclamacoes')"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+          </div>
+        </div>
+
+        <div class="rel-modulo-card">
+          <div class="rel-mod-header" style="background:#1565C0">
+            <i class="fas fa-search"></i> Prospecções
+          </div>
+          <div class="rel-mod-body">
+            <div class="rel-mod-count" id="rel-count-prospeccoes">—</div>
+            <div class="rel-mod-label">registros</div>
+            <div class="rel-mod-campos">Empresa, Mês, Contato, Cidade, Origem, Responsável, Status</div>
+          </div>
+          <div class="rel-mod-footer">
+            <button class="btn-outline btn-sm" onclick="exportarCSV('prospeccoes')"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+          </div>
+        </div>
+
+        <div class="rel-modulo-card">
+          <div class="rel-mod-header" style="background:#2E7D32">
+            <i class="fas fa-file-contract"></i> Propostas
+          </div>
+          <div class="rel-mod-body">
+            <div class="rel-mod-count" id="rel-count-propostas">—</div>
+            <div class="rel-mod-label">registros</div>
+            <div class="rel-mod-campos">Nº Proposta, Mês, Cliente, Tipo, Responsável, Valor, KM, Status</div>
+          </div>
+          <div class="rel-mod-footer">
+            <button class="btn-outline btn-sm" onclick="exportarCSV('propostas')"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+          </div>
+        </div>
+
+      </div><!-- /rel-modulos-grid -->
+
+      <!-- Relatório financeiro consolidado -->
+      <div class="dash-card" style="margin-top:20px">
+        <div class="dash-card-header">
+          <h3><i class="fas fa-table" style="color:#F07800;margin-right:6px"></i>Relatório Financeiro Consolidado (Apuração)</h3>
+          <div style="display:flex;gap:8px">
+            <select id="rel-filtro-mes" class="select-filtro" onchange="renderRelatorioFinanceiro()">
+              <option value="">Todos os meses</option>
+            </select>
+            <select id="rel-filtro-cliente" class="select-filtro" onchange="renderRelatorioFinanceiro()">
+              <option value="">Todos os clientes</option>
+            </select>
+            <button class="btn-outline btn-sm" onclick="exportarRelatorioFinanceiro()"><i class="fas fa-file-csv"></i> Exportar</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="tabela-relatorio-financeiro">
+            <thead>
+              <tr>
+                <th>Mês</th><th>Cliente</th><th>KM Cont.</th><th>KM Rodada</th>
+                <th>Fat. Contratado</th><th>Fat. Realizado</th><th>Extras</th>
+                <th>Custo Total</th><th>Outras Desp.</th><th>Margem (R$)</th><th>Margem (%)</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-relatorio-financeiro"></tbody>
+          </table>
+        </div>
+        <div id="rel-fin-totais" style="padding:12px 16px;border-top:1px solid #e2e8f0;font-size:.85rem;color:#475569"></div>
+      </div>
+
+    </section>
+
+    <!-- ══ RECLAMAÇÕES ══ -->
+    <section id="page-reclamacoes" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-exclamation-circle" style="color:#F07800;margin-right:8px"></i>Reclamações</h1>
+        <button class="btn-primary" onclick="abrirModal('reclamacao')"><i class="fas fa-plus"></i> Nova Reclamação</button>
+      </div>
+
+
+      <div class="filters-bar" style="flex-wrap:wrap;gap:8px">
+        <input type="text" id="filtro-busca-recl" class="select-filtro" placeholder="🔍 Buscar cliente, motorista, veículo..." oninput="renderReclamacoes()" style="min-width:220px">
+        <select id="filtro-status-recl" onchange="renderReclamacoes()" class="select-filtro">
+          <option value="">Todos os status</option>
+          <option>Aberta</option><option>Em Andamento</option><option>Resolvida</option>
+        </select>
+        <select id="filtro-tipo-recl" onchange="renderReclamacoes()" class="select-filtro">
+          <option value="">Todos os tipos</option>
+          <option>Atraso</option><option>Conduta do Motorista</option><option>Veículo</option><option>Rota</option><option>Outros</option>
+        </select>
+        <select id="filtro-origem-recl" onchange="renderReclamacoes()" class="select-filtro">
+          <option value="">Todas as origens</option>
+          <option>E-mail</option><option>WhatsApp</option><option>Telefone</option><option>Presencial</option><option>Outros</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Cliente</th>
+              <th>Tipo</th>
+              <th>Motorista</th>
+              <th>Veículo</th>
+              <th>Origem</th>
+              <th>Descrição</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-reclamacoes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ USUÁRIOS ══ -->
+    <section id="page-usuarios" class="page">
+      <div class="page-header">
+        <h1><i class="fas fa-users-cog" style="color:#F07800;margin-right:8px"></i>Usuários do Sistema</h1>
+        <button class="btn-primary" onclick="abrirModal('usuario')"><i class="fas fa-plus"></i> Novo Usuário</button>
+      </div>
+      <div class="users-grid" id="users-grid"></div>
+    </section>
+
+  </div>
+</main>
+
+<!-- DRAWER CLIENTE -->
+<div class="cliente-drawer" id="cliente-drawer">
+  <div class="drawer-header">
+    <div>
+      <h2 id="drawer-cliente-nome">—</h2>
+      <span id="drawer-cliente-status" class="badge"></span>
     </div>
-  </footer>
+    <button onclick="fecharDrawer()" class="btn-fechar"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="drawer-tabs">
+    <button class="dtab active" onclick="switchDrawerTab(this,'resumo')">Resumo</button>
+    <button class="dtab" onclick="switchDrawerTab(this,'linhas')">Linhas</button>
+    <button class="dtab" onclick="switchDrawerTab(this,'apuracao')">Apuração</button>
+    <button class="dtab" onclick="switchDrawerTab(this,'reclamacoes')">Reclamações</button>
+    <button class="dtab" onclick="switchDrawerTab(this,'historico')">Histórico</button>
+  </div>
+  <div class="drawer-body">
+    <div id="dtab-resumo" class="dtab-content active"></div>
+    <div id="dtab-linhas" class="dtab-content"></div>
+    <div id="dtab-apuracao" class="dtab-content"></div>
+    <div id="dtab-reclamacoes" class="dtab-content"></div>
+    <div id="dtab-historico" class="dtab-content">
+      <button class="btn-primary btn-sm" onclick="abrirModal('historico')" style="margin-bottom:16px"><i class="fas fa-plus"></i> Registrar Evento</button>
+      <div id="lista-historico"></div>
+    </div>
+  </div>
+</div>
+<div class="drawer-overlay" id="drawer-overlay" onclick="fecharDrawer()"></div>
 
-  <!-- ===== WhatsApp Flutuante ===== -->
-  <a href="https://wa.me/5511998024526?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20da%20Itnerol%20Transportes."
-     class="whatsapp-float"
-     target="_blank"
-     rel="noopener"
-     aria-label="Falar no WhatsApp">
-    <i class="fab fa-whatsapp" aria-hidden="true"></i>
-  </a>
+<!-- MODAL UNIVERSAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="fecharModalOverlay(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-header">
+      <h3 id="modal-titulo">Formulário</h3>
+      <button onclick="fecharModal()" class="btn-fechar"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn-outline" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-primary" id="btn-salvar" onclick="salvarModal()"><i class="fas fa-save"></i> Salvar</button>
+    </div>
+  </div>
+</div>
 
-  <script src="js/main.js"></script>
+<!-- TOAST -->
+<div id="toast-container"></div>
+
+<script src="js/offline.js?v=1.0"></script>
+<script src="js/crm.js?v=20260608-07"></script>
 </body>
 </html>

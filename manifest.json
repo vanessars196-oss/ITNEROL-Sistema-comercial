@@ -1,0 +1,11 @@
+{
+  "name": "ITNEROL — Sistema Comercial",
+  "short_name": "ITNEROL",
+  "version": "7.4",
+  "description": "Sistema Comercial ITNEROL",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#F07800",
+  "icons": []
+}

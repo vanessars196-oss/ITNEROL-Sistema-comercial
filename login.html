@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ITNEROL — Login</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<style>
+:root{
+  --bg:#0F172A; --bg2:#1E293B; --text:#F1F5F9; --muted:#94A3B8;
+  --laranja:#F07800; --laranja2:#FF8C1A;
+  --border:#334155; --radius:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{
+  font-family:'Inter',system-ui,Arial,sans-serif;
+  background:radial-gradient(circle at 20% 30%,#1E293B 0%,#0F172A 60%);
+  color:var(--text);
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;padding:20px;
+}
+.card{
+  width:100%;max-width:380px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:32px 28px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px;}
+.logo-icon{
+  width:46px;height:46px;border-radius:12px;
+  background:linear-gradient(135deg,var(--laranja),var(--laranja2));
+  display:grid;place-items:center;color:#fff;font-size:22px;
+}
+.logo-text{font-size:22px;font-weight:800;letter-spacing:1px;}
+.logo-sub{text-align:center;color:var(--muted);font-size:12px;margin-bottom:22px;}
+h1{font-size:14px;font-weight:600;color:var(--muted);text-align:center;margin-bottom:18px;text-transform:uppercase;letter-spacing:.6px;}
+label{display:block;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin:12px 0 6px;}
+input{
+  width:100%;padding:11px 12px;font-size:14px;
+  border:1px solid var(--border);border-radius:8px;
+  background:#0B1220;color:var(--text);outline:none;
+  font-family:inherit;
+}
+input:focus{border-color:var(--laranja);}
+.btn{
+  width:100%;margin-top:18px;padding:12px;
+  background:linear-gradient(180deg,var(--laranja),var(--laranja2));
+  color:#fff;border:none;border-radius:8px;
+  font-weight:700;font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn:hover{filter:brightness(1.1);}
+.btn:disabled{opacity:.6;cursor:not-allowed;}
+.msg{padding:10px 12px;border-radius:8px;font-size:12px;margin-top:14px;display:none;}
+.err{background:#3F1D1D;border:1px solid #B91C1C;color:#FCA5A5;}
+.ok{background:#0F2E1F;border:1px solid #15803D;color:#86EFAC;}
+.profiles{margin-top:22px;padding-top:18px;border-top:1px dashed var(--border);}
+.profiles b{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;}
+.profiles .row{display:flex;justify-content:space-between;font-size:11px;padding:5px 0;color:var(--muted);font-family:monospace;}
+.profiles .row b{color:var(--laranja);text-transform:none;letter-spacing:0;font-size:11px;font-family:monospace;}
+</style>
+</head>
+<body>
+<form class="card" id="loginForm" autocomplete="off">
+  <div class="logo">
+    <div class="logo-icon"><i class="fas fa-bus-alt"></i></div>
+    <div class="logo-text">ITNEROL</div>
+  </div>
+  <div class="logo-sub">Sistema Comercial · v7.4</div>
+
+  <h1>Faça login para continuar</h1>
+  <div class="msg err" id="msg"></div>
+
+  <label>E-mail</label>
+  <input id="email" type="email" required autocomplete="username" value="admin@itnerol.com.br"/>
+
+  <label>Senha</label>
+  <input id="senha" type="password" required autocomplete="current-password" value="itnerol2025"/>
+
+  <button class="btn" id="btn" type="submit"><i class="fas fa-sign-in-alt"></i> Entrar no Sistema</button>
+
+  <div class="profiles">
+    <b>Perfis disponíveis</b>
+    <div class="row"><b>ADMIN</b> admin@itnerol.com.br / itnerol2025</div>
+    <div class="row"><b>COMERCIAL</b> comercial@itnerol.com.br / comercial123</div>
+    <div class="row"><b>OPERACIONAL</b> CCO@ITNEROL.COM.BR / CCO2026</div>
+    <div class="row"><b>VISUALIZADOR</b> view@itnerol.com.br / view123</div>
+  </div>
+</form>
+
+<script>
+'use strict';
+// Carrega candidatos a usuario a partir do data.json embarcado (fallback) ou fetch
+async function carregarUsuarios(){
+  // 1) data.js inline se o sistema foi embarcado (caso o admin tenha colocado BACKUP_DATA)
+  if(window.BACKUP_DATA && window.BACKUP_DATA.dados && Array.isArray(window.BACKUP_DATA.dados.usuarios)){
+    return window.BACKUP_DATA.dados.usuarios;
+  }
+  // 2) tenta ./data.json
+  try{
+    const r = await fetch('data.json?_=' + Date.now(), {cache:'no-store'});
+    if(r.ok){
+      const j = await r.json();
+      if(j && j.dados && Array.isArray(j.dados.usuarios)) return j.dados.usuarios;
+    }
+  }catch(_){}
+  // 3) tenta ./js/crm.js nao — voltar trio canonico de credenciais do manual
+  return [
+    {nome:'Administrador',     email:'admin@itnerol.com.br',    senha_hash:'itnerol2025',  perfil:'admin'},
+    {nome:'Comercial ITNEROL', email:'comercial@itnerol.com.br', senha_hash:'comercial123', perfil:'comercial'},
+    {nome:'OPERACIONAL',       email:'CCO@ITNEROL.COM.BR',       senha_hash:'CCO2026',      perfil:'operacional'},
+    {nome:'Visualizador',      email:'view@itnerol.com.br',      senha_hash:'view123',      perfil:'visualizador'}
+  ];
+}
+
+function show(msg, ok){
+  const el = document.getElementById('msg');
+  el.className = 'msg ' + (ok?'ok':'err');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+document.getElementById('loginForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const btn = document.getElementById('btn');
+  btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando…';
+  try{
+    const email = (document.getElementById('email').value||'').trim().toLowerCase();
+    const senha = document.getElementById('senha').value||'';
+    const users = await carregarUsuarios();
+    const u = users.find(x => ((x.email||'').toLowerCase()===email) && (x.senha_hash===senha));
+    if(!u){
+      show('E-mail ou senha inválidos.', false);
+      btn.disabled = false; btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Entrar no Sistema';
+      return;
+    }
+    const session = { nome:(u.nome||'?'), email:(u.email||email), perfil:(u.perfil||'visualizador') };
+    sessionStorage.setItem('crm_user', JSON.stringify(session));
+    window.location.href = 'index.html';
+  }catch(err){
+    show('Falha ao validar login: '+err.message, false);
+    btn.disabled = false; btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Entrar no Sistema';
+  }
+});
+
+// Se ja estiver logado, manda direto
+(function(){
+  try{
+    const s = sessionStorage.getItem('crm_user');
+    if(s){ window.location.replace('index.html'); }
+  }catch(_){}
+})();
+</script>
+</body>
+</html>
