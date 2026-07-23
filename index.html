@@ -2945,8 +2945,8 @@ body { display: flex; }
 <!-- TOAST -->
 <div id="toast-container"></div>
 
-<script src="js/offline.js?v=1.0"></script>
-<script src="js/crm.js?v=20260608-07"></script>
+
+
 
 
 <script>
@@ -3190,7 +3190,21 @@ function navegarPara(page) {
   if(btn) btn.style.display = semNovo.includes(page) ? 'none' : 'flex';
 }
 
-// ─── CARREGAR TUDO ──────────────────────────────
+// ═══ Shims de seguranca (auto-cura contra 404 de js/offline.js) ═══
+if(typeof offlineFetch === 'undefined'){
+  window.offlineFetch = function(url){
+    return fetch(url).then(function(r){
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r;
+    });
+  };
+}
+if(typeof window._offlineMode === 'undefined'){ window._offlineMode = false; }
+if(typeof offlineSalvarCache !== 'function'){
+  window.offlineSalvarCache = function(){ /* no-op */ };
+}
+// ══════════════════════════════════════════════════════════════════
+
 async function carregarTudo() {
   try {
     const _f = (url) => offlineFetch(url).then(r=>r.json());
@@ -11012,7 +11026,7 @@ function abrirImportarBackup() {
 
   // Abrir modal customizado
   const overlay = el('modal-overlay');
-  const modalTitle = el('modal-title');
+  const modalTitle = el('modal-titulo');
   const modalBody  = el('modal-body');
   const modalFooter = el('modal-footer');
   if(overlay && modalBody){
@@ -11808,6 +11822,7 @@ function _coletarDadosPrecificacao() {
 }
 
 </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
 </body>
 </html>
