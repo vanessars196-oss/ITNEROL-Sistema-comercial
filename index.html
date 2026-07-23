@@ -1098,14 +1098,30 @@ window.addEventListener('offline',updateNetStatus);
 
 /* ─── Boot ──────────────────────────────────── */
 (function boot(){
-  // Manter backup em localStorage também como fallback para futuras importações
+  // Manter backup em localStorage tambem como fallback para futuras importacoes
   updateNetStatus();
   let s=null;
   try{s=JSON.parse(sessionStorage.getItem('crm_user')||'null');}catch(e){}
-  if(s){session=s;iniciarApp();}
-  el('login-form').addEventListener('submit',fazerLogin);
-  // Bootstrap do formulário de login (caso browser autocomplete)
-  setTimeout(()=>{try{const e=document.activeElement;if(e&&e.id==='login-email')setTimeout(()=>{},0);}catch(x){}},100);
+  // FIX: validar sessao antes de aceitar. Sessoes vazias/parciais sao descartadas.
+  var sessOK = !!(s && typeof s.nome==='string' && s.nome.trim() && typeof s.email==='string' && s.email.indexOf('@')>=0 && typeof s.perfil==='string' && s.perfil.trim());
+  if(sessOK){
+    session=s;
+    iniciarApp();
+  }else{
+    // Limpa qualquer lixo residual de sessoes invalidas
+    try{sessionStorage.removeItem('crm_user');}catch(e){}
+    session=null;
+    // Garante que a tela de login apareca
+    try{
+      var ls=document.getElementById('login-screen'); if(ls) ls.style.display='flex';
+      var ap=document.getElementById('app'); if(ap) ap.style.display='none';
+      document.body.classList.remove('app-mode');
+    }catch(e){}
+  }
+  var lf=document.getElementById('login-form');
+  if(lf) lf.addEventListener('submit',fazerLogin);
+  // Bootstrap do formulario de login (caso browser autocomplete)
+  setTimeout(function(){try{var e=document.activeElement;if(e&&e.id==='login-email'){} }catch(x){}},100);
 })();
 
 /* Expor para handlers inline onclick */
