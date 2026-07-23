@@ -189,11 +189,12 @@ table.data-table{width:100%;border-collapse:collapse;background:#fff;border-radi
       <div class="login-field"><label>Senha</label><input type="password" id="login-senha" required autocomplete="current-password"/></div>
       <button class="login-btn" type="submit"><i class="fas fa-sign-in-alt"></i> Entrar no Sistema</button>
     </form>
-    <div class="login-profiles">
-      <strong>Perfis disponíveis</strong>
-      <div class="lp-row"><span class="lp-prof">ADMIN</span><span>admin@itnerol.com.br</span><span>itnerol2025</span></div>
-      <div class="lp-row"><span class="lp-prof">COMERCIAL</span><span>comercial@itnerol.com.br</span><span>comercial123</span></div>
-      <div class="lp-row"><span class="lp-prof">OPERACIONAL</span><span>CCO@ITNEROL.COM.BR</span><span>CCO2026</span></div>
+        </div> <!-- /login-profiles -->
+  </div>   <!-- /login-card -->
+</div>     <!-- /login-screen -->
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
       let chartsCache={};
 function destroyChart(id){if(chartsCache[id]){chartsCache[id].destroy(); delete chartsCache[id];}}
 function drawCharts(){
@@ -595,18 +596,20 @@ function ultimosMeses(n){const r=[]; const d=new Date(); for(let i=n-1;i>=0;i--)
 function parseMes(m){if(!m||!m.includes('/')) return null; const [mm,yy]=m.split('/').map(Number); return new Date(yy,mm-1,1);}
 
 /* ─── Auth ────────────────────────────────────── */
-let session=null;
 function fazerLogin(e){
-  e.preventDefault();
-  const email=(document.getElementById('login-email').value||'').trim().toLowerCase();
-  const senha=document.getElementById('login-senha').value;
-  const u=(DB.dados.usuarios||[]).find(x=>(x.email||'').toLowerCase()===email && x.senha_hash===senha);
-  if(!u){const m=el('login-msg'); m.style.display='block'; m.textContent='E-mail ou senha inválidos.'; return false;}
-  session={nome:u.nome,email:u.email,perfil:u.perfil};
-  sessionStorage.setItem('crm_user',JSON.stringify(session));
+  if(e&&e.preventDefault) e.preventDefault();
+  var email=(document.getElementById('login-email').value||'').trim().toLowerCase();
+  var senha=document.getElementById('login-senha').value||'';
+  var u=null;
+  try{u=(DB.dados.usuarios||[]).find(function(x){return (x.email||'').toLowerCase()===email && x.senha_hash===senha;});}catch(_){}
+  if(!u){
+    var m=el('login-msg');
+    if(m){m.style.display='block'; m.textContent='E-mail ou senha inválidos.';}
+    return false;
+    session={nome:(u.nome||'?'), email:(u.email||''), perfil:(u.perfil||'visualizador')};
+  try{sessionStorage.setItem('crm_user', JSON.stringify(session));}catch(_){}
   iniciarApp();
   return false;
-}
 function fazerLogout(){
   if(!confirm('Sair do sistema?')) return;
   sessionStorage.removeItem('crm_user');
@@ -620,26 +623,29 @@ function el(id){return document.getElementById(id);}
 function perfilLabel(p){return {admin:'Admin',comercial:'Comercial',operacional:'Operacional',visualizador:'Visualizador'}[p]||p;}
 
 function iniciarApp(){
-  el('login-screen').style.display='none';
-    try{var a=el('app'); if(a) a.style.display='block';}catch(_e){}
-  document.body.classList.add('app-mode');
-  const ini=(session.nome||'?').split(' ').map(p=>p[0]).slice(0,2).join('').toUpperCase();
-  set('sidebar-user-nome', session.nome);
-  set('sidebar-user-perfil', perfilLabel(session.perfil));
-  set('user-avatar-initials', ini);
-  set('chip-avatar', ini);
-  set('chip-nome', session.nome.split(' ')[0]);
-  set('chip-perfil', perfilLabel(session.perfil));
-  aplicarPermissoes();
-  atualizarData();
-  document.querySelectorAll('.nav-item').forEach(it=>{
-    it.onclick=()=>navegar(it.dataset.page);
-  });
-  // restore last page
-  const last=sessionStorage.getItem('crm_page')||'dashboard';
-  navegar(last);
-}
-function aplicarPermissoes(){
+  try{
+    var ls=el('login-screen'); if(ls) ls.style.display='none';
+    var ap=el('app');         if(ap) ap.style.display='block';
+    document.body.classList.add('app-mode');
+    var nome=session&&session.nome||'?';
+    var ini=nome.split(' ').map(function(p){return p[0];}).slice(0,2).join('').toUpperCase();
+    set('sidebar-user-nome', nome);
+    set('sidebar-user-perfil', perfilLabel(session&&session.perfil));
+    set('user-avatar-initials', ini);
+    set('chip-avatar', ini);
+    set('chip-nome', nome.split(' ')[0]||'?');
+    set('chip-perfil', perfilLabel(session&&session.perfil));
+    aplicarPermissoes();
+    atualizarData();
+    document.querySelectorAll('.nav-item').forEach(function(it){
+      it.onclick=function(){navegar(it.dataset.page);};
+    });
+    var last=sessionStorage.getItem('crm_page')||'dashboard';
+    navegar(last);
+  }catch(err){
+    console.error('[ITNEROL] iniciarApp falhou:', err);
+    var m=el('login-msg'); if(m){m.style.display='block'; m.textContent='Erro ao iniciar sessão. Recarregue a página.';}
+ function aplicarPermissoes(){
   const p=session.perfil;
   document.querySelectorAll('[data-perm]').forEach(el2=>{
     const lista=(el2.dataset.perm||'').split(',');
