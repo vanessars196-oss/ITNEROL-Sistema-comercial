@@ -611,7 +611,7 @@ function fazerLogout(){
   if(!confirm('Sair do sistema?')) return;
   sessionStorage.removeItem('crm_user');
   session=null;
-  el('app').style.display='none';
+    try{var a=el('app'); if(a) a.style.display='none';}catch(_e){}
   document.body.classList.remove('app-mode');
   el('login-screen').style.display='flex';
   el('login-email').value=''; el('login-senha').value='';
@@ -621,7 +621,7 @@ function perfilLabel(p){return {admin:'Admin',comercial:'Comercial',operacional:
 
 function iniciarApp(){
   el('login-screen').style.display='none';
-  el('app').style.display='block';
+    try{var a=el('app'); if(a) a.style.display='block';}catch(_e){}
   document.body.classList.add('app-mode');
   const ini=(session.nome||'?').split(' ').map(p=>p[0]).slice(0,2).join('').toUpperCase();
   set('sidebar-user-nome', session.nome);
