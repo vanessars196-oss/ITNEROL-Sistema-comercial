@@ -2066,8 +2066,8 @@ body { display: flex; }
         <div>
           <strong>Importação por planilha CSV:</strong> Aceita dois formatos automaticamente:<br>
           <span style="color:#7dd3fc">▸ Sistema RH (VBP0213):</span> <code>EMP;N.REG;C.CUSTO;<strong>NOME DO FUNCIONARIO</strong>;ENDERECO;BAIRRO;CEP;<strong>MUNICIPIO;ES;TELEFONE</strong></code><br>
-          <span style="color:#7dd3fc">▸ Formato livre:</span> colunas <code>Nome</code> <code>CPF</code> <code>CNH</code> <code>Categoria</code> <code>Telefone</code> <code>Salario</code> <code>Status</code> <code>Endereco</code> <code>Cidade</code><br>
-          Campos não encontrados ficam em branco. Motoristas com mesmo CPF ou nome são <strong>atualizados</strong>.
+          <span style="color:#7dd3fc">▸ Formato livre:</span> colunas <code>Nome</code> <code>Chapa</code> <code>CNH</code> <code>Categoria</code> <code>Telefone</code> <code>Salario</code> <code>Status</code> <code>Endereco</code> <code>Cidade</code><br>
+          Campos não encontrados ficam em branco. Motoristas com mesma Chapa ou nome são <strong>atualizados</strong>.
         </div>
       </div>
       <div id="mot-import-progress" style="display:none;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 16px;font-size:.84rem;color:#94a3b8;margin-bottom:12px"></div>
@@ -2082,7 +2082,7 @@ body { display: flex; }
       </div>
       <div class="table-wrap">
         <table class="data-table">
-          <thead><tr><th>Nome</th><th>CPF</th><th>Nº Chapa</th><th>CNH</th><th>Cat. CNH</th><th>Habilitado para</th><th>Vencimento CNH</th><th>Telefone</th><th>Status</th><th>Ações</th></tr></thead>
+          <thead><tr><th>Nome</th><th>Chapa</th><th>Nº Chapa</th><th>CNH</th><th>Cat. CNH</th><th>Habilitado para</th><th>Vencimento CNH</th><th>Telefone</th><th>Status</th><th>Ações</th></tr></thead>
           <tbody id="tbody-motoristas"></tbody>
         </table>
       </div>
@@ -2719,7 +2719,7 @@ body { display: flex; }
           <div class="rel-mod-body">
             <div class="rel-mod-count" id="rel-count-motoristas">—</div>
             <div class="rel-mod-label">registros</div>
-            <div class="rel-mod-campos">Nome, CPF, CNH, Categoria, Vencimento, Telefone, Endereço, Cidade</div>
+            <div class="rel-mod-campos">Nome, Chapa, CNH, Categoria, Vencimento, Telefone, Endereço, Cidade</div>
           </div>
           <div class="rel-mod-footer">
             <button class="btn-outline btn-sm" onclick="exportarCSV('motoristas')"><i class="fas fa-file-csv"></i> Exportar CSV</button>
@@ -8695,7 +8695,7 @@ const REL_COLUNAS = {
   ],
   motoristas:[
     {h:'Nome',              f:'nome'},
-    {h:'CPF',               f:'cpf'},
+    {h:'Chapa',             f:'cpf'},
     {h:'CNH',               f:'cnh'},
     {h:'Categoria CNH',     f:'categoria_cnh'},
     {h:'Vencimento CNH',    f:'vencimento_cnh'},
@@ -9170,7 +9170,7 @@ function _normalizarMesAno(raw) {
 //    → Campos lidos: NOME, ENDERECO, MUNICIPIO, ES (UF), TELEFONE
 //
 // B) Formato Genérico:
-//    Linha 1: cabeçalho com colunas Nome, CPF, CNH, Categoria, Vencimento, Telefone, Salario, Status, Endereco, Cidade
+//    Linha 1: cabeçalho com colunas Nome, Chapa, CNH, Categoria, Vencimento, Telefone, Salario, Status, Endereco, Cidade
 //    Linhas+: dados
 // ════════════════════════════════════════════════════════════════════
 async function importarCSVMotoristas(event) {
@@ -9211,7 +9211,7 @@ async function importarCSVMotoristas(event) {
       // ── Encontrar linha de cabeçalho REAL ──
       // Ignora linhas que são apenas título (sem separador suficiente)
       // Palavras-chave que indicam cabeçalho de motoristas
-      const KW_HEADER = ['NOME','FUNCIONARIO','MOTORISTA','CPF','CNH','ENDERECO','MUNICIPIO'];
+      const KW_HEADER = ['NOME','FUNCIONARIO','MOTORISTA','CHAPA','CPF','CNH','ENDERECO','MUNICIPIO'];
       let iLinhaHeader = -1;
       for(let i=0; i<Math.min(linhas.length,5); i++){
         const upper = normCol(linhas[i]);
@@ -9323,7 +9323,7 @@ async function importarCSVMotoristas(event) {
           numero_chapa:    iChapa>=0 ? (cols[iChapa]||'').toString().trim()    : '',
         };
 
-        // Verificar duplicata: por CPF (se disponível) ou por nome exato
+        // Verificar duplicata: por Chapa/CPF (se disponível) ou por nome exato
         const cpfNorm = (payload.cpf||'').replace(/\D/g,'');
         const existente = state.motoristas.find(m => {
           if(cpfNorm && cpfNorm.length >= 11 && m.cpf && m.cpf.replace(/\D/g,'') === cpfNorm) return true;
