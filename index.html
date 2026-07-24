@@ -3206,6 +3206,21 @@ if(typeof offlineSalvarCache !== 'function'){
 // ══════════════════════════════════════════════════════════════════
 
 async function carregarTudo() {
+  // 1) HIDRATAR do localStorage primeiro (instantaneo, sempre funciona em GitHub Pages)
+  const _ls_get = (k) => { try { return JSON.parse(localStorage.getItem('itnerol_'+k) || '[]'); } catch(e){ return []; } };
+  state.clientes    = _ls_get('clientes');
+  state.veiculos    = _ls_get('veiculos');
+  state.motoristas  = _ls_get('motoristas');
+  state.contratos   = _ls_get('contratos');
+  state.linhas      = _ls_get('linhas');
+  state.apuracao    = _ls_get('apuracao_mensal');
+  state.reclamacoes = _ls_get('reclamacoes');
+  state.prospeccoes = _ls_get('prospeccoes');
+  state.propostas   = _ls_get('propostas');
+  state.usuarios    = _ls_get('crm_users');
+  renderDashboard();
+  preencherFiltrosMeses();
+  // 2) Tentar API em paralelo (vai falhar com 404 em GH Pages, mas nao quebra)
   try {
     const _f = (url) => offlineFetch(url).then(r=>r.json());
     const [c,v,m,co,l,a,r,pr,po,u] = await Promise.all([
@@ -11122,37 +11137,47 @@ async function preVisualizarBackup(event) {
 async function executarImportarBackup() {
   if(!_backupImportData) return;
   const btnEx = el('btn-executar-import');
-  if(btnEx){ btnEx.disabled=true; btnEx.innerHTML='<i class="fas fa-spinner fa-spin"></i> Importando...'; }
+  if(btnEx){ btnEx.disabled=true; btnEx.innerHTML='<i class="fas fa-spinner fa-spin"></i> Salvando...'; }
 
-  const tabelaAPI = {
+  // Grava direto em localStorage (sem rede, sem 404, sem delay)
+  const tabelaLS = {
     clientes: 'clientes', veiculos: 'veiculos', motoristas: 'motoristas',
     contratos: 'contratos', linhas: 'linhas', apuracao: 'apuracao_mensal',
-    reclamacoes: 'reclamacoes', prospeccoes: 'prospeccoes', propostas: 'propostas'
+    reclamacoes: 'reclamacoes', prospeccoes: 'prospeccoes', propostas: 'propostas',
+    usuarios: 'crm_users'
   };
 
-  let totalOk = 0, totalErro = 0;
   const { backup, tabelas, idsNoBanco } = _backupImportData;
+  let totalOk = 0, totalErro = 0;
 
   for(const [chave, info] of Object.entries(tabelas)){
     const registrosBackup = (backup.dados[chave]||[]);
-    const novos = registrosBackup.filter(r => !idsNoBanco[chave].has(r.id));
-    for(const reg of novos){
-      try {
-        // Remover campos de sistema que a API vai gerar
-        const { gs_project_id, gs_table_name, deleted, ...dados } = reg;
-        const resp = await fetch(API(tabelaAPI[chave]), {
-          method: 'POST',
-          headers: {'Content-Type':'application/json'},
-          body: JSON.stringify(dados)
-        });
-        if(resp.ok || resp.status===201) totalOk++;
-        else totalErro++;
-      } catch(e){ totalErro++; }
+    const novos = registrosBackup.filter(r => r && r.id && !idsNoBanco[chave].has(r.id));
+    if(novos.length === 0) continue;
+    try {
+      const lsKey = 'itnerol_' + (tabelaLS[chave] || chave);
+      let atual = [];
+      try { atual = JSON.parse(localStorage.getItem(lsKey) || '[]'); } catch(e){ atual = []; }
+      const idsAtuais = new Set(atual.map(r => r && r.id));
+      const merged = atual.concat(novos.filter(r => !idsAtuais.has(r.id)));
+      localStorage.setItem(lsKey, JSON.stringify(merged));
+      totalOk += novos.length;
+    } catch(e){
+      console.error('Erro ao salvar em localStorage:', chave, e);
+      totalErro++;
     }
   }
 
-  fecharModalOverlay();
-  _backupImportData = null;
+  // Persistir metadados do backup aplicado (auditoria)
+  try {
+    localStorage.setItem('itnerol_last_backup', JSON.stringify({
+      data_backup: backup.data_backup,
+      sistema: backup.sistema || 'ITNEROL',
+      versao: backup.versao || '?',
+      registros_importados: totalOk,
+      imported_at: new Date().toISOString()
+    }));
+  } catch(e){}
 
   if(totalOk > 0){
     toast(`✅ ${totalOk} registro(s) importado(s) com sucesso!${totalErro>0?' ⚠️ '+totalErro+' erro(s).':''}`, totalErro>0?'warning':'success', 6000);
@@ -11822,6 +11847,7 @@ function _coletarDadosPrecificacao() {
 }
 
 </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
 </body>
