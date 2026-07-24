@@ -2066,8 +2066,8 @@ body { display: flex; }
         <div>
           <strong>Importação por planilha CSV:</strong> Aceita dois formatos automaticamente:<br>
           <span style="color:#7dd3fc">▸ Sistema RH (VBP0213):</span> <code>EMP;N.REG;C.CUSTO;<strong>NOME DO FUNCIONARIO</strong>;ENDERECO;BAIRRO;CEP;<strong>MUNICIPIO;ES;TELEFONE</strong></code><br>
-          <span style="color:#7dd3fc">▸ Formato livre:</span> colunas <code>Nome</code> <code>Chapa</code> <code>CNH</code> <code>Categoria</code> <code>Telefone</code> <code>Salario</code> <code>Status</code> <code>Endereco</code> <code>Cidade</code><br>
-          Campos não encontrados ficam em branco. Motoristas com mesma Chapa ou nome são <strong>atualizados</strong>.
+          <span style="color:#7dd3fc">▸ Formato livre:</span> colunas <code>Nome</code> <code>CPF</code> <code>CNH</code> <code>Categoria</code> <code>Telefone</code> <code>Salario</code> <code>Status</code> <code>Endereco</code> <code>Cidade</code><br>
+          Campos não encontrados ficam em branco. Motoristas com mesmo CPF ou nome são <strong>atualizados</strong>.
         </div>
       </div>
       <div id="mot-import-progress" style="display:none;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 16px;font-size:.84rem;color:#94a3b8;margin-bottom:12px"></div>
@@ -2082,7 +2082,7 @@ body { display: flex; }
       </div>
       <div class="table-wrap">
         <table class="data-table">
-          <thead><tr><th>Nome</th><th>Chapa</th><th>Nº Chapa</th><th>CNH</th><th>Cat. CNH</th><th>Habilitado para</th><th>Vencimento CNH</th><th>Telefone</th><th>Status</th><th>Ações</th></tr></thead>
+          <thead><tr><th>Nome</th><th>CPF</th><th>CNH</th><th>Cat. CNH</th><th>Habilitado para</th><th>Vencimento CNH</th><th>Telefone</th><th>Status</th><th>Ações</th></tr></thead>
           <tbody id="tbody-motoristas"></tbody>
         </table>
       </div>
@@ -2719,7 +2719,7 @@ body { display: flex; }
           <div class="rel-mod-body">
             <div class="rel-mod-count" id="rel-count-motoristas">—</div>
             <div class="rel-mod-label">registros</div>
-            <div class="rel-mod-campos">Nome, Chapa, CNH, Categoria, Vencimento, Telefone, Endereço, Cidade</div>
+            <div class="rel-mod-campos">Nome, CPF, CNH, Categoria, Vencimento, Telefone, Endereço, Cidade</div>
           </div>
           <div class="rel-mod-footer">
             <button class="btn-outline btn-sm" onclick="exportarCSV('motoristas')"><i class="fas fa-file-csv"></i> Exportar CSV</button>
@@ -4209,12 +4209,9 @@ function renderMotoristas(filtro='') {
         }).join(' ')
       : `<span style="font-size:.68rem;color:#64748b;font-style:italic">não informado</span>`;
 
-    const chapa = m.numero_chapa ? `<span style="background:#fff7ed;color:#C2410C;border:1px solid #FED7AA;border-radius:4px;padding:1px 6px;font-size:.7rem;font-weight:700;margin-left:4px">Chapa ${esc(m.numero_chapa)}</span>` : '';
-
     return `<tr>
-      <td class="td-empresa"><div style="font-weight:600">${esc(m.nome||'—')}${chapa}</div>${linhasMot.length?`<div style="font-size:.7rem;color:#F07800">${linhasMot.length} linha(s) ativa(s)</div>`:''}</td>
+      <td class="td-empresa"><div style="font-weight:600">${esc(m.nome||'—')}</div>${linhasMot.length?`<div style="font-size:.7rem;color:#F07800">${linhasMot.length} linha(s) ativa(s)</div>`:''}</td>
       <td class="td-num">${esc(m.cpf||'—')}</td>
-      <td class="td-num" style="font-weight:700;color:#C2410C">${esc(m.numero_chapa||'—')}</td>
       <td class="td-num">${esc(m.cnh||'—')}</td>
       <td><span class="badge badge-blue">${esc(m.categoria_cnh||'—')}</span></td>
       <td style="min-width:130px">${catsBadges}</td>
@@ -5485,23 +5482,20 @@ function gerarFormulario(tipo, item) {
     motorista:`
       <div class="form-row">
         <div class="form-group"><label>Nome Completo *</label><input id="nome" value="${esc(v.nome)}"/></div>
-        <div class="form-group"><label>Chapa</label><input id="cpf" value="${esc(v.cpf)}" placeholder="Ex.: 12345" maxlength="20"/></div>
+        <div class="form-group"><label>CPF</label><input id="cpf" value="${esc(v.cpf)}" placeholder="000.000.000-00"/></div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label>Nº Chapa</label><input id="numero_chapa" value="${esc(v.numero_chapa)}" placeholder="Ex.: 12345" maxlength="20"/></div>
         <div class="form-group"><label>CNH</label><input id="cnh" value="${esc(v.cnh)}"/></div>
-      </div>
-      <div class="form-row">
         <div class="form-group"><label>Categoria CNH</label>
           <select id="categoria_cnh">${['B','C','D','E'].map(s=>`<option ${v.categoria_cnh===s?'selected':''}>${s}</option>`).join('')}</select>
         </div>
+      </div>
+      <div class="form-row">
         <div class="form-group"><label>Vencimento CNH</label><input id="vencimento_cnh" type="date" value="${v.vencimento_cnh||''}"/></div>
-      </div>
-      <div class="form-row">
         <div class="form-group"><label>Telefone</label><input id="telefone" value="${esc(v.telefone)}"/></div>
-        <div class="form-group"><label>Salário Base (R$)</label><input id="salario_base" type="number" step="0.01" value="${v.salario_base||''}"/></div>
       </div>
       <div class="form-row">
+        <div class="form-group"><label>Salário Base (R$)</label><input id="salario_base" type="number" step="0.01" value="${v.salario_base||''}"/></div>
         <div class="form-group"><label>Status</label>
           <select id="status">${['Ativo','Inativo','Férias','Afastado'].map(s=>`<option ${v.status===s?'selected':''}>${s}</option>`).join('')}</select>
         </div>
@@ -6446,7 +6440,7 @@ function coletarFormulario(tipo) {
     proposta:['numero_proposta','mes_ano','cliente_id','prospeccao_id','empresa','contato_nome','tipo_servico','responsavel','valor_proposto','km_mensal','qtd_veiculos','status','data_envio','data_validade','motivo_perda','observacoes'],
     cliente:['razao_social','nome_fantasia','cnpj','segmento','contato_nome','contato_cargo','contato_email','contato_telefone','endereco','cidade','status','data_inicio','observacoes'],
     veiculo:['placa','numero_frota','tipo','modelo','ano','capacidade','km_atual','status','observacoes'],
-    motorista:['nome','cpf','cnh','categoria_cnh','vencimento_cnh','telefone','salario_base','numero_chapa','status','endereco','cidade_motorista','categoria_veiculo'],
+    motorista:['nome','cpf','cnh','categoria_cnh','vencimento_cnh','telefone','salario_base','status','endereco','cidade_motorista','categoria_veiculo'],
     contrato:['numero_contrato','cliente_id','tipo_servico','status','valor_mensal','km_mensal_contratada','data_inicio','data_fim','onibus_qtd','micro_qtd','van_qtd','passeio_qtd','prefixos','observacoes'],
     linha:['codigo_linha','cliente_id','contrato_id','descricao','itinerario','endereco_garagem','endereco_inicio_linha','km_ocioso_ida','km_ocioso_volta','km_ocioso_total','tipo_veiculo','veiculo_id','motorista_id','km_diaria','dias_mes','km_mensal_contratada','horario_ida','horario_volta','status'],
     apuracao:['mes_ano','cliente_id','contrato_id','km_contratada','km_rodada',
@@ -8695,7 +8689,7 @@ const REL_COLUNAS = {
   ],
   motoristas:[
     {h:'Nome',              f:'nome'},
-    {h:'Chapa',             f:'cpf'},
+    {h:'CPF',               f:'cpf'},
     {h:'CNH',               f:'cnh'},
     {h:'Categoria CNH',     f:'categoria_cnh'},
     {h:'Vencimento CNH',    f:'vencimento_cnh'},
@@ -9170,7 +9164,7 @@ function _normalizarMesAno(raw) {
 //    → Campos lidos: NOME, ENDERECO, MUNICIPIO, ES (UF), TELEFONE
 //
 // B) Formato Genérico:
-//    Linha 1: cabeçalho com colunas Nome, Chapa, CNH, Categoria, Vencimento, Telefone, Salario, Status, Endereco, Cidade
+//    Linha 1: cabeçalho com colunas Nome, CPF, CNH, Categoria, Vencimento, Telefone, Salario, Status, Endereco, Cidade
 //    Linhas+: dados
 // ════════════════════════════════════════════════════════════════════
 async function importarCSVMotoristas(event) {
@@ -9211,7 +9205,7 @@ async function importarCSVMotoristas(event) {
       // ── Encontrar linha de cabeçalho REAL ──
       // Ignora linhas que são apenas título (sem separador suficiente)
       // Palavras-chave que indicam cabeçalho de motoristas
-      const KW_HEADER = ['NOME','FUNCIONARIO','MOTORISTA','CHAPA','CPF','CNH','ENDERECO','MUNICIPIO'];
+      const KW_HEADER = ['NOME','FUNCIONARIO','MOTORISTA','CPF','CNH','ENDERECO','MUNICIPIO'];
       let iLinhaHeader = -1;
       for(let i=0; i<Math.min(linhas.length,5); i++){
         const upper = normCol(linhas[i]);
@@ -9255,19 +9249,18 @@ async function importarCSVMotoristas(event) {
         return -1;
       };
 
-      const iNome    = idx('NOME');
-      const iCpf     = idx('CPF');
-      const iCnh     = idx('CNH');
-      const iCat     = idx('CAT_CNH');
-      const iVenc    = idx('VENC_CNH');
-      const iTel     = idx('TELEFONE');
-      const iSal     = idx('SALARIO');
-      const iStatus  = idx('STATUS');
-      const iEnd     = idx('ENDERECO');
-      const iMun     = idx('MUNICIPIO');
-      const iUF      = idx('UF');
-      const iBairro  = idx('BAIRRO');
-      const iChapa   = idx('NREG');   // Nº Chapa (VBP013: N.REG) — alimenta campo numero_chapa
+      const iNome   = idx('NOME');
+      const iCpf    = idx('CPF');
+      const iCnh    = idx('CNH');
+      const iCat    = idx('CAT_CNH');
+      const iVenc   = idx('VENC_CNH');
+      const iTel    = idx('TELEFONE');
+      const iSal    = idx('SALARIO');
+      const iStatus = idx('STATUS');
+      const iEnd    = idx('ENDERECO');
+      const iMun    = idx('MUNICIPIO');
+      const iUF     = idx('UF');
+      const iBairro = idx('BAIRRO');
 
       if(iNome < 0){
         toast('Coluna NOME não encontrada. Verifique se o arquivo tem a coluna "Nome do Funcionario" ou "Nome".','error');
@@ -9275,7 +9268,7 @@ async function importarCSVMotoristas(event) {
         if(prog) prog.style.display='none'; return;
       }
 
-      console.log('[MotoristasImport] iNome:', iNome, '| iEnd:', iEnd, '| iMun:', iMun, '| iUF:', iUF, '| iTel:', iTel, '| iChapa:', iChapa);
+      console.log('[MotoristasImport] iNome:', iNome, '| iEnd:', iEnd, '| iMun:', iMun, '| iUF:', iUF, '| iTel:', iTel);
 
       let importados=0, atualizados=0, ignorados=0, erros=0;
       if(prog) prog.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Processando ${rows.length} registros...`;
@@ -9320,10 +9313,9 @@ async function importarCSVMotoristas(event) {
           status,
           endereco:        endFull,
           cidade_motorista: cidadeUF,
-          numero_chapa:    iChapa>=0 ? (cols[iChapa]||'').toString().trim()    : '',
         };
 
-        // Verificar duplicata: por Chapa/CPF (se disponível) ou por nome exato
+        // Verificar duplicata: por CPF (se disponível) ou por nome exato
         const cpfNorm = (payload.cpf||'').replace(/\D/g,'');
         const existente = state.motoristas.find(m => {
           if(cpfNorm && cpfNorm.length >= 11 && m.cpf && m.cpf.replace(/\D/g,'') === cpfNorm) return true;
