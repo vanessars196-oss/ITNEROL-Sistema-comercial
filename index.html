@@ -3206,7 +3206,9 @@ if(typeof offlineSalvarCache !== 'function'){
 // ══════════════════════════════════════════════════════════════════
 
 async function carregarTudo() {
-  // 1) HIDRATAR do localStorage primeiro (instantaneo, sempre funciona em GitHub Pages)
+  // GitHub Pages nao tem backend REST. Carregar apenas do localStorage.
+  // (Modo exclusivamente local - o toast 'Erro ao carregar dados' era disparado
+  //  pelos 9 fetches que davam 404 abaixo; removidos.)
   const _ls_get = (k) => { try { return JSON.parse(localStorage.getItem('itnerol_'+k) || '[]'); } catch(e){ return []; } };
   state.clientes    = _ls_get('clientes');
   state.veiculos    = _ls_get('veiculos');
@@ -3218,53 +3220,9 @@ async function carregarTudo() {
   state.prospeccoes = _ls_get('prospeccoes');
   state.propostas   = _ls_get('propostas');
   state.usuarios    = _ls_get('crm_users');
+  state.pedagioLog  = _ls_get('pedagio_ticketlog');
   renderDashboard();
   preencherFiltrosMeses();
-  // 2) Tentar API em paralelo (vai falhar com 404 em GH Pages, mas nao quebra)
-  try {
-    const _f = (url) => offlineFetch(url).then(r=>r.json());
-    const [c,v,m,co,l,a,r,pr,po,u] = await Promise.all([
-      _f(`${API('clientes')}?limit=500`),
-      _f(`${API('veiculos')}?limit=200`),
-      _f(`${API('motoristas')}?limit=200`),
-      _f(`${API('contratos')}?limit=200`),
-      _f(`${API('linhas')}?limit=500`),
-      _f(`${API('apuracao_mensal')}?limit=500`),
-      _f(`${API('reclamacoes')}?limit=300`),
-      _f(`${API('prospeccoes')}?limit=500`),
-      _f(`${API('propostas')}?limit=500`),
-      _f(`${API('crm_users')}?limit=50`),
-    ]);
-    state.clientes    = c.data||[];  state.veiculos   = v.data||[];
-    state.motoristas  = m.data||[];  state.contratos  = co.data||[];
-    state.linhas      = l.data||[];  state.apuracao   = a.data||[];
-    state.reclamacoes = r.data||[];  state.prospeccoes= pr.data||[];
-    state.propostas   = po.data||[]; state.usuarios   = u.data||[];
-    // Salvar cache offline após carregamento online
-    if (!window._offlineMode) {
-      offlineSalvarCache('clientes',          state.clientes);
-      offlineSalvarCache('veiculos',          state.veiculos);
-      offlineSalvarCache('motoristas',        state.motoristas);
-      offlineSalvarCache('contratos',         state.contratos);
-      offlineSalvarCache('linhas',            state.linhas);
-      offlineSalvarCache('apuracao_mensal',   state.apuracao);
-      offlineSalvarCache('reclamacoes',       state.reclamacoes);
-      offlineSalvarCache('prospeccoes',       state.prospeccoes);
-      offlineSalvarCache('propostas',         state.propostas);
-      offlineSalvarCache('crm_users',         state.usuarios);
-    }
-    // Carregar TicketLog separadamente (não bloqueia carregamento principal)
-    offlineFetch(`${API('pedagio_ticketlog')}?limit=2000`).then(r=>r.json())
-      .then(d=>{
-        state.pedagioLog = d.data||[];
-        if(!window._offlineMode) offlineSalvarCache('pedagio_ticketlog', state.pedagioLog);
-      }).catch(()=>{});
-    renderDashboard();
-    preencherFiltrosMeses();
-  } catch(e) {
-    toast('Erro ao carregar dados. Verifique a conexão.','error');
-    console.error(e);
-  }
 }
 
 function preencherFiltrosMeses() {
@@ -11859,6 +11817,7 @@ function _coletarDadosPrecificacao() {
 }
 
 </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
