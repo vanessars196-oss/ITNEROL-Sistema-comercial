@@ -9255,18 +9255,19 @@ async function importarCSVMotoristas(event) {
         return -1;
       };
 
-      const iNome   = idx('NOME');
-      const iCpf    = idx('CPF');
-      const iCnh    = idx('CNH');
-      const iCat    = idx('CAT_CNH');
-      const iVenc   = idx('VENC_CNH');
-      const iTel    = idx('TELEFONE');
-      const iSal    = idx('SALARIO');
-      const iStatus = idx('STATUS');
-      const iEnd    = idx('ENDERECO');
-      const iMun    = idx('MUNICIPIO');
-      const iUF     = idx('UF');
-      const iBairro = idx('BAIRRO');
+      const iNome    = idx('NOME');
+      const iCpf     = idx('CPF');
+      const iCnh     = idx('CNH');
+      const iCat     = idx('CAT_CNH');
+      const iVenc    = idx('VENC_CNH');
+      const iTel     = idx('TELEFONE');
+      const iSal     = idx('SALARIO');
+      const iStatus  = idx('STATUS');
+      const iEnd     = idx('ENDERECO');
+      const iMun     = idx('MUNICIPIO');
+      const iUF      = idx('UF');
+      const iBairro  = idx('BAIRRO');
+      const iChapa   = idx('NREG');   // Nº Chapa (VBP013: N.REG) — alimenta campo numero_chapa
 
       if(iNome < 0){
         toast('Coluna NOME não encontrada. Verifique se o arquivo tem a coluna "Nome do Funcionario" ou "Nome".','error');
@@ -9274,7 +9275,7 @@ async function importarCSVMotoristas(event) {
         if(prog) prog.style.display='none'; return;
       }
 
-      console.log('[MotoristasImport] iNome:', iNome, '| iEnd:', iEnd, '| iMun:', iMun, '| iUF:', iUF, '| iTel:', iTel);
+      console.log('[MotoristasImport] iNome:', iNome, '| iEnd:', iEnd, '| iMun:', iMun, '| iUF:', iUF, '| iTel:', iTel, '| iChapa:', iChapa);
 
       let importados=0, atualizados=0, ignorados=0, erros=0;
       if(prog) prog.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Processando ${rows.length} registros...`;
@@ -9319,6 +9320,7 @@ async function importarCSVMotoristas(event) {
           status,
           endereco:        endFull,
           cidade_motorista: cidadeUF,
+          numero_chapa:    iChapa>=0 ? (cols[iChapa]||'').toString().trim()    : '',
         };
 
         // Verificar duplicata: por CPF (se disponível) ou por nome exato
