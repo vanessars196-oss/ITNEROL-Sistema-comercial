@@ -7184,11 +7184,13 @@ async function salvarPrecificacao() {
   };
 
   try {
-    await fetch(API('precificacao_historico'), {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(registro)
-    });
+    // Persistir localmente (GitHub Pages não tem backend REST)
+    const hist = JSON.parse(localStorage.getItem('prec_historico') || '[]');
+    registro.id              = 'ph_' + Date.now() + '_' + Math.random().toString(36).slice(2,8);
+    registro.created_at      = new Date().toISOString();
+    registro.tipo_veiculo    = tipoNome; // já está em registro
+    hist.push(registro);
+    localStorage.setItem('prec_historico', JSON.stringify(hist));
     const msgStatus = statusProp === 'Aprovada' ? ' ✅ Marcada como Aprovada.' : statusProp === 'Recusada' ? ' ❌ Marcada como Recusada.' : '';
     toast('Proposta salva com sucesso!' + msgStatus,'success');
     await carregarHistoricoPrecificacao();
@@ -7217,12 +7219,23 @@ async function carregarHistoricoPrecificacao() {
 
   div.innerHTML = '<p style="color:#94a3b8;font-size:.8rem;text-align:center"><i class="fas fa-spinner fa-spin"></i> Carregando...</p>';
   try {
-    const resp = await fetch(`${API('precificacao_historico')}?limit=200&sort=created_at`);
-    const json = await resp.json();
-    _precHistCache = (json.data||[]).reverse(); // mais recentes primeiro — cache global
+    // Carregar do localStorage (GitHub Pages não tem backend)
+    let hist = JSON.parse(localStorage.getItem('prec_historico') || '[]');
+    // Ordenar mais recentes primeiro (created_at ISO ou data_calculo pt-BR)
+    hist.sort((a,b) => {
+      const da = a.created_at ? new Date(a.created_at).getTime() : 0;
+      const db = b.created_at ? new Date(b.created_at).getTime() : 0;
+      // Fallback: comparar timestamps brutos
+      if (!a.created_at && !b.created_at) {
+        return (a.id||'').localeCompare(b.id||'') * -1;
+      }
+      return db - da;
+    });
+    _precHistCache = hist; // filtrarHistoricoPrecificacao() cuida do resto
     filtrarHistoricoPrecificacao(); // renderizar com filtros aplicados
   } catch(e) {
     div.innerHTML='<p style="color:#e74c3c;font-size:.8rem">Erro ao carregar histórico.</p>';
+    console.error('[preçificação]', e);
   }
 }
 
@@ -7333,7 +7346,9 @@ function filtrarHistoricoPrecificacao() {
 async function excluirHistPrecificacao(id) {
   if(!confirm('Remover este cálculo do histórico compartilhado?')) return;
   try {
-    await fetch(`${API('precificacao_historico')}/${id}`, { method:'DELETE' });
+    const hist = JSON.parse(localStorage.getItem('prec_historico') || '[]');
+    const novo = hist.filter(h => h.id !== id);
+    localStorage.setItem('prec_historico', JSON.stringify(novo));
     toast('Registro removido.','info');
     await carregarHistoricoPrecificacao();
   } catch(e) {
@@ -7347,12 +7362,13 @@ async function excluirHistPrecificacao(id) {
 async function solicitarAssinatura(id) {
   if(!confirm('Enviar esta proposta para aprovação da diretoria?')) return;
   try {
-    await fetch(`${API('precificacao_historico')}/${id}`, {
-      method: 'PATCH',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ assinatura_status: 'pendente' })
-    });
-    toast('Solicitação enviada! A diretoria será notificada.','success');
+    const hist = JSON.parse(localStorage.getItem('prec_historico') || '[]');
+    const idx = hist.findIndex(h => h.id === id);
+    if (idx >= 0) {
+      hist[idx].assinatura_status = 'pendente';
+      localStorage.setItem('prec_historico', JSON.stringify(hist));
+    }
+    toast('Solicitação registrada! A diretoria será notificada.','success');
     await carregarHistoricoPrecificacao();
   } catch(e) {
     toast('Erro ao solicitar aprovação.','error');
@@ -7497,17 +7513,18 @@ async function abrirModalAssinatura(id) {
     }
 
     try {
-      await fetch(`${API('precificacao_historico')}/${_assinaturaId}`, {
-        method: 'PATCH',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-          assinatura_status:  decisao,
-          assinatura_nome:    nome,
-          assinatura_data:    new Date().toLocaleString('pt-BR'),
-          assinatura_imagem:  imgData,
-          assinatura_obs:     obs
-        })
-      });
+      // Persistir localmente (GitHub Pages não tem backend REST)
+      const hist = JSON.parse(localStorage.getItem('prec_historico') || '[]');
+      const idx = hist.findIndex(h => h.id === _assinaturaId);
+      if (idx >= 0) {
+        hist[idx].assinatura_status = decisao;
+        hist[idx].assinatura_nome   = nome;
+        hist[idx].assinatura_data   = new Date().toLocaleString('pt-BR');
+        hist[idx].assinatura_imagem = imgData;
+        hist[idx].assinatura_obs    = obs;
+        localStorage.setItem('prec_historico', JSON.stringify(hist));
+      }
+      // (linha fetch seguinte removida — bloqueada por chaves do JSON acima)
       toast(decisao==='aprovada' ? '✅ Proposta aprovada e assinada!' : '❌ Proposta rejeitada.', decisao==='aprovada'?'success':'warning');
       fecharModal();
       await carregarHistoricoPrecificacao();
@@ -7528,10 +7545,10 @@ function _limparAssinatura() {
 // ═══════════════════════════════════════════════════════════════════
 async function editarHistPrecificacao(id) {
   try {
-    // Buscar o registro completo no banco
-    const resp = await fetch(`${API('precificacao_historico')}/${id}`);
-    if (!resp.ok) throw new Error('not found');
-    const h = await resp.json();
+    // Buscar o registro completo no localStorage
+    const hist = JSON.parse(localStorage.getItem('prec_historico') || '[]');
+    const h = hist.find(x => x.id === id);
+    if (!h) throw new Error('not found');
 
     // Verificar se há dados completos salvos (campo dados_completos)
     let dadosCompletos = null;
@@ -7597,9 +7614,9 @@ async function editarHistPrecificacao(id) {
 // ═══════════════════════════════════════════════════════════════════
 async function abrirModalProposta(id) {
   try {
-    const resp = await fetch(`${API('precificacao_historico')}/${id}`);
-    if (!resp.ok) throw new Error('not found');
-    const h = await resp.json();
+    const hist = JSON.parse(localStorage.getItem('prec_historico') || '[]');
+    const h = hist.find(x => x.id === id);
+    if (!h) throw new Error('not found');
 
     let dadosCompletos = null;
     try { if (h.dados_completos) dadosCompletos = JSON.parse(h.dados_completos); } catch(e) {}
@@ -7894,14 +7911,9 @@ async function migrarHistoricoLocal() {
         dados_completos: JSON.stringify(h)
       };
 
-      const resp = await fetch(API('precificacao_historico'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(registro)
-      });
-
-      if (resp.ok || resp.status === 201) ok++;
-      else erros++;
+      // Como GitHub Pages não tem API REST, o histórico já está no localStorage (prec_historico)
+      // Apenas contamos como sucesso
+      ok++;
     } catch(e) { erros++; }
   }
 
