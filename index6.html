@@ -2082,7 +2082,7 @@ body { display: flex; }
       </div>
       <div class="table-wrap">
         <table class="data-table">
-          <thead><tr><th>Nome</th><th>CPF</th><th>CNH</th><th>Cat. CNH</th><th>Habilitado para</th><th>Vencimento CNH</th><th>Telefone</th><th>Status</th><th>Ações</th></tr></thead>
+          <thead><tr><th>Nome</th><th>CPF</th><th>Nº Chapa</th><th>CNH</th><th>Cat. CNH</th><th>Habilitado para</th><th>Vencimento CNH</th><th>Telefone</th><th>Status</th><th>Ações</th></tr></thead>
           <tbody id="tbody-motoristas"></tbody>
         </table>
       </div>
@@ -4209,9 +4209,12 @@ function renderMotoristas(filtro='') {
         }).join(' ')
       : `<span style="font-size:.68rem;color:#64748b;font-style:italic">não informado</span>`;
 
+    const chapa = m.numero_chapa ? `<span style="background:#fff7ed;color:#C2410C;border:1px solid #FED7AA;border-radius:4px;padding:1px 6px;font-size:.7rem;font-weight:700;margin-left:4px">Chapa ${esc(m.numero_chapa)}</span>` : '';
+
     return `<tr>
-      <td class="td-empresa"><div style="font-weight:600">${esc(m.nome||'—')}</div>${linhasMot.length?`<div style="font-size:.7rem;color:#F07800">${linhasMot.length} linha(s) ativa(s)</div>`:''}</td>
+      <td class="td-empresa"><div style="font-weight:600">${esc(m.nome||'—')}${chapa}</div>${linhasMot.length?`<div style="font-size:.7rem;color:#F07800">${linhasMot.length} linha(s) ativa(s)</div>`:''}</td>
       <td class="td-num">${esc(m.cpf||'—')}</td>
+      <td class="td-num" style="font-weight:700;color:#C2410C">${esc(m.numero_chapa||'—')}</td>
       <td class="td-num">${esc(m.cnh||'—')}</td>
       <td><span class="badge badge-blue">${esc(m.categoria_cnh||'—')}</span></td>
       <td style="min-width:130px">${catsBadges}</td>
@@ -5485,17 +5488,20 @@ function gerarFormulario(tipo, item) {
         <div class="form-group"><label>CPF</label><input id="cpf" value="${esc(v.cpf)}" placeholder="000.000.000-00"/></div>
       </div>
       <div class="form-row">
+        <div class="form-group"><label>Nº Chapa</label><input id="numero_chapa" value="${esc(v.numero_chapa)}" placeholder="Ex.: 12345" maxlength="20"/></div>
         <div class="form-group"><label>CNH</label><input id="cnh" value="${esc(v.cnh)}"/></div>
+      </div>
+      <div class="form-row">
         <div class="form-group"><label>Categoria CNH</label>
           <select id="categoria_cnh">${['B','C','D','E'].map(s=>`<option ${v.categoria_cnh===s?'selected':''}>${s}</option>`).join('')}</select>
         </div>
-      </div>
-      <div class="form-row">
         <div class="form-group"><label>Vencimento CNH</label><input id="vencimento_cnh" type="date" value="${v.vencimento_cnh||''}"/></div>
-        <div class="form-group"><label>Telefone</label><input id="telefone" value="${esc(v.telefone)}"/></div>
       </div>
       <div class="form-row">
+        <div class="form-group"><label>Telefone</label><input id="telefone" value="${esc(v.telefone)}"/></div>
         <div class="form-group"><label>Salário Base (R$)</label><input id="salario_base" type="number" step="0.01" value="${v.salario_base||''}"/></div>
+      </div>
+      <div class="form-row">
         <div class="form-group"><label>Status</label>
           <select id="status">${['Ativo','Inativo','Férias','Afastado'].map(s=>`<option ${v.status===s?'selected':''}>${s}</option>`).join('')}</select>
         </div>
@@ -6440,7 +6446,7 @@ function coletarFormulario(tipo) {
     proposta:['numero_proposta','mes_ano','cliente_id','prospeccao_id','empresa','contato_nome','tipo_servico','responsavel','valor_proposto','km_mensal','qtd_veiculos','status','data_envio','data_validade','motivo_perda','observacoes'],
     cliente:['razao_social','nome_fantasia','cnpj','segmento','contato_nome','contato_cargo','contato_email','contato_telefone','endereco','cidade','status','data_inicio','observacoes'],
     veiculo:['placa','numero_frota','tipo','modelo','ano','capacidade','km_atual','status','observacoes'],
-    motorista:['nome','cpf','cnh','categoria_cnh','vencimento_cnh','telefone','salario_base','status','endereco','cidade_motorista','categoria_veiculo'],
+    motorista:['nome','cpf','cnh','categoria_cnh','vencimento_cnh','telefone','salario_base','numero_chapa','status','endereco','cidade_motorista','categoria_veiculo'],
     contrato:['numero_contrato','cliente_id','tipo_servico','status','valor_mensal','km_mensal_contratada','data_inicio','data_fim','onibus_qtd','micro_qtd','van_qtd','passeio_qtd','prefixos','observacoes'],
     linha:['codigo_linha','cliente_id','contrato_id','descricao','itinerario','endereco_garagem','endereco_inicio_linha','km_ocioso_ida','km_ocioso_volta','km_ocioso_total','tipo_veiculo','veiculo_id','motorista_id','km_diaria','dias_mes','km_mensal_contratada','horario_ida','horario_volta','status'],
     apuracao:['mes_ano','cliente_id','contrato_id','km_contratada','km_rodada',
